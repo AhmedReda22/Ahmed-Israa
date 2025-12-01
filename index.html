@@ -679,63 +679,324 @@
             box-shadow: 0 12px 25px rgba(255, 107, 139, 0.3);
         }
         
-        /* قسم العد التنازلي */
-        .countdown-section {
-            background: linear-gradient(135deg, rgba(255, 182, 193, 0.1) 0%, rgba(255, 255, 255, 1) 100%);
-            text-align: center;
-        }
-        
-        .countdown-container {
-            display: flex;
-            justify-content: center;
-            gap: 25px;
-            flex-wrap: wrap;
-            margin-top: 50px;
-        }
-        
-        .countdown-box {
-            background: var(--white);
-            border-radius: 20px;
-            padding: 35px 25px;
-            min-width: 160px;
-            box-shadow: var(--shadow-lg);
-            border: 2px solid var(--light-pink);
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .countdown-box::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 5px;
-            background: linear-gradient(to right, transparent, var(--primary-pink), transparent);
-        }
-        
-        .countdown-box:hover {
-            transform: translateY(-10px);
-            border-color: var(--primary-pink);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-        }
-        
-        .countdown-value {
-            font-size: 4rem;
-            font-weight: 800;
-            color: var(--primary-pink);
-            line-height: 1;
-            font-family: 'Cairo', sans-serif;
-            text-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-        }
-        
-        .countdown-label {
-            font-size: 1.4rem;
-            margin-top: 10px;
-            color: #666;
-            font-weight: 600;
-        }
+        /* قسم العد التنازلي المحسن */
+.countdown-section {
+    background: linear-gradient(135deg, rgba(255, 182, 193, 0.05) 0%, rgba(255, 240, 245, 0.9) 100%);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.countdown-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cpath d='M50,20 C60,15 75,20 80,30 C85,40 80,50 75,55 C70,60 60,63 50,67 C40,63 30,60 25,55 C20,50 15,40 20,30 C25,20 40,15 50,20 Z' fill='none' stroke='%23FF69B4' stroke-width='0.8' opacity='0.05'/%3E%3C/svg%3E");
+    background-size: 120px;
+    z-index: 0;
+}
+
+.countdown-container {
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+    margin: 50px auto;
+}
+
+/* تصميم جديد للعداد */
+.countdown-box-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-bottom: 50px;
+}
+
+.countdown-box {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 30px 20px;
+    width: 170px;
+    box-shadow: var(--shadow-lg);
+    border: 2px solid transparent;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.countdown-box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255, 107, 139, 0.05) 0%, rgba(212, 175, 55, 0.05) 100%);
+    z-index: -1;
+}
+
+.countdown-box::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(to right, var(--primary-pink), var(--gold));
+    border-radius: 2px;
+}
+
+.countdown-box:hover {
+    transform: translateY(-10px);
+    border-color: var(--primary-pink);
+    box-shadow: 0 25px 50px rgba(255, 107, 139, 0.15);
+}
+
+.countdown-value {
+    font-size: 4.2rem;
+    font-weight: 900;
+    color: var(--primary-pink);
+    line-height: 1;
+    font-family: 'Cairo', sans-serif;
+    text-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+    position: relative;
+}
+
+.countdown-value::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 25%;
+    width: 50%;
+    height: 3px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+    border-radius: 3px;
+}
+
+.countdown-label {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.arabic-label {
+    font-size: 1.5rem;
+    color: var(--primary-pink);
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.english-label {
+    font-size: 0.9rem;
+    color: #999;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+/* فاصل القلوب */
+.countdown-separator {
+    color: var(--light-pink);
+    font-size: 2rem;
+    margin: 0 5px;
+    animation: heartbeat 2s infinite;
+}
+
+/* شريط التقدم البصري */
+.progress-timeline {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 25px;
+    margin: 40px auto;
+    max-width: 700px;
+    box-shadow: var(--shadow-lg);
+    border: 2px solid var(--light-pink);
+}
+
+.timeline-label {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.label-text {
+    color: var(--primary-pink);
+    font-size: 1.2rem;
+}
+
+.time-left {
+    color: var(--gold);
+    font-size: 1.2rem;
+    font-weight: 800;
+}
+
+.timeline-bar {
+    width: 100%;
+    height: 12px;
+    background: rgba(255, 182, 193, 0.2);
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+}
+
+.timeline-progress {
+    height: 100%;
+    width: 85%;
+    background: linear-gradient(to right, var(--primary-pink), var(--gold));
+    border-radius: 10px;
+    position: relative;
+    transition: width 1s ease;
+}
+
+.timeline-progress::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, 
+        rgba(255, 255, 255, 0) 0%, 
+        rgba(255, 255, 255, 0.4) 50%, 
+        rgba(255, 255, 255, 0) 100%);
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+/* رسالة العد التنازلي */
+.countdown-message {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 30px;
+    margin-top: 50px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: var(--shadow-lg);
+    border: 2px solid var(--light-pink);
+    position: relative;
+    overflow: hidden;
+}
+
+.countdown-message::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(255, 107, 139, 0.03) 0%, rgba(255, 255, 255, 0) 100%);
+}
+
+.message-icon {
+    font-size: 2.5rem;
+    color: var(--primary-pink);
+    margin-bottom: 20px;
+    animation: float 3s infinite ease-in-out;
+}
+
+.countdown-message p {
+    font-size: 1.4rem;
+    color: #666;
+    line-height: 1.8;
+    font-weight: 500;
+}
+
+/* تصميم متجاوب للعداد المحسن */
+@media (max-width: 1100px) {
+    .countdown-box {
+        width: 150px;
+        padding: 25px 15px;
+    }
+    
+    .countdown-value {
+        font-size: 3.8rem;
+    }
+}
+
+@media (max-width: 850px) {
+    .countdown-box-wrapper {
+        gap: 15px;
+        row-gap: 20px;
+    }
+    
+    .countdown-box {
+        width: 160px;
+    }
+    
+    .countdown-separator {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .countdown-box {
+        width: 145px;
+        padding: 20px 15px;
+    }
+    
+    .countdown-value {
+        font-size: 3.2rem;
+    }
+    
+    .arabic-label {
+        font-size: 1.3rem;
+    }
+    
+    .progress-timeline {
+        padding: 20px;
+    }
+    
+    .countdown-message {
+        padding: 25px;
+    }
+    
+    .countdown-message p {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 650px) {
+    .countdown-box-wrapper {
+        gap: 10px;
+    }
+    
+    .countdown-box {
+        width: calc(50% - 20px);
+        min-width: 140px;
+    }
+}
+
+@media (max-width: 480px) {
+    .countdown-box {
+        width: calc(50% - 15px);
+        min-width: 130px;
+        padding: 20px 10px;
+    }
+    
+    .countdown-value {
+        font-size: 2.8rem;
+    }
+    
+    .arabic-label {
+        font-size: 1.2rem;
+    }
+    
+    .countdown-message p {
+        font-size: 1.1rem;
+    }
+}
         
         /* الفوتر المعدل */
         .luxury-footer {
@@ -1367,38 +1628,76 @@
         </div>
     </section>
     
-    <!-- قسم العد التنازلي -->
-    <section class="section countdown-section" id="countdown">
-        <div class="container">
-            <h2 class="section-title">العد التنازلي للفرح</h2>
-            
-            <div class="countdown-container">
+    <!-- قسم العد التنازلي المحسن -->
+<section class="section countdown-section" id="countdown">
+    <div class="container">
+        <h2 class="section-title">العد التنازلي لبداية الفرح</h2>
+        
+        <div class="countdown-container">
+            <!-- تصميم جديد للعداد -->
+            <div class="countdown-box-wrapper">
                 <div class="countdown-box">
                     <div class="countdown-value" id="days">00</div>
-                    <div class="countdown-label">أيام</div>
+                    <div class="countdown-label">
+                        <span class="arabic-label">أيام</span>
+                        <span class="english-label">Days</span>
+                    </div>
+                </div>
+                <div class="countdown-separator">
+                    <i class="fas fa-heart"></i>
                 </div>
                 
                 <div class="countdown-box">
                     <div class="countdown-value" id="hours">00</div>
-                    <div class="countdown-label">ساعات</div>
+                    <div class="countdown-label">
+                        <span class="arabic-label">ساعات</span>
+                        <span class="english-label">Hours</span>
+                    </div>
+                </div>
+                <div class="countdown-separator">
+                    <i class="fas fa-heart"></i>
                 </div>
                 
                 <div class="countdown-box">
                     <div class="countdown-value" id="minutes">00</div>
-                    <div class="countdown-label">دقائق</div>
+                    <div class="countdown-label">
+                        <span class="arabic-label">دقائق</span>
+                        <span class="english-label">Minutes</span>
+                    </div>
+                </div>
+                <div class="countdown-separator">
+                    <i class="fas fa-heart"></i>
                 </div>
                 
                 <div class="countdown-box">
                     <div class="countdown-value" id="seconds">00</div>
-                    <div class="countdown-label">ثواني</div>
+                    <div class="countdown-label">
+                        <span class="arabic-label">ثواني</span>
+                        <span class="english-label">Seconds</span>
+                    </div>
                 </div>
             </div>
             
-            <p style="text-align: center; margin-top: 50px; font-size: 1.3rem; max-width: 700px; margin-left: auto; margin-right: auto; color: #666;">
-                مع كل ثانية تمر، نقترب أكثر من بداية رحلة عمر جديدة مليئة بالحب والسعادة
-            </p>
+            <!-- شريط التقدم البصري -->
+            <div class="progress-timeline">
+                <div class="timeline-label">
+                    <span class="label-text">انقضاء الوقت</span>
+                    <span class="time-left" id="timeLeftText">100%</span>
+                </div>
+                <div class="timeline-bar">
+                    <div class="timeline-progress" id="timelineProgress"></div>
+                </div>
+            </div>
+            
+            <div class="countdown-message">
+                <div class="message-icon">
+                    <i class="fas fa-heartbeat"></i>
+                </div>
+                <p>كل لحظة تقربنا من بداية رحلة عمر جديدة مليئة بالسعادة والمحبة</p>
+            </div>
         </div>
-    </section>
+    </div>
+</section>
     
     <!-- الفوتر المعدل بالآية القرآنية والنص الأكثر رقيًا -->
     <footer class="luxury-footer">
@@ -1647,29 +1946,83 @@
         
         // العد التنازلي
         function updateCountdown() {
-            const weddingDate = new Date('December 11, 2025 19:00:00').getTime();
-            const now = new Date().getTime();
-            const timeLeft = weddingDate - now;
-            
-            if (timeLeft < 0) {
-                document.getElementById('days').textContent = '00';
-                document.getElementById('hours').textContent = '00';
-                document.getElementById('minutes').textContent = '00';
-                document.getElementById('seconds').textContent = '00';
-                return;
-            }
-            
-            const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-            
-            document.getElementById('days').textContent = days.toString().padStart(2, '0');
-            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
-            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
-            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
-        }
+    const weddingDate = new Date('December 11, 2025 19:00:00').getTime();
+    const now = new Date().getTime();
+    const timeLeft = weddingDate - now;
+    
+    if (timeLeft < 0) {
+        document.getElementById('days').textContent = '00';
+        document.getElementById('hours').textContent = '00';
+        document.getElementById('minutes').textContent = '00';
+        document.getElementById('seconds').textContent = '00';
+        document.getElementById('timeLeftText').textContent = 'بدأ الفرح!';
+        document.getElementById('timelineProgress').style.width = '100%';
+        return;
+    }
+    
+    // حساب الوحدات الزمنية
+    const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+    
+    // تحديث الأرقام
+    document.getElementById('days').textContent = days.toString().padStart(2, '0');
+    document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+    document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+    document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+    
+    // حساب نسبة الوقت المتبقي وعرضها
+    const totalTime = 60 * 24 * 60 * 60 * 1000; // 60 يوم تقريباً
+    const timePassed = totalTime - timeLeft;
+    const percentage = Math.min(100, Math.max(0, (timePassed / totalTime) * 100));
+    
+    document.getElementById('timelineProgress').style.width = `${percentage}%`;
+    document.getElementById('timeLeftText').textContent = `${Math.round(100 - percentage)}%`;
+    
+    // تأثير نبض للعداد عند تغيير الثواني
+    if (seconds % 10 === 0) {
+        document.getElementById('seconds').style.animation = 'pulse 0.5s';
+        setTimeout(() => {
+            document.getElementById('seconds').style.animation = '';
+        }, 500);
+    }
+}
         
+
+// تهيئة تأثيرات إضافية للعداد
+function initCountdownEffects() {
+    // إضافة قلوب صغيرة عند تحريك الماوس فوق العداد
+    const countdownBoxes = document.querySelectorAll('.countdown-box');
+    
+    countdownBoxes.forEach(box => {
+        box.addEventListener('mouseenter', function() {
+            // إضافة قلب صغير يظهر عند المرور
+            const heart = document.createElement('div');
+            heart.innerHTML = '❤';
+            heart.style.position = 'absolute';
+            heart.style.color = 'var(--primary-pink)';
+            heart.style.fontSize = '1.2rem';
+            heart.style.top = `${Math.random() * 80 + 10}%`;
+            heart.style.left = `${Math.random() * 80 + 10}%`;
+            heart.style.opacity = '0';
+            heart.style.animation = 'float 2s ease-out forwards';
+            heart.style.zIndex = '10';
+            heart.style.pointerEvents = 'none';
+            
+            this.appendChild(heart);
+            
+            // إزالة القلب بعد انتهاء الحركة
+            setTimeout(() => {
+                if (heart.parentNode) {
+                    heart.parentNode.removeChild(heart);
+                }
+            }, 2000);
+        });
+    });
+}
+
+
         // تأكيد الحضور البسيط (زر صح)
         let attendanceConfirmed = false;
         let attendanceCount = 15; // عدد أولي للأشخاص الذين أكدوا الحضور
@@ -1811,7 +2164,7 @@
             // بدء العد التنازلي
             updateCountdown();
             setInterval(updateCountdown, 1000);
-            
+            initCountdownEffects();
             // تحديث شريط التقدم
             window.addEventListener('scroll', function() {
                 updateProgressBar();
