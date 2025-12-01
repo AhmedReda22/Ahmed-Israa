@@ -20,6 +20,9 @@
             --gold: #D4AF37;
             --dark-gold: #B8860B;
             --light-gold: #F4E4A6;
+            --rose-pink: #FF69B4;
+            --rose-light: #FFB6C1;
+            --rose-dark: #DB7093;
             --shadow-lg: 0 15px 35px rgba(0, 0, 0, 0.08);
             --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
@@ -80,10 +83,10 @@
                 opacity: 0;
             }
             10% {
-                opacity: 0.7;
+                opacity: 0.9;
             }
             90% {
-                opacity: 0.7;
+                opacity: 0.9;
             }
             100% {
                 transform: translateY(-100px) rotate(360deg);
@@ -91,14 +94,41 @@
             }
         }
         
-        @keyframes roseRotate {
-            0% { transform: rotate(0deg) scale(1); }
-            50% { transform: rotate(180deg) scale(1.05); }
-            100% { transform: rotate(360deg) scale(1); }
+        @keyframes roseFloat {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+                opacity: 0.7;
+            }
+            25% {
+                transform: translate(20px, -40px) rotate(90deg);
+                opacity: 0.8;
+            }
+            50% {
+                transform: translate(-15px, -80px) rotate(180deg);
+                opacity: 0.9;
+            }
+            75% {
+                transform: translate(25px, -120px) rotate(270deg);
+                opacity: 0.8;
+            }
+            100% {
+                transform: translate(0, -160px) rotate(360deg);
+                opacity: 0.7;
+            }
         }
         
-        /* خلفية الورد المتحركة */
-        .rose-background {
+        @keyframes rotateSlowly {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        @keyframes sparkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+        
+        /* خلفية الورد المتحركة - أكثر جاذبية */
+        .beautiful-rose-background {
             position: fixed;
             top: 0;
             left: 0;
@@ -106,24 +136,36 @@
             height: 100%;
             z-index: -2;
             overflow: hidden;
-            background: linear-gradient(135deg, rgba(255, 246, 249, 0.9) 0%, rgba(255, 240, 245, 0.95) 100%);
+            background: linear-gradient(135deg, 
+                rgba(255, 240, 245, 0.95) 0%, 
+                rgba(255, 246, 249, 0.9) 50%,
+                rgba(255, 250, 252, 0.95) 100%);
         }
         
-        .floating-rose {
+        .floating-full-rose {
             position: absolute;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath fill='%23FFB6C1' d='M50,15 C60,5 75,10 80,20 C85,30 80,40 75,45 C70,50 60,55 50,60 C40,55 30,50 25,45 C20,40 15,30 20,20 C25,10 40,5 50,15 Z'/%3E%3Cpath fill='%23FF6B8B' d='M50,20 C55,15 65,18 68,25 C71,32 68,38 65,42 C62,46 55,50 50,53 C45,50 38,46 35,42 C32,38 29,32 32,25 C35,18 45,15 50,20 Z'/%3E%3Ccircle cx='50' cy='50' r='8' fill='%23D4AF37'/%3E%3C/svg%3E");
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath fill='%23FF69B4' d='M50,20 C55,10 70,15 75,25 C80,35 75,45 70,50 C65,55 55,60 50,65 C45,60 35,55 30,50 C25,45 20,35 25,25 C30,15 45,10 50,20 Z'/%3E%3Cpath fill='%23FF1493' d='M50,25 C53,20 63,23 66,30 C69,37 66,43 63,47 C60,51 53,54 50,58 C47,54 40,51 37,47 C34,43 31,37 34,30 C37,23 47,20 50,25 Z'/%3E%3Ccircle cx='50' cy='50' r='12' fill='%23FFD700'/%3E%3Ccircle cx='50' cy='50' r='6' fill='%23FFA500'/%3E%3C/svg%3E");
             background-size: contain;
             background-repeat: no-repeat;
-            animation: float 20s linear infinite, roseRotate 40s linear infinite;
-            opacity: 0.15;
+            animation: roseFloat 60s linear infinite;
+            filter: drop-shadow(0 5px 15px rgba(255, 105, 180, 0.3));
         }
         
-        .floating-petal {
+        .floating-rose-petal {
             position: absolute;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 50'%3E%3Cpath fill='%23FF6B8B' opacity='0.6' d='M25,5 C30,0 40,5 42,12 C44,19 40,26 35,30 C30,34 20,38 25,45 C30,38 40,34 35,30 C30,26 26,19 28,12 C30,5 20,0 25,5 Z'/%3E%3C/svg%3E");
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 60'%3E%3Cpath fill='%23FF69B4' d='M30,5 C35,0 45,5 48,15 C51,25 48,35 45,40 C42,45 35,48 30,53 C25,48 18,45 15,40 C12,35 9,25 12,15 C15,5 25,0 30,5 Z'/%3E%3Cpath fill='%23FFB6C1' opacity='0.7' d='M30,10 C33,7 39,10 41,17 C43,24 41,30 39,34 C37,38 33,40 30,43 C27,40 23,38 21,34 C19,30 17,24 19,17 C21,10 27,7 30,10 Z'/%3E%3C/svg%3E");
             background-size: contain;
             background-repeat: no-repeat;
             animation: petalFloat linear infinite;
+            filter: drop-shadow(0 3px 8px rgba(255, 105, 180, 0.2));
+        }
+        
+        .sparkle {
+            position: absolute;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23FFD700' d='M12,2 L14.5,8.5 L21,10 L16,14 L18,21 L12,17 L6,21 L8,14 L3,10 L9.5,8.5 Z'/%3E%3C/svg%3E");
+            background-size: contain;
+            background-repeat: no-repeat;
+            animation: sparkle 2s infinite;
         }
         
         /* الهيدر الفخم */
@@ -137,7 +179,9 @@
             text-align: center;
             overflow: hidden;
             padding: 40px 20px;
-            background: linear-gradient(135deg, rgba(255, 182, 193, 0.15) 0%, rgba(255, 255, 255, 0.97) 100%);
+            background: linear-gradient(135deg, 
+                rgba(255, 182, 193, 0.2) 0%, 
+                rgba(255, 255, 255, 0.97) 100%);
         }
         
         .header-content {
@@ -231,15 +275,10 @@
             left: -20px;
             right: -20px;
             bottom: -20px;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cpath d='M50,5 C60,15 75,10 80,20 C85,30 80,40 75,45 C70,50 60,55 50,60 C40,55 30,50 25,45 C20,40 15,30 20,20 C25,10 40,15 50,5 Z' fill='none' stroke='%23FF6B8B' stroke-width='1.2' opacity='0.3'/%3E%3C/svg%3E");
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cpath d='M50,15 C60,10 75,15 80,25 C85,35 80,45 75,50 C70,55 60,58 50,62 C40,58 30,55 25,50 C20,45 15,35 20,25 C25,15 40,10 50,15 Z' fill='none' stroke='%23FF69B4' stroke-width='1.2' opacity='0.3'/%3E%3C/svg%3E");
             background-size: 70px;
-            animation: rotate 40s linear infinite;
+            animation: rotateSlowly 40s linear infinite;
             z-index: 0;
-        }
-        
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
         }
         
         .date-wrapper {
@@ -1021,8 +1060,8 @@
         <i class="fas fa-chevron-up"></i>
     </div>
     
-    <!-- خلفية الورد المتحركة -->
-    <div class="rose-background" id="roseBackground"></div>
+    <!-- خلفية الورد الجميلة والمتحركة -->
+    <div class="beautiful-rose-background" id="beautifulRoseBackground"></div>
     
     <!-- الهيدر الفخم -->
     <header class="luxury-header">
@@ -1250,19 +1289,20 @@
     </div>
     
     <script>
-        // تهيئة خلفية الورد المتحركة
-        function createRoseBackground() {
-            const roseContainer = document.getElementById('roseBackground');
-            const roseCount = 20;
-            const petalCount = 40;
+        // تهيئة خلفية الورد الجميلة والمتحركة
+        function createBeautifulRoseBackground() {
+            const roseContainer = document.getElementById('beautifulRoseBackground');
+            const roseCount = 15;
+            const petalCount = 30;
+            const sparkleCount = 20;
             
-            // إنشاء ورد متحرك
+            // إنشاء ورد متحرك كامل
             for (let i = 0; i < roseCount; i++) {
                 const rose = document.createElement('div');
-                rose.classList.add('floating-rose');
+                rose.classList.add('floating-full-rose');
                 
                 // حجم عشوائي للورد
-                const size = Math.random() * 150 + 50;
+                const size = Math.random() * 120 + 60;
                 rose.style.width = `${size}px`;
                 rose.style.height = `${size}px`;
                 
@@ -1273,13 +1313,13 @@
                 rose.style.top = `${startY}%`;
                 
                 // مدة وتأخير عشوائي للحركة
-                const floatDuration = Math.random() * 30 + 20;
-                const rotateDuration = Math.random() * 60 + 40;
-                const delay = Math.random() * 10;
-                rose.style.animation = `float ${floatDuration}s linear infinite ${delay}s, roseRotate ${rotateDuration}s linear infinite ${delay}s`;
+                const duration = Math.random() * 40 + 40;
+                const delay = Math.random() * 20;
+                rose.style.animationDuration = `${duration}s`;
+                rose.style.animationDelay = `${delay}s`;
                 
                 // شفافية عشوائية
-                rose.style.opacity = Math.random() * 0.15 + 0.05;
+                rose.style.opacity = Math.random() * 0.2 + 0.1;
                 
                 roseContainer.appendChild(rose);
             }
@@ -1287,10 +1327,10 @@
             // إنشاء بتلات ورد متحركة
             for (let i = 0; i < petalCount; i++) {
                 const petal = document.createElement('div');
-                petal.classList.add('floating-petal');
+                petal.classList.add('floating-rose-petal');
                 
                 // حجم عشوائي للبتلة
-                const size = Math.random() * 40 + 20;
+                const size = Math.random() * 50 + 25;
                 petal.style.width = `${size}px`;
                 petal.style.height = `${size}px`;
                 
@@ -1299,50 +1339,75 @@
                 petal.style.left = `${startX}%`;
                 
                 // مدة وتأخير عشوائي للحركة
-                const duration = Math.random() * 25 + 15;
+                const duration = Math.random() * 20 + 15;
                 const delay = Math.random() * 5;
                 petal.style.animationDuration = `${duration}s`;
                 petal.style.animationDelay = `${delay}s`;
                 
+                // شفافية عشوائية
+                petal.style.opacity = Math.random() * 0.7 + 0.3;
+                
                 roseContainer.appendChild(petal);
+            }
+            
+            // إنشاء ومضات ذهبية
+            for (let i = 0; i < sparkleCount; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.classList.add('sparkle');
+                
+                // حجم عشوائي للومضة
+                const size = Math.random() * 25 + 10;
+                sparkle.style.width = `${size}px`;
+                sparkle.style.height = `${size}px`;
+                
+                // موقع عشوائي
+                const startX = Math.random() * 100;
+                const startY = Math.random() * 100;
+                sparkle.style.left = `${startX}%`;
+                sparkle.style.top = `${startY}%`;
+                
+                // تأخير عشوائي للوميض
+                const delay = Math.random() * 2;
+                sparkle.style.animationDelay = `${delay}s`;
+                
+                roseContainer.appendChild(sparkle);
             }
             
             // إضافة ورد وبتلات بشكل مستمر
             setInterval(() => {
-                if (document.querySelectorAll('.floating-rose').length < 25) {
-                    addSingleRose();
+                if (document.querySelectorAll('.floating-full-rose').length < 18) {
+                    addSingleBeautifulRose();
                 }
-                if (document.querySelectorAll('.floating-petal').length < 50) {
-                    addSinglePetal();
+                if (document.querySelectorAll('.floating-rose-petal').length < 35) {
+                    addSingleBeautifulPetal();
                 }
-            }, 3000);
+            }, 4000);
         }
         
-        // إضافة وردة واحدة
-        function addSingleRose() {
-            const roseContainer = document.getElementById('roseBackground');
+        // إضافة وردة جميلة واحدة
+        function addSingleBeautifulRose() {
+            const roseContainer = document.getElementById('beautifulRoseBackground');
             
             const rose = document.createElement('div');
-            rose.classList.add('floating-rose');
+            rose.classList.add('floating-full-rose');
             
             // حجم عشوائي
-            const size = Math.random() * 120 + 40;
+            const size = Math.random() * 100 + 50;
             rose.style.width = `${size}px`;
             rose.style.height = `${size}px`;
             
             // موقع عشوائي
             const startX = Math.random() * 100;
-            const startY = Math.random() * 100;
+            const startY = 100 + Math.random() * 10;
             rose.style.left = `${startX}%`;
             rose.style.top = `${startY}%`;
             
             // مدة عشوائية
-            const floatDuration = Math.random() * 30 + 20;
-            const rotateDuration = Math.random() * 60 + 40;
-            rose.style.animation = `float ${floatDuration}s linear infinite, roseRotate ${rotateDuration}s linear infinite`;
+            const duration = Math.random() * 40 + 40;
+            rose.style.animationDuration = `${duration}s`;
             
             // شفافية عشوائية
-            rose.style.opacity = Math.random() * 0.15 + 0.05;
+            rose.style.opacity = Math.random() * 0.2 + 0.1;
             
             roseContainer.appendChild(rose);
             
@@ -1351,18 +1416,18 @@
                 if (rose.parentNode) {
                     rose.parentNode.removeChild(rose);
                 }
-            }, (floatDuration * 1000) * 2);
+            }, duration * 1000);
         }
         
-        // إضافة بتلة واحدة
-        function addSinglePetal() {
-            const roseContainer = document.getElementById('roseBackground');
+        // إضافة بتلة جميلة واحدة
+        function addSingleBeautifulPetal() {
+            const roseContainer = document.getElementById('beautifulRoseBackground');
             
             const petal = document.createElement('div');
-            petal.classList.add('floating-petal');
+            petal.classList.add('floating-rose-petal');
             
             // حجم عشوائي
-            const size = Math.random() * 40 + 15;
+            const size = Math.random() * 40 + 20;
             petal.style.width = `${size}px`;
             petal.style.height = `${size}px`;
             
@@ -1371,8 +1436,11 @@
             petal.style.left = `${startX}%`;
             
             // مدة عشوائية
-            const duration = Math.random() * 25 + 15;
+            const duration = Math.random() * 20 + 15;
             petal.style.animationDuration = `${duration}s`;
+            
+            // شفافية عشوائية
+            petal.style.opacity = Math.random() * 0.7 + 0.3;
             
             roseContainer.appendChild(petal);
             
@@ -1432,10 +1500,12 @@
                 document.body.style.overflow = 'hidden';
                 
                 // إضافة ورد وبتلات عند تأكيد الحضور
-                for (let i = 0; i < 5; i++) {
-                    setTimeout(() => addSinglePetal(), i * 150);
+                for (let i = 0; i < 8; i++) {
+                    setTimeout(() => addSingleBeautifulPetal(), i * 150);
                 }
-                setTimeout(() => addSingleRose(), 300);
+                for (let i = 0; i < 3; i++) {
+                    setTimeout(() => addSingleBeautifulRose(), i * 300);
+                }
                 
                 // إرسال بيانات الحضور (هنا يمكنك إضافة كود لإرسال البيانات لخادم)
                 console.log('تم تأكيد الحضور بدون بيانات');
@@ -1468,8 +1538,8 @@
             console.log('تم إرسال رسالة تهنئة:', { name, message });
             
             // إضافة ورد وبتلات عند إرسال رسالة التهنئة
-            for (let i = 0; i < 3; i++) {
-                setTimeout(() => addSinglePetal(), i * 200);
+            for (let i = 0; i < 5; i++) {
+                setTimeout(() => addSingleBeautifulPetal(), i * 200);
             }
         });
         
@@ -1539,8 +1609,8 @@
         
         // تهيئة الصفحة عند التحميل
         document.addEventListener('DOMContentLoaded', function() {
-            // إنشاء خلفية الورد
-            createRoseBackground();
+            // إنشاء خلفية الورد الجميلة
+            createBeautifulRoseBackground();
             
             // بدء العد التنازلي
             updateCountdown();
@@ -1582,8 +1652,8 @@
             
             // إضافة ورد عند التمرير
             window.addEventListener('scroll', function() {
-                if (Math.random() > 0.8 && document.querySelectorAll('.floating-petal').length < 35) {
-                    setTimeout(() => addSinglePetal(), 100);
+                if (Math.random() > 0.8 && document.querySelectorAll('.floating-rose-petal').length < 40) {
+                    setTimeout(() => addSingleBeautifulPetal(), 100);
                 }
             });
             
