@@ -11,18 +11,17 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <style>
         :root {
-            --primary-gold: #D4AF37;
+            --primary-pink: #FF6B8B;
+            --light-pink: #FFB6C1;
+            --soft-pink: #FFF0F5;
+            --white: #FFFFFF;
+            --off-white: #FAFAFA;
+            --light-gray: #F5F5F5;
+            --gold: #D4AF37;
             --dark-gold: #B8860B;
             --light-gold: #F4E4A6;
-            --primary-burgundy: #800020;
-            --dark-burgundy: #5A0018;
-            --light-burgundy: #A3002A;
-            --black: #0A0A0A;
-            --dark-gray: #1A1A1A;
-            --light-gray: #F5F5F5;
-            --white: #FFFFFF;
-            --shadow-lg: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-            --transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            --shadow-lg: 0 15px 35px rgba(0, 0, 0, 0.08);
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
         * {
@@ -37,8 +36,8 @@
         
         body {
             font-family: 'Cairo', 'Noto Naskh Arabic', sans-serif;
-            background-color: var(--black);
-            color: var(--light-gray);
+            background-color: var(--off-white);
+            color: #333;
             overflow-x: hidden;
             line-height: 1.6;
         }
@@ -52,41 +51,31 @@
         /* أنيميشن مخصصة */
         @keyframes float {
             0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
+            50% { transform: translateY(-15px); }
         }
         
         @keyframes glow {
-            0%, 100% { text-shadow: 0 0 10px var(--primary-gold); }
-            50% { text-shadow: 0 0 30px var(--primary-gold), 0 0 40px var(--primary-gold); }
-        }
-        
-        @keyframes shimmer {
-            0% { background-position: -1000px 0; }
-            100% { background-position: 1000px 0; }
+            0%, 100% { text-shadow: 0 0 5px rgba(255, 107, 139, 0.3); }
+            50% { text-shadow: 0 0 20px rgba(255, 107, 139, 0.5), 0 0 30px rgba(255, 107, 139, 0.3); }
         }
         
         @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(50px); }
+            from { opacity: 0; transform: translateY(40px); }
             to { opacity: 1; transform: translateY(0); }
         }
         
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-        
-        @keyframes fadeInScale {
-            from { opacity: 0; transform: scale(0.8); }
-            to { opacity: 1; transform: scale(1); }
-        }
-        
         @keyframes heartbeat {
-            0%, 100% { transform: scale(1); opacity: 0.3; }
-            50% { transform: scale(1.1); opacity: 0.6; }
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.1); opacity: 1; }
         }
         
-        /* خلفية القلوب */
-        #hearts-background {
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        /* خلفية الفقاعات المتحركة */
+        #bubbles-background {
             position: fixed;
             top: 0;
             left: 0;
@@ -96,15 +85,14 @@
             overflow: hidden;
         }
         
-        .heart {
+        .bubble {
             position: absolute;
-            color: var(--primary-burgundy);
-            opacity: 0;
-            font-size: 20px;
-            animation: floatHeart linear infinite;
+            background: rgba(255, 182, 193, 0.15);
+            border-radius: 50%;
+            animation: floatBubble linear infinite;
         }
         
-        @keyframes floatHeart {
+        @keyframes floatBubble {
             0% {
                 transform: translateY(100vh) rotate(0deg);
                 opacity: 0;
@@ -121,29 +109,6 @@
             }
         }
         
-        /* خلفية النجوم */
-        #stars-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -3;
-            overflow: hidden;
-        }
-        
-        .star {
-            position: absolute;
-            background-color: var(--white);
-            border-radius: 50%;
-            animation: twinkle 5s infinite;
-        }
-        
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.2; }
-            50% { opacity: 1; }
-        }
-        
         /* الهيدر الفخم */
         .luxury-header {
             position: relative;
@@ -155,17 +120,7 @@
             text-align: center;
             overflow: hidden;
             padding: 40px 20px;
-            background: radial-gradient(ellipse at center, rgba(128, 0, 32, 0.2) 0%, rgba(10, 10, 10, 0.95) 70%);
-        }
-        
-        .gold-ornament {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path d="M50,5 L60,40 L95,50 L60,60 L50,95 L40,60 L5,50 L40,40 Z" fill="none" stroke="%23D4AF37" stroke-width="0.5" opacity="0.2"/></svg>');
-            background-size: 200px;
-            opacity: 0.1;
-            z-index: 0;
+            background: linear-gradient(135deg, rgba(255, 182, 193, 0.1) 0%, rgba(255, 255, 255, 0.95) 100%);
         }
         
         .header-content {
@@ -175,90 +130,66 @@
             width: 100%;
         }
         
+        /* الاسمين على نفس السطر - Responsive */
         .couple-names {
-            font-size: 5.5rem;
+            font-size: 5rem;
             font-weight: 900;
             margin-bottom: 30px;
-            background: linear-gradient(135deg, var(--primary-gold) 0%, var(--light-gold) 50%, var(--dark-gold) 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            letter-spacing: 3px;
-            text-transform: uppercase;
+            color: var(--primary-pink);
+            letter-spacing: 1px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: nowrap;
+            white-space: nowrap;
             position: relative;
             animation: glow 3s infinite;
+            gap: 30px;
         }
         
-        .couple-names::before, .couple-names::after {
-            content: "❖";
-            color: var(--primary-gold);
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 3rem;
-            opacity: 0.7;
+        .couple-names span {
+            display: inline-block;
         }
         
-        .couple-names::before {
-            right: -60px;
-        }
-        
-        .couple-names::after {
-            left: -60px;
+        .couple-names .and {
+            color: var(--gold);
+            font-size: 3.5rem;
+            margin: 0 15px;
         }
         
         .invitation-title {
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             margin-bottom: 40px;
-            color: var(--light-gray);
+            color: #666;
             position: relative;
             display: inline-block;
-            font-weight: 300;
-            letter-spacing: 2px;
+            font-weight: 400;
+            letter-spacing: 1px;
         }
         
         .invitation-title::after {
             content: '';
             position: absolute;
-            width: 100%;
+            width: 80%;
             height: 2px;
-            background: linear-gradient(to right, transparent, var(--primary-gold), transparent);
+            background: linear-gradient(to right, transparent, var(--primary-pink), transparent);
             bottom: -15px;
-            left: 0;
+            left: 10%;
         }
         
         /* إطار صورة العروسين */
         .couple-photo-frame {
             position: relative;
             margin: 40px auto 50px;
-            width: 350px;
-            height: 350px;
+            width: 320px;
+            height: 320px;
             border-radius: 50%;
             overflow: hidden;
-            border: 6px solid transparent;
-            background: linear-gradient(135deg, var(--primary-gold), var(--dark-gold), var(--primary-burgundy), var(--dark-burgundy));
-            background-size: 400% 400%;
-            animation: gradientRotate 8s ease infinite;
+            border: 8px solid var(--white);
+            background: linear-gradient(135deg, var(--primary-pink), var(--gold));
             box-shadow: var(--shadow-lg), 
-                        inset 0 0 30px rgba(212, 175, 55, 0.3),
-                        0 0 60px rgba(128, 0, 32, 0.4);
-            z-index: 1;
-        }
-        
-        @keyframes gradientRotate {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-        
-        .couple-photo-frame::before {
-            content: '';
-            position: absolute;
-            top: 6px;
-            left: 6px;
-            right: 6px;
-            bottom: 6px;
-            background: var(--dark-gray);
-            border-radius: 50%;
+                        inset 0 0 30px rgba(255, 107, 139, 0.2),
+                        0 0 40px rgba(255, 182, 193, 0.4);
             z-index: 1;
         }
         
@@ -267,14 +198,14 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 94%;
-            height: 94%;
+            width: 100%;
+            height: 100%;
             border-radius: 50%;
             object-fit: cover;
             object-position: center;
             z-index: 2;
             transition: var(--transition);
-            animation: fadeInScale 1.5s ease-out;
+            animation: fadeInUp 1.5s ease-out;
         }
         
         .photo-decoration {
@@ -283,23 +214,27 @@
             left: -20px;
             right: -20px;
             bottom: -20px;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path d="M50,5 L60,40 L95,50 L60,60 L50,95 L40,60 L5,50 L40,40 Z" fill="none" stroke="%23D4AF37" stroke-width="1.5" opacity="0.5"/></svg>');
-            background-size: 80px;
-            animation: rotate 30s linear infinite;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path d="M50,5 L60,40 L95,50 L60,60 L50,95 L40,60 L5,50 L40,40 Z" fill="none" stroke="%23FF6B8B" stroke-width="1.2" opacity="0.3"/></svg>');
+            background-size: 70px;
+            animation: rotate 40s linear infinite;
             z-index: 0;
         }
         
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
         .date-wrapper {
-            background: linear-gradient(135deg, rgba(128, 0, 32, 0.3) 0%, rgba(10, 10, 10, 0.8) 100%);
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(212, 175, 55, 0.3);
+            background: var(--white);
             border-radius: 25px;
-            padding: 35px 60px;
+            padding: 30px 50px;
             margin: 30px auto;
-            max-width: 800px;
+            max-width: 700px;
             position: relative;
             overflow: hidden;
             box-shadow: var(--shadow-lg);
+            border: 2px solid var(--light-pink);
         }
         
         .date-wrapper::before {
@@ -309,28 +244,28 @@
             left: 0;
             right: 0;
             height: 3px;
-            background: linear-gradient(to right, transparent, var(--primary-gold), transparent);
+            background: linear-gradient(to right, var(--primary-pink), var(--gold));
         }
         
         .gregorian-date {
-            font-size: 3.5rem;
+            font-size: 3rem;
             font-weight: 700;
-            color: var(--primary-gold);
+            color: var(--primary-pink);
             direction: ltr;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             font-family: 'Cairo', sans-serif;
         }
         
         .hijri-date {
-            font-size: 1.8rem;
-            color: var(--light-gray);
+            font-size: 1.6rem;
+            color: #666;
             opacity: 0.9;
             font-weight: 500;
         }
         
         .wedding-icon {
             font-size: 3rem;
-            color: var(--primary-gold);
+            color: var(--primary-pink);
             margin: 30px 0;
             animation: float 4s ease-in-out infinite;
         }
@@ -340,7 +275,7 @@
             bottom: 40px;
             left: 50%;
             transform: translateX(-50%);
-            color: var(--primary-gold);
+            color: var(--primary-pink);
             font-size: 1.5rem;
             animation: float 2s infinite;
             z-index: 10;
@@ -349,15 +284,15 @@
         
         /* الأقسام العامة */
         .section {
-            padding: 100px 0;
+            padding: 80px 0;
             position: relative;
         }
         
         .section-title {
             text-align: center;
-            font-size: 3.5rem;
-            margin-bottom: 70px;
-            color: var(--primary-gold);
+            font-size: 3rem;
+            margin-bottom: 50px;
+            color: var(--primary-pink);
             position: relative;
             font-weight: 700;
         }
@@ -365,52 +300,102 @@
         .section-title::after {
             content: '';
             position: absolute;
-            width: 200px;
+            width: 150px;
             height: 4px;
-            background: linear-gradient(to right, transparent, var(--primary-burgundy), transparent);
-            bottom: -20px;
+            background: linear-gradient(to right, transparent, var(--gold), transparent);
+            bottom: -15px;
             left: 50%;
             transform: translateX(-50%);
         }
         
-        /* قسم تأكيد الحضور الفاخر */
+        /* قسم تأكيد الحضور البسيط */
         .attendance-section {
-            background: linear-gradient(180deg, rgba(10, 10, 10, 0.9) 0%, rgba(26, 26, 26, 0.95) 100%);
+            background: linear-gradient(135deg, rgba(255, 182, 193, 0.05) 0%, rgba(255, 255, 255, 1) 100%);
             position: relative;
             overflow: hidden;
         }
         
-        .attendance-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path d="M50,0 C77.614,0 100,22.386 100,50 C100,77.614 77.614,100 50,100 C22.386,100 0,77.614 0,50 C0,22.386 22.386,0 50,0 Z" fill="none" stroke="%23800020" stroke-width="0.3" opacity="0.1"/></svg>');
-            background-size: 150px;
-            opacity: 0.1;
-            z-index: 0;
-        }
-        
         .attendance-container {
-            position: relative;
-            z-index: 1;
-            background: rgba(26, 26, 26, 0.7);
-            backdrop-filter: blur(20px);
-            border-radius: 30px;
-            padding: 60px;
+            background: var(--white);
+            border-radius: 25px;
+            padding: 50px;
             margin: 30px auto;
-            max-width: 900px;
+            max-width: 600px;
             box-shadow: var(--shadow-lg);
-            border: 1px solid rgba(212, 175, 55, 0.2);
+            border: 2px solid var(--light-pink);
+            text-align: center;
         }
         
-        .attendance-form {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        .attendance-text {
+            font-size: 1.4rem;
+            color: #555;
+            margin-bottom: 40px;
+            line-height: 1.8;
+        }
+        
+        .attendance-btn {
+            background: linear-gradient(135deg, var(--primary-pink) 0%, #FF8E9E 100%);
+            color: var(--white);
+            border: none;
+            padding: 20px 60px;
+            border-radius: 50px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            margin: 20px auto;
+            font-family: 'Cairo', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            box-shadow: 0 10px 25px rgba(255, 107, 139, 0.3);
+            animation: pulse 2s infinite;
+        }
+        
+        .attendance-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(255, 107, 139, 0.4);
+        }
+        
+        .attendance-btn.confirmed {
+            background: linear-gradient(135deg, #4CAF50 0%, #8BC34A 100%);
+            animation: none;
+        }
+        
+        .attendance-count {
+            margin-top: 30px;
+            font-size: 1.3rem;
+            color: #666;
+        }
+        
+        .count-number {
+            font-weight: 800;
+            color: var(--primary-pink);
+            font-size: 2rem;
+        }
+        
+        /* قسم رسائل التهنئة */
+        .congratulations-section {
+            background: var(--light-gray);
+            position: relative;
+        }
+        
+        .congratulations-container {
+            background: var(--white);
+            border-radius: 25px;
+            padding: 50px;
+            margin: 30px auto;
+            max-width: 800px;
+            box-shadow: var(--shadow-lg);
+            border: 2px solid var(--light-pink);
+        }
+        
+        .congratulations-form {
+            display: flex;
+            flex-direction: column;
             gap: 30px;
-            margin-top: 40px;
+            margin-top: 30px;
         }
         
         .form-group {
@@ -420,7 +405,7 @@
         
         .form-label {
             margin-bottom: 15px;
-            color: var(--primary-gold);
+            color: var(--primary-pink);
             font-weight: 600;
             font-size: 1.2rem;
             display: flex;
@@ -433,10 +418,10 @@
         
         .form-input {
             padding: 18px 20px;
-            background: rgba(255, 255, 255, 0.07);
-            border: 1px solid rgba(212, 175, 55, 0.3);
+            background: rgba(255, 182, 193, 0.05);
+            border: 2px solid var(--light-pink);
             border-radius: 15px;
-            color: var(--light-gray);
+            color: #333;
             font-family: 'Cairo', sans-serif;
             font-size: 1.1rem;
             transition: var(--transition);
@@ -444,36 +429,26 @@
         
         .form-input:focus {
             outline: none;
-            border-color: var(--primary-gold);
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
-            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--primary-pink);
+            box-shadow: 0 0 15px rgba(255, 107, 139, 0.2);
+            background: var(--white);
         }
         
         .form-input::placeholder {
-            color: rgba(245, 245, 245, 0.5);
-        }
-        
-        .guests-select {
-            appearance: none;
-            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23D4AF37' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
-            background-repeat: no-repeat;
-            background-position: left 20px center;
-            background-size: 20px;
-            padding-right: 20px;
+            color: #999;
         }
         
         .submit-btn {
-            grid-column: 1 / -1;
-            background: linear-gradient(135deg, var(--primary-burgundy) 0%, var(--dark-burgundy) 100%);
+            background: linear-gradient(135deg, var(--gold) 0%, var(--dark-gold) 100%);
             color: var(--white);
             border: none;
-            padding: 22px;
+            padding: 20px;
             border-radius: 15px;
             font-size: 1.4rem;
             font-weight: 700;
             cursor: pointer;
             transition: var(--transition);
-            margin-top: 30px;
+            margin-top: 20px;
             font-family: 'Cairo', sans-serif;
             letter-spacing: 1px;
             position: relative;
@@ -481,41 +456,24 @@
             z-index: 1;
         }
         
-        .submit-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, var(--dark-gold) 0%, var(--primary-gold) 100%);
-            z-index: -1;
-            opacity: 0;
-            transition: var(--transition);
-        }
-        
         .submit-btn:hover {
             transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(128, 0, 32, 0.4);
+            box-shadow: 0 15px 30px rgba(212, 175, 55, 0.3);
         }
         
-        .submit-btn:hover::before {
-            opacity: 1;
-        }
-        
-        /* قسم الموقع الفاخر */
+        /* قسم الموقع */
         .location-section {
-            background: linear-gradient(180deg, rgba(26, 26, 26, 0.95) 0%, rgba(10, 10, 10, 0.9) 100%);
+            background: linear-gradient(135deg, rgba(255, 182, 193, 0.05) 0%, rgba(255, 255, 255, 1) 100%);
         }
         
         .location-card {
-            background: linear-gradient(135deg, rgba(128, 0, 32, 0.2) 0%, rgba(26, 26, 26, 0.9) 100%);
-            border-radius: 30px;
+            background: var(--white);
+            border-radius: 25px;
             padding: 50px;
             margin: 0 auto;
-            max-width: 900px;
+            max-width: 800px;
             box-shadow: var(--shadow-lg);
-            border: 1px solid rgba(212, 175, 55, 0.2);
+            border: 2px solid var(--light-pink);
             position: relative;
             overflow: hidden;
         }
@@ -527,20 +485,20 @@
             left: 0;
             right: 0;
             height: 5px;
-            background: linear-gradient(to right, var(--primary-burgundy), var(--primary-gold), var(--primary-burgundy));
+            background: linear-gradient(to right, var(--primary-pink), var(--gold), var(--primary-pink));
         }
         
         .hall-name {
-            font-size: 3.2rem;
-            color: var(--primary-gold);
-            margin-bottom: 15px;
+            font-size: 2.8rem;
+            color: var(--primary-pink);
+            margin-bottom: 10px;
             font-weight: 800;
         }
         
         .hall-address {
-            font-size: 1.6rem;
+            font-size: 1.5rem;
             margin-bottom: 40px;
-            color: var(--light-gray);
+            color: #666;
             opacity: 0.9;
             font-weight: 500;
         }
@@ -559,32 +517,32 @@
             align-items: center;
             text-align: center;
             flex: 1;
-            min-width: 200px;
+            min-width: 180px;
         }
         
         .detail-icon {
-            font-size: 2.5rem;
-            color: var(--primary-gold);
+            font-size: 2.2rem;
+            color: var(--primary-pink);
             margin-bottom: 15px;
-            background: rgba(212, 175, 55, 0.1);
-            width: 80px;
-            height: 80px;
+            background: rgba(255, 107, 139, 0.1);
+            width: 70px;
+            height: 70px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 2px solid rgba(212, 175, 55, 0.3);
+            border: 2px solid rgba(255, 107, 139, 0.2);
         }
         
         .map-container {
             position: relative;
             width: 100%;
-            height: 450px;
+            height: 400px;
             border-radius: 20px;
             overflow: hidden;
             margin-top: 30px;
-            border: 2px solid rgba(212, 175, 55, 0.3);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            border: 2px solid var(--light-pink);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
         }
         
         .map-frame {
@@ -599,7 +557,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(10, 10, 10, 0.7);
+            background: rgba(255, 255, 255, 0.85);
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -613,46 +571,46 @@
         }
         
         .map-btn {
-            background: linear-gradient(135deg, var(--primary-gold) 0%, var(--dark-gold) 100%);
-            color: var(--black);
-            padding: 18px 35px;
+            background: linear-gradient(135deg, var(--primary-pink) 0%, #FF8E9E 100%);
+            color: var(--white);
+            padding: 16px 30px;
             border-radius: 50px;
             font-weight: 700;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             text-decoration: none;
             transition: var(--transition);
             display: flex;
             align-items: center;
             gap: 10px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
         }
         
         .map-btn:hover {
             transform: scale(1.05);
-            box-shadow: 0 15px 30px rgba(212, 175, 55, 0.4);
+            box-shadow: 0 12px 25px rgba(255, 107, 139, 0.3);
         }
         
-        /* قسم العد التنازلي الفاخر */
+        /* قسم العد التنازلي */
         .countdown-section {
-            background: linear-gradient(180deg, rgba(10, 10, 10, 0.9) 0%, rgba(128, 0, 32, 0.1) 100%);
+            background: linear-gradient(135deg, rgba(255, 182, 193, 0.1) 0%, rgba(255, 255, 255, 1) 100%);
             text-align: center;
         }
         
         .countdown-container {
             display: flex;
             justify-content: center;
-            gap: 30px;
+            gap: 25px;
             flex-wrap: wrap;
-            margin-top: 60px;
+            margin-top: 50px;
         }
         
         .countdown-box {
-            background: linear-gradient(135deg, rgba(128, 0, 32, 0.3) 0%, rgba(26, 26, 26, 0.9) 100%);
+            background: var(--white);
             border-radius: 20px;
-            padding: 40px 30px;
-            min-width: 180px;
+            padding: 35px 25px;
+            min-width: 160px;
             box-shadow: var(--shadow-lg);
-            border: 1px solid rgba(212, 175, 55, 0.2);
+            border: 2px solid var(--light-pink);
             transition: var(--transition);
             position: relative;
             overflow: hidden;
@@ -665,73 +623,71 @@
             left: 0;
             right: 0;
             height: 5px;
-            background: linear-gradient(to right, transparent, var(--primary-gold), transparent);
+            background: linear-gradient(to right, transparent, var(--primary-pink), transparent);
         }
         
         .countdown-box:hover {
-            transform: translateY(-15px);
-            border-color: var(--primary-gold);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6);
+            transform: translateY(-10px);
+            border-color: var(--primary-pink);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
         }
         
         .countdown-value {
-            font-size: 4.5rem;
+            font-size: 4rem;
             font-weight: 800;
-            color: var(--primary-gold);
+            color: var(--primary-pink);
             line-height: 1;
             font-family: 'Cairo', sans-serif;
-            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            text-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
         }
         
         .countdown-label {
-            font-size: 1.5rem;
-            margin-top: 15px;
-            color: var(--light-gray);
+            font-size: 1.4rem;
+            margin-top: 10px;
+            color: #666;
             font-weight: 600;
         }
         
-        /* الفوتر الفاخر */
+        /* الفوتر */
         .luxury-footer {
-            background: linear-gradient(180deg, rgba(128, 0, 32, 0.2) 0%, rgba(10, 10, 10, 1) 100%);
-            padding: 80px 0 40px;
+            background: linear-gradient(135deg, rgba(255, 182, 193, 0.15) 0%, rgba(255, 255, 255, 1) 100%);
+            padding: 70px 0 30px;
             text-align: center;
-            border-top: 1px solid rgba(212, 175, 55, 0.2);
+            border-top: 2px solid var(--light-pink);
             position: relative;
             overflow: hidden;
         }
         
         .footer-heart {
-            color: var(--primary-burgundy);
+            color: var(--primary-pink);
             animation: heartbeat 1.5s infinite;
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             margin: 0 10px;
         }
         
         .footer-text {
-            font-size: 2rem;
-            color: var(--primary-gold);
-            margin-bottom: 30px;
+            font-size: 1.8rem;
+            color: var(--primary-pink);
+            margin-bottom: 20px;
             font-weight: 700;
             letter-spacing: 1px;
         }
-        
-        
         
         .copyright {
             opacity: 0.7;
             font-size: 0.9rem;
             margin-top: 40px;
-            color: var(--light-gray);
+            color: #666;
         }
         
-        /* رسالة التأكيد الفاخرة */
+        /* رسالة التأكيد */
         .confirmation-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.9);
+            background: rgba(0, 0, 0, 0.85);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -748,14 +704,14 @@
         }
         
         .confirmation-card {
-            background: linear-gradient(135deg, rgba(128, 0, 32, 0.3) 0%, rgba(26, 26, 26, 0.95) 100%);
-            border-radius: 30px;
+            background: var(--white);
+            border-radius: 25px;
             padding: 50px;
             max-width: 600px;
             width: 90%;
             text-align: center;
             box-shadow: var(--shadow-lg);
-            border: 2px solid var(--primary-gold);
+            border: 2px solid var(--primary-pink);
             position: relative;
             transform: scale(0.8);
             transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
@@ -767,14 +723,14 @@
         
         .confirmation-icon {
             font-size: 5rem;
-            color: var(--primary-gold);
+            color: var(--primary-pink);
             margin-bottom: 30px;
             animation: float 3s infinite;
         }
         
         .confirmation-title {
             font-size: 2.5rem;
-            color: var(--primary-gold);
+            color: var(--primary-pink);
             margin-bottom: 20px;
             font-weight: 800;
         }
@@ -782,22 +738,22 @@
         .confirmation-text {
             font-size: 1.4rem;
             margin-bottom: 30px;
-            color: var(--light-gray);
+            color: #333;
             line-height: 1.8;
         }
         
         .close-confirmation {
             position: absolute;
-            top: 25px;
-            left: 25px;
+            top: 20px;
+            left: 20px;
             background: none;
             border: none;
-            color: var(--primary-gold);
-            font-size: 2rem;
+            color: var(--primary-pink);
+            font-size: 1.8rem;
             cursor: pointer;
             transition: var(--transition);
-            width: 50px;
-            height: 50px;
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -805,7 +761,7 @@
         }
         
         .close-confirmation:hover {
-            background: rgba(212, 175, 55, 0.1);
+            background: rgba(255, 107, 139, 0.1);
             transform: rotate(90deg);
         }
         
@@ -815,8 +771,8 @@
             top: 0;
             left: 0;
             width: 0%;
-            height: 5px;
-            background: linear-gradient(to right, var(--primary-burgundy), var(--primary-gold));
+            height: 4px;
+            background: linear-gradient(to right, var(--primary-pink), var(--gold));
             z-index: 9998;
             transition: width 0.3s ease;
         }
@@ -826,22 +782,22 @@
             position: fixed;
             bottom: 30px;
             left: 30px;
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, var(--primary-burgundy) 0%, var(--dark-burgundy) 100%);
+            width: 55px;
+            height: 55px;
+            background: linear-gradient(135deg, var(--primary-pink) 0%, #FF8E9E 100%);
             color: var(--white);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             cursor: pointer;
             z-index: 99;
             opacity: 0;
             visibility: hidden;
             transition: var(--transition);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-            border: 2px solid rgba(212, 175, 55, 0.3);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            border: 2px solid var(--white);
         }
         
         .back-to-top.visible {
@@ -850,52 +806,62 @@
         }
         
         .back-to-top:hover {
-            background: linear-gradient(135deg, var(--primary-gold) 0%, var(--dark-gold) 100%);
+            background: linear-gradient(135deg, var(--gold) 0%, var(--dark-gold) 100%);
             transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(212, 175, 55, 0.3);
+            box-shadow: 0 12px 25px rgba(255, 107, 139, 0.3);
         }
         
         /* تصميم متجاوب */
         @media (max-width: 1100px) {
             .couple-names {
-                font-size: 4.5rem;
-            }
-            
-            .couple-photo-frame {
-                width: 300px;
-                height: 300px;
-            }
-            
-            .date-wrapper {
-                padding: 30px 40px;
-            }
-            
-            .gregorian-date {
-                font-size: 3rem;
-            }
-            
-            .section-title {
-                font-size: 3rem;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .couple-names {
-                font-size: 3.5rem;
-            }
-            
-            .couple-names::before, .couple-names::after {
-                display: none;
+                font-size: 4.2rem;
             }
             
             .couple-photo-frame {
                 width: 280px;
                 height: 280px;
+            }
+            
+            .date-wrapper {
+                padding: 25px 40px;
+            }
+            
+            .gregorian-date {
+                font-size: 2.5rem;
+            }
+            
+            .section-title {
+                font-size: 2.6rem;
+            }
+        }
+        
+        @media (max-width: 850px) {
+            .couple-names {
+                font-size: 3.8rem;
+                flex-wrap: wrap;
+                white-space: normal;
+                gap: 10px;
+                justify-content: center;
+            }
+            
+            .couple-names .and {
+                margin: 0 10px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .couple-names {
+                font-size: 3.2rem;
+            }
+            
+            .couple-photo-frame {
+                width: 250px;
+                height: 250px;
                 margin: 30px auto;
             }
             
             .invitation-title {
-                font-size: 2rem;
+                font-size: 1.8rem;
             }
             
             .date-wrapper {
@@ -904,90 +870,48 @@
             }
             
             .gregorian-date {
-                font-size: 2.5rem;
+                font-size: 2.2rem;
             }
             
             .hijri-date {
-                font-size: 1.5rem;
-            }
-            
-            .section-title {
-                font-size: 2.5rem;
-            }
-            
-            .attendance-container, .location-card {
-                padding: 40px 30px;
-            }
-            
-            .countdown-box {
-                min-width: 150px;
-                padding: 30px 20px;
-            }
-            
-            .countdown-value {
-                font-size: 3.5rem;
-            }
-            
-            .hall-name {
-                font-size: 2.5rem;
-            }
-            
-            .hall-address {
                 font-size: 1.4rem;
-            }
-            
-            .footer-text {
-                font-size: 1.8rem;
-            }
-            
-            .social-icon {
-                width: 60px;
-                height: 60px;
-                font-size: 1.5rem;
-            }
-            
-            .back-to-top {
-                width: 50px;
-                height: 50px;
-                font-size: 1.5rem;
-                bottom: 20px;
-                left: 20px;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .couple-names {
-                font-size: 2.8rem;
-            }
-            
-            .couple-photo-frame {
-                width: 240px;
-                height: 240px;
-            }
-            
-            .invitation-title {
-                font-size: 1.7rem;
-            }
-            
-            .gregorian-date {
-                font-size: 2rem;
             }
             
             .section-title {
                 font-size: 2.2rem;
             }
             
+            .attendance-container, .location-card, .congratulations-container {
+                padding: 35px 25px;
+            }
+            
             .countdown-box {
-                min-width: 130px;
-                padding: 25px 15px;
+                min-width: 140px;
+                padding: 25px 20px;
             }
             
             .countdown-value {
-                font-size: 3rem;
+                font-size: 3.2rem;
             }
             
-            .attendance-form {
-                grid-template-columns: 1fr;
+            .hall-name {
+                font-size: 2.2rem;
+            }
+            
+            .hall-address {
+                font-size: 1.3rem;
+            }
+            
+            .footer-text {
+                font-size: 1.6rem;
+            }
+            
+            .back-to-top {
+                width: 50px;
+                height: 50px;
+                font-size: 1.4rem;
+                bottom: 20px;
+                left: 20px;
             }
             
             .location-details {
@@ -995,22 +919,77 @@
                 align-items: center;
             }
             
+            .detail-item {
+                min-width: 100%;
+                margin-bottom: 20px;
+            }
+        }
+        
+        @media (max-width: 580px) {
+            .couple-names {
+                font-size: 2.8rem;
+                flex-direction: column;
+                gap: 5px;
+            }
+            
+            .couple-names .and {
+                font-size: 2.5rem;
+                margin: 10px 0;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .couple-names {
+                font-size: 2.5rem;
+            }
+            
+            .couple-photo-frame {
+                width: 220px;
+                height: 220px;
+            }
+            
+            .invitation-title {
+                font-size: 1.5rem;
+            }
+            
+            .gregorian-date {
+                font-size: 1.8rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .countdown-box {
+                min-width: 120px;
+                padding: 20px 15px;
+            }
+            
+            .countdown-value {
+                font-size: 2.8rem;
+            }
+            
             .map-container {
-                height: 350px;
+                height: 300px;
+            }
+            
+            .attendance-btn {
+                padding: 18px 40px;
+                font-size: 1.3rem;
             }
         }
         
         /* تأثيرات خاصة للجوال */
         @media (hover: none) {
             .map-overlay {
-                opacity: 0.7;
+                opacity: 0.8;
             }
             
             .countdown-box:hover {
                 transform: none;
             }
             
-            .social-icon:hover, .submit-btn:hover, .map-btn:hover {
+            .submit-btn:hover, .map-btn:hover, .attendance-btn:hover {
                 transform: none;
             }
         }
@@ -1025,22 +1004,18 @@
         <i class="fas fa-chevron-up"></i>
     </div>
     
-    <!-- خلفية القلوب المتحركة -->
-    <div id="hearts-background"></div>
-    
-    <!-- خلفية النجوم -->
-    <div id="stars-container"></div>
+    <!-- خلفية الفقاعات المتحركة -->
+    <div id="bubbles-background"></div>
     
     <!-- الهيدر الفخم -->
     <header class="luxury-header">
-        <div class="gold-ornament"></div>
-        
         <div class="header-content">
             <h1 class="invitation-title">دعوة لحضور حفل زفاف</h1>
             
+            <!-- الاسمين على نفس السطر دائماً -->
             <div class="couple-names animate__animated animate__fadeIn">
                 <span>أحمد</span>
-                <span style="margin: 0 25px;">و</span>
+                <span class="and">و</span>
                 <span>إسراء</span>
             </div>
             
@@ -1057,13 +1032,13 @@
             <div class="date-wrapper animate__animated animate__fadeInUp">
                 <div class="gregorian-date">11 ديسمبر 2025</div>
                 <div class="hijri-date">٢٠ رجب ١٤٤٧ هـ</div>
-                <div style="margin-top: 25px; font-size: 1.3rem; opacity: 0.9;">
-                    <i class="fas fa-clock" style="color: var(--primary-gold); margin-left: 8px;"></i>
+                <div style="margin-top: 20px; font-size: 1.2rem; color: #666;">
+                    <i class="fas fa-clock" style="color: var(--primary-pink); margin-left: 8px;"></i>
                     يبدأ الاستقبال الساعة ٨:٠٠ مساءً
                 </div>
             </div>
             
-            <p style="font-size: 1.5rem; max-width: 800px; margin: 0 auto; opacity: 0.9; line-height: 1.8;">
+            <p style="font-size: 1.3rem; max-width: 700px; margin: 0 auto; color: #666; line-height: 1.8;">
                 نشارككم فرحة واحدة من أجمل ليالي العمر، ونتشرف بدعوتكم لحضور حفل زفافنا الذي سيكون بتشريفكم أكثر بهجةً وسروراً
             </p>
         </div>
@@ -1073,58 +1048,57 @@
         </div>
     </header>
     
-    <!-- قسم تأكيد الحضور -->
+    <!-- قسم تأكيد الحضور البسيط -->
     <section class="section attendance-section" id="attendance">
         <div class="container">
             <h2 class="section-title">تأكيد الحضور</h2>
-            <p style="text-align: center; font-size: 1.4rem; margin-bottom: 40px; max-width: 800px; margin-left: auto; margin-right: auto; opacity: 0.9;">
-                نرجو منكم تأكيد حضوركم حتى نتمكن من الترتيب لاستقبالكم على أكمل وجه
-            </p>
             
             <div class="attendance-container">
-                <form id="attendanceForm" class="attendance-form">
+                <p class="attendance-text">
+                    يسرنا دعوتكم لحضور فرحتنا، ونرجو منكم تأكيد حضوركم بالضغط على الزر أدناه
+                </p>
+                
+                <button id="attendanceBtn" class="attendance-btn">
+                    <i class="fas fa-check-circle"></i>
+                    سأحضر الفرح
+                </button>
+                
+                <div class="attendance-count">
+                    <span class="count-number" id="attendanceCount">0</span> شخص أكد حضوره حتى الآن
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- قسم رسائل التهنئة -->
+    <section class="section congratulations-section" id="congratulations">
+        <div class="container">
+            <h2 class="section-title">رسائل التهنئة</h2>
+            <p style="text-align: center; font-size: 1.3rem; margin-bottom: 40px; max-width: 700px; margin-left: auto; margin-right: auto; color: #666;">
+                شارك العروسين رسالة تهنئة وبركة لتكون ذكرى في فرحتهم
+            </p>
+            
+            <div class="congratulations-container">
+                <form id="congratulationsForm" class="congratulations-form">
                     <div class="form-group">
                         <label for="name" class="form-label">
                             <i class="fas fa-user"></i>
-                            الاسم الكريم
+                            اسمك الكريم
                         </label>
-                        <input type="text" id="name" name="name" class="form-input" required placeholder="أدخل اسمك الثلاثي">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="phone" class="form-label">
-                            <i class="fas fa-phone"></i>
-                            رقم الهاتف
-                        </label>
-                        <input type="tel" id="phone" name="phone" class="form-input" required placeholder="مثال: 01234567890">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="guests" class="form-label">
-                            <i class="fas fa-users"></i>
-                            عدد الأشخاص المرافقين
-                        </label>
-                        <select id="guests" name="guests" class="form-input guests-select">
-                            <option value="0">لا يوجد مرافقين</option>
-                            <option value="1">شخص واحد</option>
-                            <option value="2">شخصين</option>
-                            <option value="3">ثلاثة أشخاص</option>
-                            <option value="4">أربعة أشخاص</option>
-                            <option value="5">خمسة أشخاص أو أكثر</option>
-                        </select>
+                        <input type="text" id="name" name="name" class="form-input" required placeholder="أدخل اسمك الكريم">
                     </div>
                     
                     <div class="form-group">
                         <label for="message" class="form-label">
                             <i class="fas fa-envelope"></i>
-                            رسالة تهنئة (اختياري)
+                            رسالة التهنئة
                         </label>
-                        <textarea id="message" name="message" rows="4" class="form-input" placeholder="اكتب رسالة تهنئة للعروسين..."></textarea>
+                        <textarea id="message" name="message" rows="5" class="form-input" required placeholder="اكتب رسالة تهنئة للعروسين..."></textarea>
                     </div>
                     
                     <button type="submit" class="submit-btn">
-                        <i class="fas fa-check-circle" style="margin-left: 10px;"></i>
-                        تأكيد الحضور
+                        <i class="fas fa-paper-plane" style="margin-left: 10px;"></i>
+                        إرسال التهنئة
                     </button>
                 </form>
             </div>
@@ -1145,7 +1119,7 @@
                         <div class="detail-icon">
                             <i class="fas fa-clock"></i>
                         </div>
-                        <h4 style="color: var(--primary-gold); margin-bottom: 8px;">الموعد</h4>
+                        <h4 style="color: var(--primary-pink); margin-bottom: 8px;">الموعد</h4>
                         <p>٨:٠٠ مساءً</p>
                     </div>
                     
@@ -1153,7 +1127,7 @@
                         <div class="detail-icon">
                             <i class="fas fa-car"></i>
                         </div>
-                        <h4 style="color: var(--primary-gold); margin-bottom: 8px;">الموقف</h4>
+                        <h4 style="color: var(--primary-pink); margin-bottom: 8px;">الموقف</h4>
                         <p>موقف سيارات مجاني</p>
                     </div>
                     
@@ -1161,7 +1135,7 @@
                         <div class="detail-icon">
                             <i class="fas fa-phone-alt"></i>
                         </div>
-                        <h4 style="color: var(--primary-gold); margin-bottom: 8px;">للاستفسار</h4>
+                        <h4 style="color: var(--primary-pink); margin-bottom: 8px;">للاستفسار</h4>
                         <p>01234567890</p>
                     </div>
                 </div>
@@ -1180,7 +1154,7 @@
                             <i class="fas fa-map-marker-alt"></i>
                             افتح في خرائط جوجل
                         </a>
-                        <p style="margin-top: 20px; color: var(--light-gray); font-size: 1.1rem;">
+                        <p style="margin-top: 20px; color: #666; font-size: 1.1rem;">
                             اضغط على الرابط لفتح الموقع في تطبيق الخرائط
                         </p>
                     </div>
@@ -1216,23 +1190,21 @@
                 </div>
             </div>
             
-            <p style="text-align: center; margin-top: 60px; font-size: 1.5rem; max-width: 800px; margin-left: auto; margin-right: auto; opacity: 0.9;">
+            <p style="text-align: center; margin-top: 50px; font-size: 1.3rem; max-width: 700px; margin-left: auto; margin-right: auto; color: #666;">
                 مع كل ثانية تمر، نقترب أكثر من بداية رحلة عمر جديدة مليئة بالحب والسعادة
             </p>
         </div>
     </section>
     
-    <!-- الفوتر الفاخر -->
+    <!-- الفوتر -->
     <footer class="luxury-footer">
         <div class="container">
             <p class="footer-text">
                 فرحتنا لا تكتمل بدون حضوركم <span class="footer-heart">❤</span>
             </p>
-            <p style="font-size: 1.5rem; margin-bottom: 30px; opacity: 0.9; max-width: 800px; margin-left: auto; margin-right: auto;">
+            <p style="font-size: 1.3rem; margin-bottom: 20px; color: #666; max-width: 700px; margin-left: auto; margin-right: auto;">
                 بتشريفكم نكتمل الفرح، وبتواجدكم تزدان الأمسية ببهجة لا توصف
             </p>
-            
-            
             
             <p class="copyright">
                 تم تصميم هذه الدعوة الرقمية الفاخرة خصيصاً لفرح أحمد وإسراء<br>
@@ -1252,18 +1224,16 @@
                 <i class="fas fa-check-circle"></i>
             </div>
             
-            <h3 class="confirmation-title">تم تأكيد الحضور بنجاح!</h3>
-            <p id="confirmationText" class="confirmation-text">
-                شكراً لتأكيد حضورك، ننتظر رؤيتك في فرحتنا
-            </p>
+            <h3 class="confirmation-title" id="confirmationTitle"></h3>
+            <p id="confirmationText" class="confirmation-text"></p>
             
-            <div style="margin-top: 40px; padding-top: 30px; border-top: 1px solid rgba(212, 175, 55, 0.3);">
-                <p style="font-size: 1.3rem; color: var(--primary-gold); margin-bottom: 10px;">
+            <div style="margin-top: 30px; padding-top: 25px; border-top: 2px solid rgba(255, 107, 139, 0.2);">
+                <p style="font-size: 1.2rem; color: var(--primary-pink); margin-bottom: 10px;">
                     <i class="fas fa-calendar-alt" style="margin-left: 8px;"></i>
                     ١١ ديسمبر ٢٠٢٥
                 </p>
-                <p style="font-size: 1.3rem; color: var(--light-gray);">
-                    <i class="fas fa-map-marker-alt" style="margin-left: 8px; color: var(--primary-gold);"></i>
+                <p style="font-size: 1.2rem; color: #666;">
+                    <i class="fas fa-map-marker-alt" style="margin-left: 8px; color: var(--primary-pink);"></i>
                     قاعة ستيدج النيل - الدقي
                 </p>
             </div>
@@ -1271,122 +1241,87 @@
     </div>
     
     <script>
-        // تهيئة النجوم في الخلفية
-        function createStars() {
-            const starsContainer = document.getElementById('stars-container');
-            const starsCount = 150;
-            
-            for (let i = 0; i < starsCount; i++) {
-                const star = document.createElement('div');
-                star.classList.add('star');
-                
-                // حجم عشوائي للنجوم
-                const size = Math.random() * 2 + 1;
-                star.style.width = `${size}px`;
-                star.style.height = `${size}px`;
-                
-                // موقع عشوائي
-                star.style.left = `${Math.random() * 100}%`;
-                star.style.top = `${Math.random() * 100}%`;
-                
-                // تأخير عشوائي للوميض
-                star.style.animationDelay = `${Math.random() * 5}s`;
-                
-                starsContainer.appendChild(star);
-            }
-        }
-        
-        // تهيئة القلوب المتحركة
-        function createHearts() {
-            const heartsContainer = document.getElementById('hearts-background');
-            const heartsCount = 40;
-            const heartColors = [
-                'var(--primary-burgundy)',
-                'var(--light-burgundy)',
-                'var(--primary-gold)',
-                'var(--light-gold)',
-                '#ff6b9d',
-                '#ff99cc',
-                '#ff3366'
+        // تهيئة الفقاعات في الخلفية
+        function createBubbles() {
+            const bubblesContainer = document.getElementById('bubbles-background');
+            const bubblesCount = 40;
+            const bubbleColors = [
+                'rgba(255, 107, 139, 0.15)',
+                'rgba(255, 182, 193, 0.2)',
+                'rgba(212, 175, 55, 0.1)',
+                'rgba(255, 182, 193, 0.12)',
+                'rgba(255, 107, 139, 0.1)'
             ];
             
-            for (let i = 0; i < heartsCount; i++) {
-                const heart = document.createElement('div');
-                heart.classList.add('heart');
-                heart.innerHTML = '❤';
+            for (let i = 0; i < bubblesCount; i++) {
+                const bubble = document.createElement('div');
+                bubble.classList.add('bubble');
                 
-                // حجم عشوائي للقلوب
-                const size = Math.random() * 25 + 15;
-                heart.style.fontSize = `${size}px`;
+                // حجم عشوائي للفقاعات
+                const size = Math.random() * 80 + 30;
+                bubble.style.width = `${size}px`;
+                bubble.style.height = `${size}px`;
                 
                 // لون عشوائي
-                const colorIndex = Math.floor(Math.random() * heartColors.length);
-                heart.style.color = heartColors[colorIndex];
+                const colorIndex = Math.floor(Math.random() * bubbleColors.length);
+                bubble.style.backgroundColor = bubbleColors[colorIndex];
                 
                 // موقع بداية عشوائي
                 const startX = Math.random() * 100;
-                heart.style.left = `${startX}%`;
+                bubble.style.left = `${startX}%`;
                 
                 // مدة وتأخير عشوائي للحركة
-                const duration = Math.random() * 20 + 15;
+                const duration = Math.random() * 25 + 20;
                 const delay = Math.random() * 10;
-                heart.style.animationDuration = `${duration}s`;
-                heart.style.animationDelay = `${delay}s`;
+                bubble.style.animationDuration = `${duration}s`;
+                bubble.style.animationDelay = `${delay}s`;
                 
-                // دوران عشوائي
-                const rotateSpeed = Math.random() * 2 + 1;
-                heart.style.animationTimingFunction = `cubic-bezier(0.${Math.floor(Math.random() * 9)}, 0.${Math.floor(Math.random() * 9)}, 0.${Math.floor(Math.random() * 9)}, 0.${Math.floor(Math.random() * 9)})`;
-                
-                heartsContainer.appendChild(heart);
+                bubblesContainer.appendChild(bubble);
             }
             
-            // إضافة قلوب بشكل مستمر
+            // إضافة فقاعات بشكل مستمر
             setInterval(() => {
-                if (document.querySelectorAll('.heart').length < 50) {
-                    addSingleHeart();
+                if (document.querySelectorAll('.bubble').length < 50) {
+                    addSingleBubble();
                 }
-            }, 1000);
+            }, 1500);
         }
         
-        // إضافة قلب واحد
-        function addSingleHeart() {
-            const heartsContainer = document.getElementById('hearts-background');
-            const heartColors = [
-                'var(--primary-burgundy)',
-                'var(--light-burgundy)',
-                'var(--primary-gold)',
-                'var(--light-gold)',
-                '#ff6b9d',
-                '#ff99cc',
-                '#ff3366'
+        // إضافة فقاعة واحدة
+        function addSingleBubble() {
+            const bubblesContainer = document.getElementById('bubbles-background');
+            const bubbleColors = [
+                'rgba(255, 107, 139, 0.15)',
+                'rgba(255, 182, 193, 0.2)',
+                'rgba(212, 175, 55, 0.1)'
             ];
             
-            const heart = document.createElement('div');
-            heart.classList.add('heart');
-            heart.innerHTML = '❤';
+            const bubble = document.createElement('div');
+            bubble.classList.add('bubble');
             
             // حجم عشوائي
-            const size = Math.random() * 25 + 15;
-            heart.style.fontSize = `${size}px`;
+            const size = Math.random() * 80 + 30;
+            bubble.style.width = `${size}px`;
+            bubble.style.height = `${size}px`;
             
             // لون عشوائي
-            const colorIndex = Math.floor(Math.random() * heartColors.length);
-            heart.style.color = heartColors[colorIndex];
+            const colorIndex = Math.floor(Math.random() * bubbleColors.length);
+            bubble.style.backgroundColor = bubbleColors[colorIndex];
             
             // موقع بداية عشوائي
             const startX = Math.random() * 100;
-            heart.style.left = `${startX}%`;
+            bubble.style.left = `${startX}%`;
             
-            // مدة وتأخير عشوائي
-            const duration = Math.random() * 20 + 15;
-            heart.style.animationDuration = `${duration}s`;
+            // مدة عشوائية
+            const duration = Math.random() * 25 + 20;
+            bubble.style.animationDuration = `${duration}s`;
             
-            heartsContainer.appendChild(heart);
+            bubblesContainer.appendChild(bubble);
             
-            // إزالة القلب بعد انتهاء الأنيميشن
+            // إزالة الفقاعة بعد انتهاء الأنيميشن
             setTimeout(() => {
-                if (heart.parentNode) {
-                    heart.parentNode.removeChild(heart);
+                if (bubble.parentNode) {
+                    bubble.parentNode.removeChild(bubble);
                 }
             }, duration * 1000);
         }
@@ -1416,38 +1351,66 @@
             document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
         }
         
-        // معالجة نموذج تأكيد الحضور
-        document.getElementById('attendanceForm').addEventListener('submit', function(e) {
+        // تأكيد الحضور البسيط (زر صح)
+        let attendanceConfirmed = false;
+        let attendanceCount = 15; // عدد أولي للأشخاص الذين أكدوا الحضور
+        
+        document.getElementById('attendanceBtn').addEventListener('click', function() {
+            if (!attendanceConfirmed) {
+                attendanceConfirmed = true;
+                attendanceCount++;
+                
+                // تحديث الزر
+                this.innerHTML = '<i class="fas fa-check"></i> تم تأكيد حضورك';
+                this.classList.add('confirmed');
+                
+                // تحديث العداد
+                document.getElementById('attendanceCount').textContent = attendanceCount;
+                
+                // عرض رسالة التأكيد
+                document.getElementById('confirmationTitle').textContent = 'تم تأكيد حضورك بنجاح!';
+                document.getElementById('confirmationText').textContent = 'شكراً لتأكيد حضورك، ننتظر رؤيتك في فرحتنا';
+                document.getElementById('confirmationOverlay').classList.add('active');
+                document.body.style.overflow = 'hidden';
+                
+                // إضافة فقاعات عند تأكيد الحضور
+                for (let i = 0; i < 8; i++) {
+                    setTimeout(() => addSingleBubble(), i * 100);
+                }
+                
+                // إرسال بيانات الحضور (هنا يمكنك إضافة كود لإرسال البيانات لخادم)
+                console.log('تم تأكيد الحضور بدون بيانات');
+            } else {
+                // إذا كان المستخدم حاول التأكيد مرة أخرى
+                document.getElementById('confirmationTitle').textContent = 'لقد أكدت حضورك بالفعل!';
+                document.getElementById('confirmationText').textContent = 'شكراً لك، لقد أكدت حضورك مسبقاً وسنكون سعداء برؤيتك في فرحتنا';
+                document.getElementById('confirmationOverlay').classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        });
+        
+        // معالجة نموذج رسائل التهنئة
+        document.getElementById('congratulationsForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
             const name = document.getElementById('name').value;
-            const guests = document.getElementById('guests').value;
+            const message = document.getElementById('message').value;
             
-            // تحديث نص التأكيد
-            let confirmationText = `عزيزي/عزيزتي ${name}،`;
-            confirmationText += ` شكراً جزيلاً لتأكيد حضورك لحفل زفافنا`;
-            
-            if (parseInt(guests) > 0) {
-                confirmationText += ` ومع ${guests} من المرافقين الكرام`;
-            }
-            
-            confirmationText += `. ننتظر بفارغ الصبر رؤيتكم في فرحتنا التي ستكون بتشريفكم أكثر بهجةً وسروراً`;
-            
-            document.getElementById('confirmationText').textContent = confirmationText;
-            
-            // عرض رسالة التأكيد
+            // عرض رسالة الشكر
+            document.getElementById('confirmationTitle').textContent = 'شكراً على تهنئتك!';
+            document.getElementById('confirmationText').textContent = `عزيزي/عزيزتي ${name}، شكراً جزيلاً على رسالتك الجميلة. تهنئتك ستكون ذكرى عزيزة في فرحتنا`;
             document.getElementById('confirmationOverlay').classList.add('active');
             document.body.style.overflow = 'hidden';
             
             // إعادة تعيين النموذج
-            document.getElementById('attendanceForm').reset();
+            document.getElementById('congratulationsForm').reset();
             
             // إرسال بيانات النموذج (هنا يمكنك إضافة كود لإرسال البيانات لخادم)
-            console.log('تم إرسال بيانات الحضور:', { name, phone: document.getElementById('phone').value, guests, message: document.getElementById('message').value });
+            console.log('تم إرسال رسالة تهنئة:', { name, message });
             
-            // إضافة قلوب عند تأكيد الحضور
-            for (let i = 0; i < 10; i++) {
-                setTimeout(() => addSingleHeart(), i * 100);
+            // إضافة فقاعات عند إرسال رسالة التهنئة
+            for (let i = 0; i < 5; i++) {
+                setTimeout(() => addSingleBubble(), i * 100);
             }
         });
         
@@ -1517,11 +1480,8 @@
         
         // تهيئة الصفحة عند التحميل
         document.addEventListener('DOMContentLoaded', function() {
-            // إنشاء النجوم
-            createStars();
-            
-            // إنشاء القلوب المتحركة
-            createHearts();
+            // إنشاء الفقاعات
+            createBubbles();
             
             // بدء العد التنازلي
             updateCountdown();
@@ -1551,7 +1511,7 @@
             // مراقبة العناصر لإضافة تأثيرات
             document.querySelectorAll('.section').forEach(section => {
                 section.style.opacity = '0';
-                section.style.transform = 'translateY(50px)';
+                section.style.transform = 'translateY(40px)';
                 section.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
                 observer.observe(section);
             });
@@ -1561,18 +1521,22 @@
                 document.body.classList.add('touch-device');
             }
             
-            // إضافة قلوب عند التمرير
+            // إضافة فقاعات عند التمرير
             window.addEventListener('scroll', function() {
-                if (Math.random() > 0.7 && document.querySelectorAll('.heart').length < 30) {
-                    setTimeout(() => addSingleHeart(), 100);
+                if (Math.random() > 0.7 && document.querySelectorAll('.bubble').length < 30) {
+                    setTimeout(() => addSingleBubble(), 100);
                 }
             });
+            
+            // ضبط العدد الأولي للأشخاص الذين أكدوا الحضور بشكل عشوائي
+            attendanceCount = Math.floor(Math.random() * 20) + 10;
+            document.getElementById('attendanceCount').textContent = attendanceCount;
             
             console.log('تم تحميل الدعوة بنجاح!');
         });
         
         // تأثيرات تفاعلية عند النقر على الأزرار
-        document.querySelectorAll('.submit-btn, .map-btn, .social-icon').forEach(button => {
+        document.querySelectorAll('.submit-btn, .map-btn, .attendance-btn').forEach(button => {
             button.addEventListener('click', function() {
                 // تأثير اهتزاز بسيط
                 this.style.transform = 'scale(0.95)';
