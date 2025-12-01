@@ -1,0 +1,1629 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دعوة زفاف | أحمد وإسراء</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        :root {
+            --primary-gold: #D4AF37;
+            --dark-gold: #B8860B;
+            --light-gold: #F4E4A6;
+            --primary-burgundy: #800020;
+            --dark-burgundy: #5A0018;
+            --light-burgundy: #A3002A;
+            --black: #0A0A0A;
+            --dark-gray: #1A1A1A;
+            --light-gray: #F5F5F5;
+            --white: #FFFFFF;
+            --shadow-lg: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            --transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Cairo', 'Noto Naskh Arabic', sans-serif;
+            background-color: var(--black);
+            color: var(--light-gray);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* أنيميشن مخصصة */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        @keyframes glow {
+            0%, 100% { text-shadow: 0 0 10px var(--primary-gold); }
+            50% { text-shadow: 0 0 30px var(--primary-gold), 0 0 40px var(--primary-gold); }
+        }
+        
+        @keyframes shimmer {
+            0% { background-position: -1000px 0; }
+            100% { background-position: 1000px 0; }
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        @keyframes fadeInScale {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); opacity: 0.3; }
+            50% { transform: scale(1.1); opacity: 0.6; }
+        }
+        
+        /* خلفية القلوب */
+        #hearts-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            overflow: hidden;
+        }
+        
+        .heart {
+            position: absolute;
+            color: var(--primary-burgundy);
+            opacity: 0;
+            font-size: 20px;
+            animation: floatHeart linear infinite;
+        }
+        
+        @keyframes floatHeart {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.4;
+            }
+            90% {
+                opacity: 0.4;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        /* خلفية النجوم */
+        #stars-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -3;
+            overflow: hidden;
+        }
+        
+        .star {
+            position: absolute;
+            background-color: var(--white);
+            border-radius: 50%;
+            animation: twinkle 5s infinite;
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.2; }
+            50% { opacity: 1; }
+        }
+        
+        /* الهيدر الفخم */
+        .luxury-header {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            overflow: hidden;
+            padding: 40px 20px;
+            background: radial-gradient(ellipse at center, rgba(128, 0, 32, 0.2) 0%, rgba(10, 10, 10, 0.95) 70%);
+        }
+        
+        .gold-ornament {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path d="M50,5 L60,40 L95,50 L60,60 L50,95 L40,60 L5,50 L40,40 Z" fill="none" stroke="%23D4AF37" stroke-width="0.5" opacity="0.2"/></svg>');
+            background-size: 200px;
+            opacity: 0.1;
+            z-index: 0;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 2;
+            animation: fadeInUp 1.5s ease-out;
+            width: 100%;
+        }
+        
+        .couple-names {
+            font-size: 5.5rem;
+            font-weight: 900;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, var(--primary-gold) 0%, var(--light-gold) 50%, var(--dark-gold) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            position: relative;
+            animation: glow 3s infinite;
+        }
+        
+        .couple-names::before, .couple-names::after {
+            content: "❖";
+            color: var(--primary-gold);
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 3rem;
+            opacity: 0.7;
+        }
+        
+        .couple-names::before {
+            right: -60px;
+        }
+        
+        .couple-names::after {
+            left: -60px;
+        }
+        
+        .invitation-title {
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            color: var(--light-gray);
+            position: relative;
+            display: inline-block;
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+        
+        .invitation-title::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(to right, transparent, var(--primary-gold), transparent);
+            bottom: -15px;
+            left: 0;
+        }
+        
+        /* إطار صورة العروسين */
+        .couple-photo-frame {
+            position: relative;
+            margin: 40px auto 50px;
+            width: 350px;
+            height: 350px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 6px solid transparent;
+            background: linear-gradient(135deg, var(--primary-gold), var(--dark-gold), var(--primary-burgundy), var(--dark-burgundy));
+            background-size: 400% 400%;
+            animation: gradientRotate 8s ease infinite;
+            box-shadow: var(--shadow-lg), 
+                        inset 0 0 30px rgba(212, 175, 55, 0.3),
+                        0 0 60px rgba(128, 0, 32, 0.4);
+            z-index: 1;
+        }
+        
+        @keyframes gradientRotate {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        .couple-photo-frame::before {
+            content: '';
+            position: absolute;
+            top: 6px;
+            left: 6px;
+            right: 6px;
+            bottom: 6px;
+            background: var(--dark-gray);
+            border-radius: 50%;
+            z-index: 1;
+        }
+        
+        .couple-photo {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 94%;
+            height: 94%;
+            border-radius: 50%;
+            object-fit: cover;
+            object-position: center;
+            z-index: 2;
+            transition: var(--transition);
+            animation: fadeInScale 1.5s ease-out;
+        }
+        
+        .photo-decoration {
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            right: -20px;
+            bottom: -20px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path d="M50,5 L60,40 L95,50 L60,60 L50,95 L40,60 L5,50 L40,40 Z" fill="none" stroke="%23D4AF37" stroke-width="1.5" opacity="0.5"/></svg>');
+            background-size: 80px;
+            animation: rotate 30s linear infinite;
+            z-index: 0;
+        }
+        
+        .date-wrapper {
+            background: linear-gradient(135deg, rgba(128, 0, 32, 0.3) 0%, rgba(10, 10, 10, 0.8) 100%);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 25px;
+            padding: 35px 60px;
+            margin: 30px auto;
+            max-width: 800px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .date-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(to right, transparent, var(--primary-gold), transparent);
+        }
+        
+        .gregorian-date {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--primary-gold);
+            direction: ltr;
+            margin-bottom: 15px;
+            font-family: 'Cairo', sans-serif;
+        }
+        
+        .hijri-date {
+            font-size: 1.8rem;
+            color: var(--light-gray);
+            opacity: 0.9;
+            font-weight: 500;
+        }
+        
+        .wedding-icon {
+            font-size: 3rem;
+            color: var(--primary-gold);
+            margin: 30px 0;
+            animation: float 4s ease-in-out infinite;
+        }
+        
+        .scroll-hint {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--primary-gold);
+            font-size: 1.5rem;
+            animation: float 2s infinite;
+            z-index: 10;
+            cursor: pointer;
+        }
+        
+        /* الأقسام العامة */
+        .section {
+            padding: 100px 0;
+            position: relative;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 3.5rem;
+            margin-bottom: 70px;
+            color: var(--primary-gold);
+            position: relative;
+            font-weight: 700;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 200px;
+            height: 4px;
+            background: linear-gradient(to right, transparent, var(--primary-burgundy), transparent);
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        /* قسم تأكيد الحضور الفاخر */
+        .attendance-section {
+            background: linear-gradient(180deg, rgba(10, 10, 10, 0.9) 0%, rgba(26, 26, 26, 0.95) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .attendance-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path d="M50,0 C77.614,0 100,22.386 100,50 C100,77.614 77.614,100 50,100 C22.386,100 0,77.614 0,50 C0,22.386 22.386,0 50,0 Z" fill="none" stroke="%23800020" stroke-width="0.3" opacity="0.1"/></svg>');
+            background-size: 150px;
+            opacity: 0.1;
+            z-index: 0;
+        }
+        
+        .attendance-container {
+            position: relative;
+            z-index: 1;
+            background: rgba(26, 26, 26, 0.7);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            padding: 60px;
+            margin: 30px auto;
+            max-width: 900px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        
+        .attendance-form {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .form-label {
+            margin-bottom: 15px;
+            color: var(--primary-gold);
+            font-weight: 600;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .form-label i {
+            margin-left: 10px;
+        }
+        
+        .form-input {
+            padding: 18px 20px;
+            background: rgba(255, 255, 255, 0.07);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 15px;
+            color: var(--light-gray);
+            font-family: 'Cairo', sans-serif;
+            font-size: 1.1rem;
+            transition: var(--transition);
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary-gold);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .form-input::placeholder {
+            color: rgba(245, 245, 245, 0.5);
+        }
+        
+        .guests-select {
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23D4AF37' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: left 20px center;
+            background-size: 20px;
+            padding-right: 20px;
+        }
+        
+        .submit-btn {
+            grid-column: 1 / -1;
+            background: linear-gradient(135deg, var(--primary-burgundy) 0%, var(--dark-burgundy) 100%);
+            color: var(--white);
+            border: none;
+            padding: 22px;
+            border-radius: 15px;
+            font-size: 1.4rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 30px;
+            font-family: 'Cairo', sans-serif;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--dark-gold) 0%, var(--primary-gold) 100%);
+            z-index: -1;
+            opacity: 0;
+            transition: var(--transition);
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(128, 0, 32, 0.4);
+        }
+        
+        .submit-btn:hover::before {
+            opacity: 1;
+        }
+        
+        /* قسم الموقع الفاخر */
+        .location-section {
+            background: linear-gradient(180deg, rgba(26, 26, 26, 0.95) 0%, rgba(10, 10, 10, 0.9) 100%);
+        }
+        
+        .location-card {
+            background: linear-gradient(135deg, rgba(128, 0, 32, 0.2) 0%, rgba(26, 26, 26, 0.9) 100%);
+            border-radius: 30px;
+            padding: 50px;
+            margin: 0 auto;
+            max-width: 900px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .location-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(to right, var(--primary-burgundy), var(--primary-gold), var(--primary-burgundy));
+        }
+        
+        .hall-name {
+            font-size: 3.2rem;
+            color: var(--primary-gold);
+            margin-bottom: 15px;
+            font-weight: 800;
+        }
+        
+        .hall-address {
+            font-size: 1.6rem;
+            margin-bottom: 40px;
+            color: var(--light-gray);
+            opacity: 0.9;
+            font-weight: 500;
+        }
+        
+        .location-details {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .detail-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .detail-icon {
+            font-size: 2.5rem;
+            color: var(--primary-gold);
+            margin-bottom: 15px;
+            background: rgba(212, 175, 55, 0.1);
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid rgba(212, 175, 55, 0.3);
+        }
+        
+        .map-container {
+            position: relative;
+            width: 100%;
+            height: 450px;
+            border-radius: 20px;
+            overflow: hidden;
+            margin-top: 30px;
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+        }
+        
+        .map-frame {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .map-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 10, 10, 0.7);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: var(--transition);
+            opacity: 0;
+        }
+        
+        .map-container:hover .map-overlay {
+            opacity: 1;
+        }
+        
+        .map-btn {
+            background: linear-gradient(135deg, var(--primary-gold) 0%, var(--dark-gold) 100%);
+            color: var(--black);
+            padding: 18px 35px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.3rem;
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .map-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 30px rgba(212, 175, 55, 0.4);
+        }
+        
+        /* قسم العد التنازلي الفاخر */
+        .countdown-section {
+            background: linear-gradient(180deg, rgba(10, 10, 10, 0.9) 0%, rgba(128, 0, 32, 0.1) 100%);
+            text-align: center;
+        }
+        
+        .countdown-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 60px;
+        }
+        
+        .countdown-box {
+            background: linear-gradient(135deg, rgba(128, 0, 32, 0.3) 0%, rgba(26, 26, 26, 0.9) 100%);
+            border-radius: 20px;
+            padding: 40px 30px;
+            min-width: 180px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .countdown-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(to right, transparent, var(--primary-gold), transparent);
+        }
+        
+        .countdown-box:hover {
+            transform: translateY(-15px);
+            border-color: var(--primary-gold);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6);
+        }
+        
+        .countdown-value {
+            font-size: 4.5rem;
+            font-weight: 800;
+            color: var(--primary-gold);
+            line-height: 1;
+            font-family: 'Cairo', sans-serif;
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        }
+        
+        .countdown-label {
+            font-size: 1.5rem;
+            margin-top: 15px;
+            color: var(--light-gray);
+            font-weight: 600;
+        }
+        
+        /* الفوتر الفاخر */
+        .luxury-footer {
+            background: linear-gradient(180deg, rgba(128, 0, 32, 0.2) 0%, rgba(10, 10, 10, 1) 100%);
+            padding: 80px 0 40px;
+            text-align: center;
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .footer-heart {
+            color: var(--primary-burgundy);
+            animation: heartbeat 1.5s infinite;
+            font-size: 2.5rem;
+            margin: 0 10px;
+        }
+        
+        .footer-text {
+            font-size: 2rem;
+            color: var(--primary-gold);
+            margin-bottom: 30px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        
+        .social-container {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 50px;
+            margin-bottom: 40px;
+        }
+        
+        .social-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(128, 0, 32, 0.3) 0%, rgba(26, 26, 26, 0.9) 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--primary-gold);
+            font-size: 1.8rem;
+            transition: var(--transition);
+            text-decoration: none;
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .social-icon:hover {
+            background: linear-gradient(135deg, var(--primary-gold) 0%, var(--dark-gold) 100%);
+            color: var(--black);
+            transform: translateY(-10px) scale(1.1);
+            border-color: var(--primary-gold);
+            box-shadow: 0 15px 30px rgba(212, 175, 55, 0.4);
+        }
+        
+        .copyright {
+            opacity: 0.7;
+            font-size: 0.9rem;
+            margin-top: 40px;
+            color: var(--light-gray);
+        }
+        
+        /* رسالة التأكيد الفاخرة */
+        .confirmation-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+        }
+        
+        .confirmation-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .confirmation-card {
+            background: linear-gradient(135deg, rgba(128, 0, 32, 0.3) 0%, rgba(26, 26, 26, 0.95) 100%);
+            border-radius: 30px;
+            padding: 50px;
+            max-width: 600px;
+            width: 90%;
+            text-align: center;
+            box-shadow: var(--shadow-lg);
+            border: 2px solid var(--primary-gold);
+            position: relative;
+            transform: scale(0.8);
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .confirmation-overlay.active .confirmation-card {
+            transform: scale(1);
+        }
+        
+        .confirmation-icon {
+            font-size: 5rem;
+            color: var(--primary-gold);
+            margin-bottom: 30px;
+            animation: float 3s infinite;
+        }
+        
+        .confirmation-title {
+            font-size: 2.5rem;
+            color: var(--primary-gold);
+            margin-bottom: 20px;
+            font-weight: 800;
+        }
+        
+        .confirmation-text {
+            font-size: 1.4rem;
+            margin-bottom: 30px;
+            color: var(--light-gray);
+            line-height: 1.8;
+        }
+        
+        .close-confirmation {
+            position: absolute;
+            top: 25px;
+            left: 25px;
+            background: none;
+            border: none;
+            color: var(--primary-gold);
+            font-size: 2rem;
+            cursor: pointer;
+            transition: var(--transition);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .close-confirmation:hover {
+            background: rgba(212, 175, 55, 0.1);
+            transform: rotate(90deg);
+        }
+        
+        /* شريط التقدم */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 5px;
+            background: linear-gradient(to right, var(--primary-burgundy), var(--primary-gold));
+            z-index: 9998;
+            transition: width 0.3s ease;
+        }
+        
+        /* زر العودة للأعلى */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary-burgundy) 0%, var(--dark-burgundy) 100%);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            cursor: pointer;
+            z-index: 99;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            border: 2px solid rgba(212, 175, 55, 0.3);
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            background: linear-gradient(135deg, var(--primary-gold) 0%, var(--dark-gold) 100%);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(212, 175, 55, 0.3);
+        }
+        
+        /* تصميم متجاوب */
+        @media (max-width: 1100px) {
+            .couple-names {
+                font-size: 4.5rem;
+            }
+            
+            .couple-photo-frame {
+                width: 300px;
+                height: 300px;
+            }
+            
+            .date-wrapper {
+                padding: 30px 40px;
+            }
+            
+            .gregorian-date {
+                font-size: 3rem;
+            }
+            
+            .section-title {
+                font-size: 3rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .couple-names {
+                font-size: 3.5rem;
+            }
+            
+            .couple-names::before, .couple-names::after {
+                display: none;
+            }
+            
+            .couple-photo-frame {
+                width: 280px;
+                height: 280px;
+                margin: 30px auto;
+            }
+            
+            .invitation-title {
+                font-size: 2rem;
+            }
+            
+            .date-wrapper {
+                padding: 25px 30px;
+                margin: 20px auto;
+            }
+            
+            .gregorian-date {
+                font-size: 2.5rem;
+            }
+            
+            .hijri-date {
+                font-size: 1.5rem;
+            }
+            
+            .section-title {
+                font-size: 2.5rem;
+            }
+            
+            .attendance-container, .location-card {
+                padding: 40px 30px;
+            }
+            
+            .countdown-box {
+                min-width: 150px;
+                padding: 30px 20px;
+            }
+            
+            .countdown-value {
+                font-size: 3.5rem;
+            }
+            
+            .hall-name {
+                font-size: 2.5rem;
+            }
+            
+            .hall-address {
+                font-size: 1.4rem;
+            }
+            
+            .footer-text {
+                font-size: 1.8rem;
+            }
+            
+            .social-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+            }
+            
+            .back-to-top {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+                bottom: 20px;
+                left: 20px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .couple-names {
+                font-size: 2.8rem;
+            }
+            
+            .couple-photo-frame {
+                width: 240px;
+                height: 240px;
+            }
+            
+            .invitation-title {
+                font-size: 1.7rem;
+            }
+            
+            .gregorian-date {
+                font-size: 2rem;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
+            }
+            
+            .countdown-box {
+                min-width: 130px;
+                padding: 25px 15px;
+            }
+            
+            .countdown-value {
+                font-size: 3rem;
+            }
+            
+            .attendance-form {
+                grid-template-columns: 1fr;
+            }
+            
+            .location-details {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .map-container {
+                height: 350px;
+            }
+        }
+        
+        /* تأثيرات خاصة للجوال */
+        @media (hover: none) {
+            .map-overlay {
+                opacity: 0.7;
+            }
+            
+            .countdown-box:hover {
+                transform: none;
+            }
+            
+            .social-icon:hover, .submit-btn:hover, .map-btn:hover {
+                transform: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- شريط التقدم -->
+    <div class="progress-bar" id="progressBar"></div>
+    
+    <!-- زر العودة للأعلى -->
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-chevron-up"></i>
+    </div>
+    
+    <!-- خلفية القلوب المتحركة -->
+    <div id="hearts-background"></div>
+    
+    <!-- خلفية النجوم -->
+    <div id="stars-container"></div>
+    
+    <!-- الهيدر الفخم -->
+    <header class="luxury-header">
+        <div class="gold-ornament"></div>
+        
+        <div class="header-content">
+            <h1 class="invitation-title">دعوة لحضور حفل زفاف</h1>
+            
+            <div class="couple-names animate__animated animate__fadeIn">
+                <span>أحمد</span>
+                <span style="margin: 0 25px;">و</span>
+                <span>إسراء</span>
+            </div>
+            
+            <!-- إطار صورة العروسين -->
+            <div class="couple-photo-frame animate__animated animate__zoomIn">
+                <div class="photo-decoration"></div>
+                <img src="wedding.jpeg" alt="أحمد وإسراء - العروسين" class="couple-photo" onerror="this.src='https://images.unsplash.com/photo-1511285560929-80b456fea0bc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80'" />
+            </div>
+            
+            <div class="wedding-icon">
+                <i class="fas fa-heart"></i>
+            </div>
+            
+            <div class="date-wrapper animate__animated animate__fadeInUp">
+                <div class="gregorian-date">11 ديسمبر 2025</div>
+                <div class="hijri-date">٢٠ رجب ١٤٤٧ هـ</div>
+                <div style="margin-top: 25px; font-size: 1.3rem; opacity: 0.9;">
+                    <i class="fas fa-clock" style="color: var(--primary-gold); margin-left: 8px;"></i>
+                    يبدأ الاستقبال الساعة ٨:٠٠ مساءً
+                </div>
+            </div>
+            
+            <p style="font-size: 1.5rem; max-width: 800px; margin: 0 auto; opacity: 0.9; line-height: 1.8;">
+                نشارككم فرحة واحدة من أجمل ليالي العمر، ونتشرف بدعوتكم لحضور حفل زفافنا الذي سيكون بتشريفكم أكثر بهجةً وسروراً
+            </p>
+        </div>
+        
+        <div class="scroll-hint" id="scrollHint">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </header>
+    
+    <!-- قسم تأكيد الحضور -->
+    <section class="section attendance-section" id="attendance">
+        <div class="container">
+            <h2 class="section-title">تأكيد الحضور</h2>
+            <p style="text-align: center; font-size: 1.4rem; margin-bottom: 40px; max-width: 800px; margin-left: auto; margin-right: auto; opacity: 0.9;">
+                نرجو منكم تأكيد حضوركم حتى نتمكن من الترتيب لاستقبالكم على أكمل وجه
+            </p>
+            
+            <div class="attendance-container">
+                <form id="attendanceForm" class="attendance-form">
+                    <div class="form-group">
+                        <label for="name" class="form-label">
+                            <i class="fas fa-user"></i>
+                            الاسم الكريم
+                        </label>
+                        <input type="text" id="name" name="name" class="form-input" required placeholder="أدخل اسمك الثلاثي">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone" class="form-label">
+                            <i class="fas fa-phone"></i>
+                            رقم الهاتف
+                        </label>
+                        <input type="tel" id="phone" name="phone" class="form-input" required placeholder="مثال: 01234567890">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="guests" class="form-label">
+                            <i class="fas fa-users"></i>
+                            عدد الأشخاص المرافقين
+                        </label>
+                        <select id="guests" name="guests" class="form-input guests-select">
+                            <option value="0">لا يوجد مرافقين</option>
+                            <option value="1">شخص واحد</option>
+                            <option value="2">شخصين</option>
+                            <option value="3">ثلاثة أشخاص</option>
+                            <option value="4">أربعة أشخاص</option>
+                            <option value="5">خمسة أشخاص أو أكثر</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message" class="form-label">
+                            <i class="fas fa-envelope"></i>
+                            رسالة تهنئة (اختياري)
+                        </label>
+                        <textarea id="message" name="message" rows="4" class="form-input" placeholder="اكتب رسالة تهنئة للعروسين..."></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-check-circle" style="margin-left: 10px;"></i>
+                        تأكيد الحضور
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+    
+    <!-- قسم الموقع -->
+    <section class="section location-section" id="location">
+        <div class="container">
+            <h2 class="section-title">مكان الفرح</h2>
+            
+            <div class="location-card">
+                <h3 class="hall-name">قاعة ستيدج النيل</h3>
+                <p class="hall-address">الدقي - ميدان الجلاء</p>
+                
+                <div class="location-details">
+                    <div class="detail-item">
+                        <div class="detail-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <h4 style="color: var(--primary-gold); margin-bottom: 8px;">الموعد</h4>
+                        <p>٨:٠٠ مساءً</p>
+                    </div>
+                    
+                    <div class="detail-item">
+                        <div class="detail-icon">
+                            <i class="fas fa-car"></i>
+                        </div>
+                        <h4 style="color: var(--primary-gold); margin-bottom: 8px;">الموقف</h4>
+                        <p>موقف سيارات مجاني</p>
+                    </div>
+                    
+                    <div class="detail-item">
+                        <div class="detail-icon">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <h4 style="color: var(--primary-gold); margin-bottom: 8px;">للاستفسار</h4>
+                        <p>01234567890</p>
+                    </div>
+                </div>
+                
+                <div class="map-container">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3453.325663075234!2d31.212538315116303!3d30.051752581877916!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1458412f4f1b4b9b%3A0x3c7a7b9a9a9a9a9a!2sStage%20El-Nile!5e0!3m2!1sen!2seg!4v1631234567890!5m2!1sen!2seg" 
+                        class="map-frame" 
+                        allowfullscreen="" 
+                        loading="lazy"
+                        title="موقع قاعة ستيدج النيل">
+                    </iframe>
+                    
+                    <div class="map-overlay">
+                        <a href="https://maps.app.goo.gl/mWk2q2vzZDC9VKsG9?g_st=aw" target="_blank" class="map-btn">
+                            <i class="fas fa-map-marker-alt"></i>
+                            افتح في خرائط جوجل
+                        </a>
+                        <p style="margin-top: 20px; color: var(--light-gray); font-size: 1.1rem;">
+                            اضغط على الرابط لفتح الموقع في تطبيق الخرائط
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- قسم العد التنازلي -->
+    <section class="section countdown-section" id="countdown">
+        <div class="container">
+            <h2 class="section-title">العد التنازلي للفرح</h2>
+            
+            <div class="countdown-container">
+                <div class="countdown-box">
+                    <div class="countdown-value" id="days">00</div>
+                    <div class="countdown-label">أيام</div>
+                </div>
+                
+                <div class="countdown-box">
+                    <div class="countdown-value" id="hours">00</div>
+                    <div class="countdown-label">ساعات</div>
+                </div>
+                
+                <div class="countdown-box">
+                    <div class="countdown-value" id="minutes">00</div>
+                    <div class="countdown-label">دقائق</div>
+                </div>
+                
+                <div class="countdown-box">
+                    <div class="countdown-value" id="seconds">00</div>
+                    <div class="countdown-label">ثواني</div>
+                </div>
+            </div>
+            
+            <p style="text-align: center; margin-top: 60px; font-size: 1.5rem; max-width: 800px; margin-left: auto; margin-right: auto; opacity: 0.9;">
+                مع كل ثانية تمر، نقترب أكثر من بداية رحلة عمر جديدة مليئة بالحب والسعادة
+            </p>
+        </div>
+    </section>
+    
+    <!-- الفوتر الفاخر -->
+    <footer class="luxury-footer">
+        <div class="container">
+            <p class="footer-text">
+                فرحتنا لا تكتمل بدون حضوركم <span class="footer-heart">❤</span>
+            </p>
+            <p style="font-size: 1.5rem; margin-bottom: 30px; opacity: 0.9; max-width: 800px; margin-left: auto; margin-right: auto;">
+                بتشريفكم نكتمل الفرح، وبتواجدكم تزدان الأمسية ببهجة لا توصف
+            </p>
+            
+            <div class="social-container">
+                <a href="https://wa.me/201234567890" target="_blank" class="social-icon">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+                <a href="#" class="social-icon">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="#" class="social-icon">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="mailto:ahmed.esraa.wedding@gmail.com" class="social-icon">
+                    <i class="fas fa-envelope"></i>
+                </a>
+            </div>
+            
+            <p class="copyright">
+                تم تصميم هذه الدعوة الرقمية الفاخرة خصيصاً لفرح أحمد وإسراء<br>
+                © 2025 جميع الحقوق محفوظة
+            </p>
+        </div>
+    </footer>
+    
+    <!-- رسالة تأكيد الحضور -->
+    <div class="confirmation-overlay" id="confirmationOverlay">
+        <div class="confirmation-card">
+            <button class="close-confirmation" id="closeConfirmation">
+                <i class="fas fa-times"></i>
+            </button>
+            
+            <div class="confirmation-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            
+            <h3 class="confirmation-title">تم تأكيد الحضور بنجاح!</h3>
+            <p id="confirmationText" class="confirmation-text">
+                شكراً لتأكيد حضورك، ننتظر رؤيتك في فرحتنا
+            </p>
+            
+            <div style="margin-top: 40px; padding-top: 30px; border-top: 1px solid rgba(212, 175, 55, 0.3);">
+                <p style="font-size: 1.3rem; color: var(--primary-gold); margin-bottom: 10px;">
+                    <i class="fas fa-calendar-alt" style="margin-left: 8px;"></i>
+                    ١١ ديسمبر ٢٠٢٥
+                </p>
+                <p style="font-size: 1.3rem; color: var(--light-gray);">
+                    <i class="fas fa-map-marker-alt" style="margin-left: 8px; color: var(--primary-gold);"></i>
+                    قاعة ستيدج النيل - الدقي
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // تهيئة النجوم في الخلفية
+        function createStars() {
+            const starsContainer = document.getElementById('stars-container');
+            const starsCount = 150;
+            
+            for (let i = 0; i < starsCount; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                
+                // حجم عشوائي للنجوم
+                const size = Math.random() * 2 + 1;
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                
+                // موقع عشوائي
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                
+                // تأخير عشوائي للوميض
+                star.style.animationDelay = `${Math.random() * 5}s`;
+                
+                starsContainer.appendChild(star);
+            }
+        }
+        
+        // تهيئة القلوب المتحركة
+        function createHearts() {
+            const heartsContainer = document.getElementById('hearts-background');
+            const heartsCount = 40;
+            const heartColors = [
+                'var(--primary-burgundy)',
+                'var(--light-burgundy)',
+                'var(--primary-gold)',
+                'var(--light-gold)',
+                '#ff6b9d',
+                '#ff99cc',
+                '#ff3366'
+            ];
+            
+            for (let i = 0; i < heartsCount; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                heart.innerHTML = '❤';
+                
+                // حجم عشوائي للقلوب
+                const size = Math.random() * 25 + 15;
+                heart.style.fontSize = `${size}px`;
+                
+                // لون عشوائي
+                const colorIndex = Math.floor(Math.random() * heartColors.length);
+                heart.style.color = heartColors[colorIndex];
+                
+                // موقع بداية عشوائي
+                const startX = Math.random() * 100;
+                heart.style.left = `${startX}%`;
+                
+                // مدة وتأخير عشوائي للحركة
+                const duration = Math.random() * 20 + 15;
+                const delay = Math.random() * 10;
+                heart.style.animationDuration = `${duration}s`;
+                heart.style.animationDelay = `${delay}s`;
+                
+                // دوران عشوائي
+                const rotateSpeed = Math.random() * 2 + 1;
+                heart.style.animationTimingFunction = `cubic-bezier(0.${Math.floor(Math.random() * 9)}, 0.${Math.floor(Math.random() * 9)}, 0.${Math.floor(Math.random() * 9)}, 0.${Math.floor(Math.random() * 9)})`;
+                
+                heartsContainer.appendChild(heart);
+            }
+            
+            // إضافة قلوب بشكل مستمر
+            setInterval(() => {
+                if (document.querySelectorAll('.heart').length < 50) {
+                    addSingleHeart();
+                }
+            }, 1000);
+        }
+        
+        // إضافة قلب واحد
+        function addSingleHeart() {
+            const heartsContainer = document.getElementById('hearts-background');
+            const heartColors = [
+                'var(--primary-burgundy)',
+                'var(--light-burgundy)',
+                'var(--primary-gold)',
+                'var(--light-gold)',
+                '#ff6b9d',
+                '#ff99cc',
+                '#ff3366'
+            ];
+            
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤';
+            
+            // حجم عشوائي
+            const size = Math.random() * 25 + 15;
+            heart.style.fontSize = `${size}px`;
+            
+            // لون عشوائي
+            const colorIndex = Math.floor(Math.random() * heartColors.length);
+            heart.style.color = heartColors[colorIndex];
+            
+            // موقع بداية عشوائي
+            const startX = Math.random() * 100;
+            heart.style.left = `${startX}%`;
+            
+            // مدة وتأخير عشوائي
+            const duration = Math.random() * 20 + 15;
+            heart.style.animationDuration = `${duration}s`;
+            
+            heartsContainer.appendChild(heart);
+            
+            // إزالة القلب بعد انتهاء الأنيميشن
+            setTimeout(() => {
+                if (heart.parentNode) {
+                    heart.parentNode.removeChild(heart);
+                }
+            }, duration * 1000);
+        }
+        
+        // العد التنازلي
+        function updateCountdown() {
+            const weddingDate = new Date('December 11, 2025 19:00:00').getTime();
+            const now = new Date().getTime();
+            const timeLeft = weddingDate - now;
+            
+            if (timeLeft < 0) {
+                document.getElementById('days').textContent = '00';
+                document.getElementById('hours').textContent = '00';
+                document.getElementById('minutes').textContent = '00';
+                document.getElementById('seconds').textContent = '00';
+                return;
+            }
+            
+            const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+            
+            document.getElementById('days').textContent = days.toString().padStart(2, '0');
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+        }
+        
+        // معالجة نموذج تأكيد الحضور
+        document.getElementById('attendanceForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const guests = document.getElementById('guests').value;
+            
+            // تحديث نص التأكيد
+            let confirmationText = `عزيزي/عزيزتي ${name}،`;
+            confirmationText += ` شكراً جزيلاً لتأكيد حضورك لحفل زفافنا`;
+            
+            if (parseInt(guests) > 0) {
+                confirmationText += ` ومع ${guests} من المرافقين الكرام`;
+            }
+            
+            confirmationText += `. ننتظر بفارغ الصبر رؤيتكم في فرحتنا التي ستكون بتشريفكم أكثر بهجةً وسروراً`;
+            
+            document.getElementById('confirmationText').textContent = confirmationText;
+            
+            // عرض رسالة التأكيد
+            document.getElementById('confirmationOverlay').classList.add('active');
+            document.body.style.overflow = 'hidden';
+            
+            // إعادة تعيين النموذج
+            document.getElementById('attendanceForm').reset();
+            
+            // إرسال بيانات النموذج (هنا يمكنك إضافة كود لإرسال البيانات لخادم)
+            console.log('تم إرسال بيانات الحضور:', { name, phone: document.getElementById('phone').value, guests, message: document.getElementById('message').value });
+            
+            // إضافة قلوب عند تأكيد الحضور
+            for (let i = 0; i < 10; i++) {
+                setTimeout(() => addSingleHeart(), i * 100);
+            }
+        });
+        
+        // إغلاق رسالة التأكيد
+        document.getElementById('closeConfirmation').addEventListener('click', function() {
+            document.getElementById('confirmationOverlay').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+        
+        // إغلاق رسالة التأكيد بالنقر خارجها
+        document.getElementById('confirmationOverlay').addEventListener('click', function(e) {
+            if (e.target === this) {
+                this.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        });
+        
+        // شريط التقدم
+        function updateProgressBar() {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById("progressBar").style.width = scrolled + "%";
+        }
+        
+        // إظهار/إخفاء زر العودة للأعلى
+        function toggleBackToTop() {
+            if (window.pageYOffset > 300) {
+                document.getElementById('backToTop').classList.add('visible');
+            } else {
+                document.getElementById('backToTop').classList.remove('visible');
+            }
+        }
+        
+        // التنقل السلس
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // النقر على مؤشر التمرير
+        document.getElementById('scrollHint').addEventListener('click', function() {
+            document.getElementById('attendance').scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+        
+        // النقر على زر العودة للأعلى
+        document.getElementById('backToTop').addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // تهيئة الصفحة عند التحميل
+        document.addEventListener('DOMContentLoaded', function() {
+            // إنشاء النجوم
+            createStars();
+            
+            // إنشاء القلوب المتحركة
+            createHearts();
+            
+            // بدء العد التنازلي
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+            
+            // تحديث شريط التقدم
+            window.addEventListener('scroll', function() {
+                updateProgressBar();
+                toggleBackToTop();
+            });
+            
+            // إضافة تأثيرات عند التمرير
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -100px 0px'
+            };
+            
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+            
+            // مراقبة العناصر لإضافة تأثيرات
+            document.querySelectorAll('.section').forEach(section => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(50px)';
+                section.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                observer.observe(section);
+            });
+            
+            // تأثيرات خاصة للهواتف
+            if ('ontouchstart' in window) {
+                document.body.classList.add('touch-device');
+            }
+            
+            // إضافة قلوب عند التمرير
+            window.addEventListener('scroll', function() {
+                if (Math.random() > 0.7 && document.querySelectorAll('.heart').length < 30) {
+                    setTimeout(() => addSingleHeart(), 100);
+                }
+            });
+            
+            console.log('تم تحميل الدعوة بنجاح!');
+        });
+        
+        // تأثيرات تفاعلية عند النقر على الأزرار
+        document.querySelectorAll('.submit-btn, .map-btn, .social-icon').forEach(button => {
+            button.addEventListener('click', function() {
+                // تأثير اهتزاز بسيط
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 200);
+            });
+        });
+    </script>
+</body>
+</html>
