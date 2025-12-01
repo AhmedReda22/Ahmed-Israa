@@ -84,10 +84,10 @@
                 opacity: 0;
             }
             10% {
-                opacity: 0.9;
+                opacity: 0.8;
             }
             90% {
-                opacity: 0.7;
+                opacity: 0.6;
             }
             100% {
                 transform: translateY(-100px) rotate(360deg) scale(1);
@@ -140,52 +140,45 @@
                 rgba(255, 250, 252, 0.97) 100%);
         }
         
-        /* زهور كبيرة كاملة */
-        .full-flower {
+        /* زهور SVG - متسقة في جميع الأجهزة */
+        .full-flower-svg {
             position: absolute;
-            font-family: 'Noto Naskh Arabic', serif;
-            font-size: 60px;
-            color: var(--rose-pink);
-            text-shadow: 0 5px 15px rgba(255, 105, 180, 0.3);
+            width: 70px;
+            height: 70px;
+            filter: drop-shadow(0 5px 15px rgba(255, 105, 180, 0.3));
             animation: gentleFloat 45s linear infinite, flowerBlink 4s infinite;
             user-select: none;
             pointer-events: none;
             z-index: 1;
         }
         
-        /* زهور متوسطة */
-        .medium-flower {
+        .medium-flower-svg {
             position: absolute;
-            font-family: 'Noto Naskh Arabic', serif;
-            font-size: 40px;
-            color: var(--light-pink);
-            text-shadow: 0 3px 10px rgba(255, 182, 193, 0.4);
+            width: 50px;
+            height: 50px;
+            filter: drop-shadow(0 3px 10px rgba(255, 182, 193, 0.4));
             animation: flowerFloat linear infinite, flowerBlink 5s infinite alternate;
             user-select: none;
             pointer-events: none;
             z-index: 0;
         }
         
-        /* زهور صغيرة */
-        .small-flower {
+        .small-flower-svg {
             position: absolute;
-            font-family: 'Noto Naskh Arabic', serif;
-            font-size: 28px;
-            color: rgba(255, 105, 180, 0.6);
-            text-shadow: 0 2px 8px rgba(255, 105, 180, 0.2);
+            width: 35px;
+            height: 35px;
+            filter: drop-shadow(0 2px 8px rgba(255, 105, 180, 0.2));
             animation: flowerFloat linear infinite, flowerBlink 6s infinite;
             user-select: none;
             pointer-events: none;
             z-index: 0;
         }
         
-        /* زهور ذهبية */
-        .gold-flower {
+        .gold-flower-svg {
             position: absolute;
-            font-family: 'Noto Naskh Arabic', serif;
-            font-size: 35px;
-            color: var(--gold);
-            text-shadow: 0 3px 12px rgba(212, 175, 55, 0.3);
+            width: 45px;
+            height: 45px;
+            filter: drop-shadow(0 3px 12px rgba(212, 175, 55, 0.3));
             animation: gentleFloat 60s linear infinite, flowerBlink 7s infinite alternate;
             user-select: none;
             pointer-events: none;
@@ -195,6 +188,8 @@
         
         .sparkle {
             position: absolute;
+            width: 20px;
+            height: 20px;
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23FFD700' d='M12,2 L14.5,8.5 L21,10 L16,14 L18,21 L12,17 L6,21 L8,14 L3,10 L9.5,8.5 Z'/%3E%3C/svg%3E");
             background-size: contain;
             background-repeat: no-repeat;
@@ -969,20 +964,24 @@
             }
             
             /* حجم الزهور على الشاشات المتوسطة */
-            .full-flower {
-                font-size: 50px;
+            .full-flower-svg {
+                width: 60px;
+                height: 60px;
             }
             
-            .medium-flower {
-                font-size: 35px;
+            .medium-flower-svg {
+                width: 45px;
+                height: 45px;
             }
             
-            .small-flower {
-                font-size: 24px;
+            .small-flower-svg {
+                width: 30px;
+                height: 30px;
             }
             
-            .gold-flower {
-                font-size: 30px;
+            .gold-flower-svg {
+                width: 40px;
+                height: 40px;
             }
         }
         
@@ -1084,20 +1083,24 @@
             }
             
             /* حجم الزهور على الشاشات الصغيرة */
-            .full-flower {
-                font-size: 45px;
+            .full-flower-svg {
+                width: 50px;
+                height: 50px;
             }
             
-            .medium-flower {
-                font-size: 32px;
+            .medium-flower-svg {
+                width: 40px;
+                height: 40px;
             }
             
-            .small-flower {
-                font-size: 22px;
+            .small-flower-svg {
+                width: 25px;
+                height: 25px;
             }
             
-            .gold-flower {
-                font-size: 28px;
+            .gold-flower-svg {
+                width: 35px;
+                height: 35px;
             }
         }
         
@@ -1174,20 +1177,24 @@
             }
             
             /* حجم الزهور على الشاشات الصغيرة جداً */
-            .full-flower {
-                font-size: 40px;
+            .full-flower-svg {
+                width: 45px;
+                height: 45px;
             }
             
-            .medium-flower {
-                font-size: 30px;
+            .medium-flower-svg {
+                width: 35px;
+                height: 35px;
             }
             
-            .small-flower {
-                font-size: 20px;
+            .small-flower-svg {
+                width: 22px;
+                height: 22px;
             }
             
-            .gold-flower {
-                font-size: 25px;
+            .gold-flower-svg {
+                width: 30px;
+                height: 30px;
             }
         }
         
@@ -1446,22 +1453,52 @@
     </div>
     
     <script>
+        // SVG لزهرة كاملة (❀)
+        const pinkFlowerSVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+            <circle cx="50" cy="50" r="15" fill="#FF69B4" opacity="0.9"/>
+            <path d="M50,15 C60,10 75,15 80,25 C85,35 80,45 75,50 C70,55 60,58 50,62 C40,58 30,55 25,50 C20,45 15,35 20,25 C25,15 40,10 50,15 Z" fill="#FF69B4" opacity="0.8"/>
+            <path d="M50,20 C55,15 65,18 68,25 C71,32 68,38 65,42 C62,46 55,48 50,52 C45,48 38,46 35,42 C32,38 29,32 32,25 C35,18 45,15 50,20 Z" fill="#FFB6C1" opacity="0.9"/>
+            <path d="M50,25 C53,22 59,24 62,29 C65,34 62,39 60,42 C58,45 53,47 50,50 C47,47 42,45 40,42 C38,39 35,34 38,29 C41,24 47,22 50,25 Z" fill="#FFFFFF" opacity="0.7"/>
+            <circle cx="50" cy="50" r="8" fill="#FFD700" opacity="0.9"/>
+            <circle cx="50" cy="50" r="4" fill="#FFA500" opacity="0.8"/>
+        </svg>`;
+        
+        const lightPinkFlowerSVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+            <circle cx="50" cy="50" r="12" fill="#FFB6C1" opacity="0.9"/>
+            <path d="M50,18 C58,14 70,18 74,27 C78,36 74,44 70,48 C66,52 58,55 50,58 C42,55 34,52 30,48 C26,44 22,36 26,27 C30,18 42,14 50,18 Z" fill="#FFB6C1" opacity="0.8"/>
+            <path d="M50,23 C56,20 64,22 67,28 C70,34 67,39 65,43 C63,47 58,49 50,52 C42,49 37,47 35,43 C33,39 30,34 33,28 C36,22 44,20 50,23 Z" fill="#FFE4E9" opacity="0.9"/>
+            <circle cx="50" cy="50" r="7" fill="#FFFACD" opacity="0.9"/>
+            <circle cx="50" cy="50" r="3" fill="#FFD700" opacity="0.8"/>
+        </svg>`;
+        
+        const smallFlowerSVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+            <circle cx="50" cy="50" r="10" fill="#FF69B4" opacity="0.6"/>
+            <path d="M50,20 C55,17 65,20 68,28 C71,36 68,43 65,47 C62,51 55,53 50,56 C45,53 38,51 35,47 C32,43 29,36 32,28 C35,20 45,17 50,20 Z" fill="#FF69B4" opacity="0.7"/>
+            <circle cx="50" cy="50" r="6" fill="#FFD700" opacity="0.8"/>
+        </svg>`;
+        
+        const goldFlowerSVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+            <circle cx="50" cy="50" r="13" fill="#D4AF37" opacity="0.9"/>
+            <path d="M50,16 C58,12 70,16 74,26 C78,36 74,45 70,50 C66,55 58,58 50,61 C42,58 34,55 30,50 C26,45 22,36 26,26 C30,16 42,12 50,16 Z" fill="#D4AF37" opacity="0.8"/>
+            <path d="M50,21 C56,18 64,21 67,28 C70,35 67,41 65,46 C63,51 58,53 50,56 C42,53 37,51 35,46 C33,41 30,35 33,28 C36,21 44,18 50,21 Z" fill="#F4E4A6" opacity="0.9"/>
+            <circle cx="50" cy="50" r="8" fill="#FFD700" opacity="0.9"/>
+            <circle cx="50" cy="50" r="4" fill="#FFA500" opacity="0.8"/>
+        </svg>`;
+        
         // تهيئة خلفية الزهور الجميلة والمتحركة
         function createBeautifulFlowerBackground() {
             const flowerContainer = document.getElementById('beautifulFlowerBackground');
-            const fullFlowerCount = 12;
-            const mediumFlowerCount = 25;
-            const smallFlowerCount = 35;
-            const goldFlowerCount = 8;
-            const sparkleCount = 15;
+            const fullFlowerCount = 10;
+            const mediumFlowerCount = 20;
+            const smallFlowerCount = 30;
+            const goldFlowerCount = 6;
+            const sparkleCount = 12;
             
             // إنشاء زهور كبيرة كاملة
             for (let i = 0; i < fullFlowerCount; i++) {
                 const flower = document.createElement('div');
-                flower.classList.add('full-flower');
-                flower.innerHTML = '❀';
-                
-                // حجم الزهرة محددة بالفئة
+                flower.classList.add('full-flower-svg');
+                flower.innerHTML = pinkFlowerSVG;
                 
                 // موقع عشوائي
                 const startX = Math.random() * 100;
@@ -1485,12 +1522,13 @@
             // إنشاء زهور متوسطة
             for (let i = 0; i < mediumFlowerCount; i++) {
                 const flower = document.createElement('div');
-                flower.classList.add('medium-flower');
-                flower.innerHTML = '❀';
+                flower.classList.add('medium-flower-svg');
+                flower.innerHTML = lightPinkFlowerSVG;
                 
                 // موقع عشوائي
                 const startX = Math.random() * 100;
                 flower.style.left = `${startX}%`;
+                flower.style.top = `100%`;
                 
                 // مدة وتأخير عشوائي للحركة
                 const duration = Math.random() * 25 + 20;
@@ -1507,12 +1545,13 @@
             // إنشاء زهور صغيرة
             for (let i = 0; i < smallFlowerCount; i++) {
                 const flower = document.createElement('div');
-                flower.classList.add('small-flower');
-                flower.innerHTML = '❀';
+                flower.classList.add('small-flower-svg');
+                flower.innerHTML = smallFlowerSVG;
                 
                 // موقع عشوائي
                 const startX = Math.random() * 100;
                 flower.style.left = `${startX}%`;
+                flower.style.top = `100%`;
                 
                 // مدة وتأخير عشوائي للحركة
                 const duration = Math.random() * 20 + 15;
@@ -1526,8 +1565,8 @@
             // إنشاء زهور ذهبية
             for (let i = 0; i < goldFlowerCount; i++) {
                 const flower = document.createElement('div');
-                flower.classList.add('gold-flower');
-                flower.innerHTML = '❀';
+                flower.classList.add('gold-flower-svg');
+                flower.innerHTML = goldFlowerSVG;
                 
                 // موقع عشوائي
                 const startX = Math.random() * 100;
@@ -1549,11 +1588,6 @@
                 const sparkle = document.createElement('div');
                 sparkle.classList.add('sparkle');
                 
-                // حجم عشوائي للومضة
-                const size = Math.random() * 25 + 10;
-                sparkle.style.width = `${size}px`;
-                sparkle.style.height = `${size}px`;
-                
                 // موقع عشوائي
                 const startX = Math.random() * 100;
                 const startY = Math.random() * 100;
@@ -1569,13 +1603,13 @@
             
             // إضافة زهور بشكل مستمر
             setInterval(() => {
-                if (document.querySelectorAll('.medium-flower').length < 30) {
+                if (document.querySelectorAll('.medium-flower-svg').length < 25) {
                     addSingleFlower('medium');
                 }
-                if (document.querySelectorAll('.small-flower').length < 40) {
+                if (document.querySelectorAll('.small-flower-svg').length < 35) {
                     addSingleFlower('small');
                 }
-            }, 5000);
+            }, 4000);
         }
         
         // إضافة زهرة واحدة
@@ -1583,47 +1617,46 @@
             const flowerContainer = document.getElementById('beautifulFlowerBackground');
             const flower = document.createElement('div');
             
-            let className, fontSize, duration, delay, startY;
+            let className, svg, duration, delay;
             
             switch(type) {
                 case 'full':
-                    className = 'full-flower';
-                    fontSize = 60;
+                    className = 'full-flower-svg';
+                    svg = pinkFlowerSVG;
                     duration = Math.random() * 40 + 35;
                     delay = Math.random() * 15;
-                    startY = 100 + Math.random() * 10;
                     break;
                 case 'medium':
-                    className = 'medium-flower';
-                    fontSize = 40;
+                    className = 'medium-flower-svg';
+                    svg = lightPinkFlowerSVG;
                     duration = Math.random() * 25 + 20;
                     delay = Math.random() * 10;
-                    startY = 100 + Math.random() * 10;
                     break;
                 case 'small':
-                    className = 'small-flower';
-                    fontSize = 28;
+                    className = 'small-flower-svg';
+                    svg = smallFlowerSVG;
                     duration = Math.random() * 20 + 15;
                     delay = Math.random() * 5;
-                    startY = 100 + Math.random() * 10;
                     break;
                 case 'gold':
-                    className = 'gold-flower';
-                    fontSize = 35;
+                    className = 'gold-flower-svg';
+                    svg = goldFlowerSVG;
                     duration = Math.random() * 50 + 40;
                     delay = Math.random() * 20;
-                    startY = Math.random() * 100;
                     break;
             }
             
             flower.classList.add(className);
-            flower.innerHTML = '❀';
+            flower.innerHTML = svg;
             
             // موقع عشوائي
             const startX = Math.random() * 100;
             flower.style.left = `${startX}%`;
             
             if (type !== 'gold') {
+                flower.style.top = `100%`;
+            } else {
+                const startY = Math.random() * 100;
                 flower.style.top = `${startY}%`;
             }
             
@@ -1848,7 +1881,7 @@
             
             // إضافة زهور عند التمرير
             window.addEventListener('scroll', function() {
-                if (Math.random() > 0.8 && document.querySelectorAll('.medium-flower').length < 35) {
+                if (Math.random() > 0.8 && document.querySelectorAll('.medium-flower-svg').length < 30) {
                     setTimeout(() => addSingleFlower('small'), 100);
                 }
             });
