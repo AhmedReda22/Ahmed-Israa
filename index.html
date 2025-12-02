@@ -88,36 +88,19 @@
             100% { transform: scale(1); }
         }
         
-        /* أنيميشن جديدة للزهور الكاملة */
-        @keyframes flowerFloat {
-            0% {
-                transform: translateY(100vh) rotate(0deg) scale(0.5);
-                opacity: 0;
-            }
-            10% {
-                opacity: 0.9;
-            }
-            90% {
-                opacity: 0.7;
-            }
-            100% {
-                transform: translateY(-100px) rotate(360deg) scale(1);
-                opacity: 0;
-            }
-        }
-        
+        /* أنيميشن جديدة للزهور الكاملة - أكثر هدوءاً */
         @keyframes gentleFloat {
             0%, 100% { 
                 transform: translate(0, 0) rotate(0deg) scale(1); 
             }
             25% { 
-                transform: translate(15px, -25px) rotate(5deg) scale(1.05); 
+                transform: translate(5px, -10px) rotate(2deg) scale(1.02); 
             }
             50% { 
-                transform: translate(-10px, -50px) rotate(0deg) scale(1); 
+                transform: translate(-3px, -20px) rotate(0deg) scale(1); 
             }
             75% { 
-                transform: translate(10px, -75px) rotate(-5deg) scale(1.05); 
+                transform: translate(3px, -30px) rotate(-2deg) scale(1.02); 
             }
         }
         
@@ -126,17 +109,17 @@
             to { transform: rotate(360deg); }
         }
         
-        @keyframes sparkle {
-            0%, 100% { opacity: 0.3; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.2); }
+        @keyframes subtleSparkle {
+            0%, 100% { opacity: 0.2; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(1.05); }
         }
         
         @keyframes flowerBlink {
-            0%, 100% { opacity: 0.7; }
-            50% { opacity: 1; }
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 0.7; }
         }
         
-        /* خلفية الزهور المتحركة - زهور كاملة */
+        /* خلفية الزهور المتحركة - أكثر هدوءاً */
         .beautiful-flower-background {
             position: fixed;
             top: 0;
@@ -146,62 +129,65 @@
             z-index: -2;
             overflow: hidden;
             background: linear-gradient(135deg, 
-                rgba(255, 240, 245, 0.97) 0%, 
-                rgba(255, 246, 249, 0.95) 50%,
-                rgba(255, 250, 252, 0.97) 100%);
+                rgba(255, 240, 245, 0.98) 0%, 
+                rgba(255, 246, 249, 0.97) 50%,
+                rgba(255, 250, 252, 0.98) 100%);
         }
         
-        /* زهور كبيرة كاملة */
+        /* زهور كبيرة كاملة - قلل العدد */
         .full-flower {
             position: absolute;
             font-family: 'Noto Naskh Arabic', serif;
-            font-size: 60px;
-            color: var(--rose-pink);
-            text-shadow: 0 5px 15px rgba(255, 105, 180, 0.3);
-            animation: gentleFloat 45s linear infinite, flowerBlink 4s infinite;
+            font-size: 50px;
+            color: rgba(255, 105, 180, 0.3); /* أخف لون */
+            text-shadow: 0 2px 8px rgba(255, 105, 180, 0.1);
+            animation: gentleFloat 60s linear infinite, flowerBlink 6s infinite;
             user-select: none;
             pointer-events: none;
             z-index: 1;
+            opacity: 0.4; /* خفف الشفافية */
         }
         
-        /* زهور متوسطة */
+        /* زهور متوسطة - قلل العدد */
         .medium-flower {
             position: absolute;
             font-family: 'Noto Naskh Arabic', serif;
-            font-size: 40px;
-            color: var(--light-pink);
-            text-shadow: 0 3px 10px rgba(255, 182, 193, 0.4);
-            animation: flowerFloat linear infinite, flowerBlink 5s infinite alternate;
+            font-size: 35px;
+            color: rgba(255, 182, 193, 0.25); /* أخف لون */
+            text-shadow: 0 1px 5px rgba(255, 182, 193, 0.15);
+            animation: gentleFloat 80s linear infinite, flowerBlink 8s infinite alternate;
             user-select: none;
             pointer-events: none;
             z-index: 0;
+            opacity: 0.3;
         }
         
-        /* زهور صغيرة */
+        /* زهور صغيرة - قلل العدد */
         .small-flower {
             position: absolute;
             font-family: 'Noto Naskh Arabic', serif;
-            font-size: 28px;
-            color: rgba(255, 105, 180, 0.6);
-            text-shadow: 0 2px 8px rgba(255, 105, 180, 0.2);
-            animation: flowerFloat linear infinite, flowerBlink 6s infinite;
+            font-size: 24px;
+            color: rgba(255, 105, 180, 0.2);
+            text-shadow: 0 1px 4px rgba(255, 105, 180, 0.1);
+            animation: gentleFloat 100s linear infinite, flowerBlink 10s infinite;
             user-select: none;
             pointer-events: none;
             z-index: 0;
+            opacity: 0.25;
         }
         
-        /* زهور ذهبية */
+        /* زهور ذهبية - قلل العدد */
         .gold-flower {
             position: absolute;
             font-family: 'Noto Naskh Arabic', serif;
-            font-size: 35px;
-            color: var(--gold);
-            text-shadow: 0 3px 12px rgba(212, 175, 55, 0.3);
-            animation: gentleFloat 60s linear infinite, flowerBlink 7s infinite alternate;
+            font-size: 30px;
+            color: rgba(255, 215, 0, 0.25);
+            text-shadow: 0 1px 6px rgba(212, 175, 55, 0.1);
+            animation: gentleFloat 90s linear infinite, flowerBlink 12s infinite alternate;
             user-select: none;
             pointer-events: none;
             z-index: 1;
-            opacity: 0.8;
+            opacity: 0.3;
         }
         
         .sparkle {
@@ -209,7 +195,8 @@
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23FFD700' d='M12,2 L14.5,8.5 L21,10 L16,14 L18,21 L12,17 L6,21 L8,14 L3,10 L9.5,8.5 Z'/%3E%3C/svg%3E");
             background-size: contain;
             background-repeat: no-repeat;
-            animation: sparkle 2s infinite;
+            animation: subtleSparkle 3s infinite;
+            opacity: 0.15;
         }
         
         /* الهيدر الفخم */
@@ -224,8 +211,8 @@
             overflow: hidden;
             padding: 40px 20px;
             background: linear-gradient(135deg, 
-                rgba(255, 182, 193, 0.15) 0%, 
-                rgba(255, 255, 255, 0.98) 100%);
+                rgba(255, 182, 193, 0.08) 0%, 
+                rgba(255, 255, 255, 0.99) 100%);
         }
         
         .header-content {
@@ -368,18 +355,6 @@
             color: var(--primary-pink);
             margin: 30px 0;
             animation: float 4s ease-in-out infinite;
-        }
-        
-        .scroll-hint {
-            position: absolute;
-            bottom: 40px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: var(--primary-pink);
-            font-size: 1.5rem;
-            animation: float 2s infinite;
-            z-index: 10;
-            cursor: pointer;
         }
         
         /* الأقسام العامة */
@@ -1185,37 +1160,6 @@
             .invitation-message {
                 font-size: 1.6rem;
             }
-            
-            /* حجم الزهور على الشاشات المتوسطة */
-            .full-flower {
-                font-size: 50px;
-            }
-            
-            .medium-flower {
-                font-size: 35px;
-            }
-            
-            .small-flower {
-                font-size: 24px;
-            }
-            
-            .gold-flower {
-                font-size: 30px;
-            }
-            
-            /* تصميم متجاوب للعداد المحسن */
-            .countdown-box {
-                width: 150px;
-                padding: 25px 15px;
-            }
-            
-            .countdown-value {
-                font-size: 3.8rem;
-            }
-            
-            .count-number {
-                font-size: 2.2rem;
-            }
         }
         
         @media (max-width: 850px) {
@@ -1328,23 +1272,6 @@
                 margin-bottom: 20px;
             }
             
-            /* حجم الزهور على الشاشات الصغيرة */
-            .full-flower {
-                font-size: 45px;
-            }
-            
-            .medium-flower {
-                font-size: 32px;
-            }
-            
-            .small-flower {
-                font-size: 22px;
-            }
-            
-            .gold-flower {
-                font-size: 28px;
-            }
-            
             .count-number {
                 font-size: 2rem;
             }
@@ -1437,23 +1364,6 @@
                 padding: 0 15px;
             }
             
-            /* حجم الزهور على الشاشات الصغيرة جداً */
-            .full-flower {
-                font-size: 40px;
-            }
-            
-            .medium-flower {
-                font-size: 30px;
-            }
-            
-            .small-flower {
-                font-size: 20px;
-            }
-            
-            .gold-flower {
-                font-size: 25px;
-            }
-            
             .count-number {
                 font-size: 1.6rem;
             }
@@ -1517,15 +1427,14 @@
                     يبدأ الاستقبال الساعة ٨:٠٠ مساءً
                 </div>
             </div>
-            
+            <p class="quran-verse">
+                "وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا"
+            </p>
             <p style="font-size: 1.3rem; max-width: 700px; margin: 0 auto; color: #666; line-height: 1.8;">
                 نشارككم فرحة واحدة من أجمل ليالي العمر، ونتشرف بدعوتكم لحضور حفل زفافنا الذي سيكون بتشريفكم أكثر بهجةً وسروراً
             </p>
         </div>
         
-        <div class="scroll-hint" id="scrollHint">
-            <i class="fas fa-chevron-down"></i>
-        </div>
     </header>
     
     <!-- قسم تأكيد الحضور البسيط -->
@@ -1714,9 +1623,7 @@
     <!-- الفوتر المعدل بالآية القرآنية والنص الأكثر رقيًا -->
     <footer class="luxury-footer">
         <div class="container">
-            <p class="quran-verse">
-                "وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا"
-            </p>
+            
             
             <p class="invitation-message">
                 فرحتنا لا تكتمل إلا بحضوركم وتلبية دعوتنا <span class="footer-heart">❤</span>
@@ -1936,14 +1843,10 @@
                         document.getElementById('confirmationOverlay').classList.add('active');
                         document.body.style.overflow = 'hidden';
                         
-                        // إضافة زهور عند تأكيد الحضور
-                        for (let i = 0; i < 5; i++) {
-                            setTimeout(() => addSingleFlower('medium'), i * 200);
-                        }
+                        // إضافة زهور عند تأكيد الحضور (بشكل أخف)
                         for (let i = 0; i < 3; i++) {
-                            setTimeout(() => addSingleFlower('small'), i * 300);
+                            setTimeout(() => addSingleFlower('medium'), i * 300);
                         }
-                        setTimeout(() => addSingleFlower('gold'), 500);
                         
                         // حفظ حالة التأكيد في localStorage
                         localStorage.setItem('attendanceConfirmed', 'true');
@@ -2009,16 +1912,18 @@
             }
         }
         
-        // تهيئة خلفية الزهور الجميلة والمتحركة
+        // تهيئة خلفية الزهور الجميلة والمتحركة - أكثر هدوءاً
         function createBeautifulFlowerBackground() {
             const flowerContainer = document.getElementById('beautifulFlowerBackground');
-            const fullFlowerCount = 12;
-            const mediumFlowerCount = 25;
-            const smallFlowerCount = 35;
-            const goldFlowerCount = 8;
-            const sparkleCount = 15;
             
-            // إنشاء زهور كبيرة كاملة
+            // قلل عدد الزهور بشكل كبير
+            const fullFlowerCount = 6;        // كانت 12
+            const mediumFlowerCount = 12;     // كانت 25
+            const smallFlowerCount = 18;      // كانت 35
+            const goldFlowerCount = 4;        // كانت 8
+            const sparkleCount = 8;           // كانت 15
+            
+            // إنشاء زهور كبيرة كاملة - أقل عددا وأبطأ حركة
             for (let i = 0; i < fullFlowerCount; i++) {
                 const flower = document.createElement('div');
                 flower.classList.add('full-flower');
@@ -2030,11 +1935,11 @@
                 flower.style.left = `${startX}%`;
                 flower.style.top = `${startY}%`;
                 
-                // مدة وتأخير عشوائي للحركة
-                const duration = Math.random() * 40 + 35;
-                const delay = Math.random() * 15;
-                flower.style.animationDuration = `${duration}s, 4s`;
-                flower.style.animationDelay = `${delay}s, ${Math.random() * 2}s`;
+                // مدة وتأخير عشوائي للحركة - أبطأ
+                const duration = Math.random() * 60 + 50; // كانت 40+35
+                const delay = Math.random() * 20;         // كانت 15
+                flower.style.animationDuration = `${duration}s, 6s`; // كانت 4s
+                flower.style.animationDelay = `${delay}s, ${Math.random() * 3}s`;
                 
                 // دوران عشوائي
                 const rotation = Math.random() * 360;
@@ -2043,7 +1948,7 @@
                 flowerContainer.appendChild(flower);
             }
             
-            // إنشاء زهور متوسطة
+            // إنشاء زهور متوسطة - أقل عددا وأبطأ حركة
             for (let i = 0; i < mediumFlowerCount; i++) {
                 const flower = document.createElement('div');
                 flower.classList.add('medium-flower');
@@ -2051,21 +1956,20 @@
                 
                 // موقع عشوائي
                 const startX = Math.random() * 100;
+                const startY = Math.random() * 100;
                 flower.style.left = `${startX}%`;
+                flower.style.top = `${startY}%`;
                 
-                // مدة وتأخير عشوائي للحركة
-                const duration = Math.random() * 25 + 20;
-                const delay = Math.random() * 10;
-                flower.style.animationDuration = `${duration}s, 5s`;
-                flower.style.animationDelay = `${delay}s, ${Math.random() * 3}s`;
-                
-                // ضبط المسار
-                flower.style.animationTimingFunction = `linear, ease-in-out`;
+                // مدة وتأخير عشوائي للحركة - أبطأ
+                const duration = Math.random() * 40 + 30; // كانت 25+20
+                const delay = Math.random() * 15;         // كانت 10
+                flower.style.animationDuration = `${duration}s, 8s`; // كانت 5s
+                flower.style.animationDelay = `${delay}s, ${Math.random() * 4}s`;
                 
                 flowerContainer.appendChild(flower);
             }
             
-            // إنشاء زهور صغيرة
+            // إنشاء زهور صغيرة - أقل عددا وأبطأ حركة
             for (let i = 0; i < smallFlowerCount; i++) {
                 const flower = document.createElement('div');
                 flower.classList.add('small-flower');
@@ -2073,18 +1977,20 @@
                 
                 // موقع عشوائي
                 const startX = Math.random() * 100;
+                const startY = Math.random() * 100;
                 flower.style.left = `${startX}%`;
+                flower.style.top = `${startY}%`;
                 
-                // مدة وتأخير عشوائي للحركة
-                const duration = Math.random() * 20 + 15;
-                const delay = Math.random() * 5;
-                flower.style.animationDuration = `${duration}s, 6s`;
-                flower.style.animationDelay = `${delay}s, ${Math.random() * 4}s`;
+                // مدة وتأخير عشوائي للحركة - أبطأ
+                const duration = Math.random() * 35 + 25; // كانت 20+15
+                const delay = Math.random() * 10;         // كانت 5
+                flower.style.animationDuration = `${duration}s, 10s`; // كانت 6s
+                flower.style.animationDelay = `${delay}s, ${Math.random() * 5}s`;
                 
                 flowerContainer.appendChild(flower);
             }
             
-            // إنشاء زهور ذهبية
+            // إنشاء زهور ذهبية - أقل عددا وأبطأ حركة
             for (let i = 0; i < goldFlowerCount; i++) {
                 const flower = document.createElement('div');
                 flower.classList.add('gold-flower');
@@ -2096,22 +2002,22 @@
                 flower.style.left = `${startX}%`;
                 flower.style.top = `${startY}%`;
                 
-                // مدة وتأخير عشوائي للحركة
-                const duration = Math.random() * 50 + 40;
-                const delay = Math.random() * 20;
-                flower.style.animationDuration = `${duration}s, 7s`;
-                flower.style.animationDelay = `${delay}s, ${Math.random() * 5}s`;
+                // مدة وتأخير عشوائي للحركة - أبطأ
+                const duration = Math.random() * 70 + 60; // كانت 50+40
+                const delay = Math.random() * 30;         // كانت 20
+                flower.style.animationDuration = `${duration}s, 12s`; // كانت 7s
+                flower.style.animationDelay = `${delay}s, ${Math.random() * 6}s`;
                 
                 flowerContainer.appendChild(flower);
             }
             
-            // إنشاء ومضات ذهبية
+            // إنشاء ومضات ذهبية - أقل عددا وأبطأ وميض
             for (let i = 0; i < sparkleCount; i++) {
                 const sparkle = document.createElement('div');
                 sparkle.classList.add('sparkle');
                 
-                // حجم عشوائي للومضة
-                const size = Math.random() * 25 + 10;
+                // حجم عشوائي للومضة - أصغر حجما
+                const size = Math.random() * 15 + 8; // كانت 25+10
                 sparkle.style.width = `${size}px`;
                 sparkle.style.height = `${size}px`;
                 
@@ -2121,25 +2027,25 @@
                 sparkle.style.left = `${startX}%`;
                 sparkle.style.top = `${startY}%`;
                 
-                // تأخير عشوائي للوميض
-                const delay = Math.random() * 2;
+                // تأخير عشوائي للوميض - أطول
+                const delay = Math.random() * 5; // كانت 2
                 sparkle.style.animationDelay = `${delay}s`;
                 
                 flowerContainer.appendChild(sparkle);
             }
             
-            // إضافة زهور بشكل مستمر
+            // تقليل وتيرة إضافة الزهور الجديدة
             setInterval(() => {
-                if (document.querySelectorAll('.medium-flower').length < 30) {
+                if (document.querySelectorAll('.medium-flower').length < 15) {
                     addSingleFlower('medium');
                 }
-                if (document.querySelectorAll('.small-flower').length < 40) {
+                if (document.querySelectorAll('.small-flower').length < 20) {
                     addSingleFlower('small');
                 }
-            }, 5000);
+            }, 10000); // كانت 5000
         }
         
-        // إضافة زهرة واحدة
+        // إضافة زهرة واحدة - بحركة أبطأ
         function addSingleFlower(type) {
             const flowerContainer = document.getElementById('beautifulFlowerBackground');
             const flower = document.createElement('div');
@@ -2149,30 +2055,30 @@
             switch(type) {
                 case 'full':
                     className = 'full-flower';
-                    fontSize = 60;
-                    duration = Math.random() * 40 + 35;
-                    delay = Math.random() * 15;
-                    startY = 100 + Math.random() * 10;
+                    fontSize = 50;
+                    duration = Math.random() * 60 + 50;
+                    delay = Math.random() * 20;
+                    startY = Math.random() * 100;
                     break;
                 case 'medium':
                     className = 'medium-flower';
-                    fontSize = 40;
-                    duration = Math.random() * 25 + 20;
-                    delay = Math.random() * 10;
-                    startY = 100 + Math.random() * 10;
+                    fontSize = 35;
+                    duration = Math.random() * 40 + 30;
+                    delay = Math.random() * 15;
+                    startY = Math.random() * 100;
                     break;
                 case 'small':
                     className = 'small-flower';
-                    fontSize = 28;
-                    duration = Math.random() * 20 + 15;
-                    delay = Math.random() * 5;
-                    startY = 100 + Math.random() * 10;
+                    fontSize = 24;
+                    duration = Math.random() * 35 + 25;
+                    delay = Math.random() * 10;
+                    startY = Math.random() * 100;
                     break;
                 case 'gold':
                     className = 'gold-flower';
-                    fontSize = 35;
-                    duration = Math.random() * 50 + 40;
-                    delay = Math.random() * 20;
+                    fontSize = 30;
+                    duration = Math.random() * 70 + 60;
+                    delay = Math.random() * 30;
                     startY = Math.random() * 100;
                     break;
             }
@@ -2183,18 +2089,12 @@
             // موقع عشوائي
             const startX = Math.random() * 100;
             flower.style.left = `${startX}%`;
+            flower.style.top = `${startY}%`;
             
-            if (type !== 'gold') {
-                flower.style.top = `${startY}%`;
-            }
-            
-            // مدة عشوائية
-            flower.style.animationDuration = `${duration}s, ${4 + Math.random() * 4}s`;
+            // مدة أبطأ للحركة
+            const blinkDuration = type === 'gold' ? 12 : (type === 'full' ? 6 : (type === 'medium' ? 8 : 10));
+            flower.style.animationDuration = `${duration}s, ${blinkDuration}s`;
             flower.style.animationDelay = `${delay}s, ${Math.random() * 6}s`;
-            
-            if (type !== 'gold') {
-                flower.style.animationTimingFunction = `linear, ease-in-out`;
-            }
             
             flowerContainer.appendChild(flower);
             
@@ -2253,32 +2153,34 @@
         
         // تهيئة تأثيرات إضافية للعداد
         function initCountdownEffects() {
-            // إضافة قلوب صغيرة عند تحريك الماوس فوق العداد
+            // إضافة قلوب صغيرة عند تحريك الماوس فوق العداد (بشكل أخف)
             const countdownBoxes = document.querySelectorAll('.countdown-box');
             
             countdownBoxes.forEach(box => {
                 box.addEventListener('mouseenter', function() {
-                    // إضافة قلب صغير يظهر عند المرور
-                    const heart = document.createElement('div');
-                    heart.innerHTML = '❤';
-                    heart.style.position = 'absolute';
-                    heart.style.color = 'var(--primary-pink)';
-                    heart.style.fontSize = '1.2rem';
-                    heart.style.top = `${Math.random() * 80 + 10}%`;
-                    heart.style.left = `${Math.random() * 80 + 10}%`;
-                    heart.style.opacity = '0';
-                    heart.style.animation = 'float 2s ease-out forwards';
-                    heart.style.zIndex = '10';
-                    heart.style.pointerEvents = 'none';
-                    
-                    this.appendChild(heart);
-                    
-                    // إزالة القلب بعد انتهاء الحركة
-                    setTimeout(() => {
-                        if (heart.parentNode) {
-                            heart.parentNode.removeChild(heart);
-                        }
-                    }, 2000);
+                    // إضافة قلب صغير يظهر عند المرور (أخف)
+                    if (Math.random() > 0.5) { // 50% فرصة فقط
+                        const heart = document.createElement('div');
+                        heart.innerHTML = '❤';
+                        heart.style.position = 'absolute';
+                        heart.style.color = 'rgba(255, 107, 139, 0.3)';
+                        heart.style.fontSize = '1rem';
+                        heart.style.top = `${Math.random() * 80 + 10}%`;
+                        heart.style.left = `${Math.random() * 80 + 10}%`;
+                        heart.style.opacity = '0';
+                        heart.style.animation = 'float 1.5s ease-out forwards';
+                        heart.style.zIndex = '10';
+                        heart.style.pointerEvents = 'none';
+                        
+                        this.appendChild(heart);
+                        
+                        // إزالة القلب بعد انتهاء الحركة
+                        setTimeout(() => {
+                            if (heart.parentNode) {
+                                heart.parentNode.removeChild(heart);
+                            }
+                        }, 1500);
+                    }
                 });
             });
         }
@@ -2386,12 +2288,9 @@ function initCongratulationsForm() {
                 // إعادة تعيين النموذج
                 document.getElementById('congratulationsForm').reset();
                 
-                // إضافة تأثيرات بصريّة
-                for (let i = 0; i < 3; i++) {
-                    setTimeout(() => addSingleFlower('small'), i * 200);
-                }
+                // إضافة تأثيرات بصريّة (أخف)
+                setTimeout(() => addSingleFlower('small'), 200);
                 setTimeout(() => addSingleFlower('medium'), 400);
-                setTimeout(() => addSingleFlower('gold'), 600);
                 
                 console.log('تم إرسال رسالة التهنئة بنجاح');
                 
@@ -2476,13 +2375,6 @@ function initCongratulationsForm() {
             });
         });
         
-        // النقر على مؤشر التمرير
-        document.getElementById('scrollHint').addEventListener('click', function() {
-            document.getElementById('attendance').scrollIntoView({
-                behavior: 'smooth'
-            });
-        });
-        
         // النقر على زر العودة للأعلى
         document.getElementById('backToTop').addEventListener('click', function() {
             window.scrollTo({
@@ -2495,8 +2387,9 @@ function initCongratulationsForm() {
         document.addEventListener('DOMContentLoaded', function() {
             // إنشاء خلفية الزهور الجميلة
             createBeautifulFlowerBackground();
+            
             // تهيئة نموذج التهنئة
-    initCongratulationsForm();
+            initCongratulationsForm();
 
             // بدء العد التنازلي
             updateCountdown();
@@ -2546,9 +2439,9 @@ function initCongratulationsForm() {
                 document.body.classList.add('touch-device');
             }
             
-            // إضافة زهور عند التمرير
+            // تقليل إضافة الزهور عند التمرير
             window.addEventListener('scroll', function() {
-                if (Math.random() > 0.8 && document.querySelectorAll('.medium-flower').length < 35) {
+                if (Math.random() > 0.9 && document.querySelectorAll('.medium-flower').length < 15) {
                     setTimeout(() => addSingleFlower('small'), 100);
                 }
             });
@@ -2571,11 +2464,6 @@ function initCongratulationsForm() {
         
         // ربط زر تأكيد الحضور بالدالة الجديدة
         document.getElementById('attendanceBtn').addEventListener('click', confirmAttendance);
-
-
-        
     </script>
 </body>
 </html>
-
-
