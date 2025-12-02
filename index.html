@@ -2370,12 +2370,12 @@ document.getElementById('congratulationsForm').addEventListener('submit', async 
 });
 
 
-// دالة لإرسال رسالة التهنئة إلى الـ API
+// دالة محسنة لإرسال رسالة التهنئة إلى الـ API
 async function sendCongratulationsAPI(name, message) {
     const apiUrl = 'https://www.taamirnajd.com/api/reda';
     
     try {
-        console.log('جارٍ إرسال رسالة التهنئة إلى الـ API...');
+        console.log('بدء إرسال طلب إلى الـ API:', apiUrl);
         
         const response = await fetch(apiUrl, {
             method: 'POST',
@@ -2387,38 +2387,47 @@ async function sendCongratulationsAPI(name, message) {
                 name: name,
                 message: message
             }),
-            mode: 'cors'
+            mode: 'cors',
+            credentials: 'same-origin'
         });
         
-        console.log('استجابة API رسائل التهنئة:', response.status, response.statusText);
+        console.log('حالة استجابة الـ API:', response.status, response.statusText);
         
         if (response.ok) {
             const data = await response.json();
-            console.log('تم إرسال رسالة التهنئة بنجاح:', data);
+            console.log('البيانات المستلمة من الـ API:', data);
             return { success: true, data: data };
         } else {
-            console.error('خطأ في إرسال رسالة التهنئة:', response.status);
+            console.error('خطأ في استجابة الـ API:', response.status);
             return { 
                 success: false, 
                 error: `خطأ في الاتصال بالخادم: ${response.status} ${response.statusText}` 
             };
         }
     } catch (error) {
-        console.error('خطأ في استدعاء API رسائل التهنئة:', error);
+        console.error('خطأ في استدعاء الـ API:', error);
         return { 
             success: false, 
-            error: error.message || 'حدث خطأ غير متوقع'
+            error: error.message || 'حدث خطأ غير متوقع في الاتصال'
         };
     }
 }
 
-// دالة معالجة نموذج رسائل التهنئة
+// دالة معالجة نموذج رسائل التهنئة مع منع الإرسال المزدوج
+let isSendingCongratulations = false;
+
 function initCongratulationsForm() {
     const congratulationsForm = document.getElementById('congratulationsForm');
     if (!congratulationsForm) return;
     
     congratulationsForm.addEventListener('submit', async function(e) {
         e.preventDefault();
+        
+        // منع الإرسال المزدوج
+        if (isSendingCongratulations) {
+            console.log('طلب إرسال قيد المعالجة بالفعل، تم تجنبه');
+            return;
+        }
         
         const name = document.getElementById('name').value.trim();
         const message = document.getElementById('message').value.trim();
@@ -2436,6 +2445,9 @@ function initCongratulationsForm() {
             return;
         }
         
+        // تعيين حالة الإرسال
+        isSendingCongratulations = true;
+        
         // حفظ النص الأصلي للزر
         const submitBtn = this.querySelector('.submit-btn');
         const originalBtnText = submitBtn.innerHTML;
@@ -2445,6 +2457,8 @@ function initCongratulationsForm() {
         submitBtn.disabled = true;
         
         try {
+            console.log('إرسال بيانات النموذج:', { name, message });
+            
             // إرسال البيانات إلى الـ API
             const result = await sendCongratulationsAPI(name, message);
             
@@ -2464,6 +2478,8 @@ function initCongratulationsForm() {
                 }
                 setTimeout(() => addSingleFlower('medium'), 400);
                 setTimeout(() => addSingleFlower('gold'), 600);
+                
+                console.log('تم إرسال رسالة التهنئة بنجاح');
                 
             } else {
                 // عرض رسالة الخطأ
@@ -2488,10 +2504,14 @@ function initCongratulationsForm() {
             // استعادة حالة الزر الأصلية
             submitBtn.innerHTML = originalBtnText;
             submitBtn.disabled = false;
+            
+            // إعادة تعيين حالة الإرسال بعد تأخير بسيط
+            setTimeout(() => {
+                isSendingCongratulations = false;
+            }, 2000); // تأخير 2 ثانية قبل السماح بإرسال جديد
         }
     });
 }
-
 
         // إغلاق رسالة التأكيد
         document.getElementById('closeConfirmation').addEventListener('click', function() {
