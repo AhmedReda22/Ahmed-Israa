@@ -77,6 +77,17 @@
             50% { transform: scale(1.05); }
         }
         
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @keyframes countChange {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+        
         /* أنيميشن جديدة للزهور الكاملة */
         @keyframes flowerFloat {
             0% {
@@ -447,8 +458,20 @@
             box-shadow: 0 15px 30px rgba(255, 107, 139, 0.4);
         }
         
+        .attendance-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none !important;
+            animation: none !important;
+        }
+        
         .attendance-btn.confirmed {
             background: linear-gradient(135deg, #4CAF50 0%, #8BC34A 100%);
+            animation: none;
+        }
+        
+        .attendance-btn.processing {
+            background: linear-gradient(135deg, #FF9800 0%, #FFB74D 100%);
             animation: none;
         }
         
@@ -456,12 +479,31 @@
             margin-top: 30px;
             font-size: 1.3rem;
             color: #666;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
         }
         
         .count-number {
             font-weight: 800;
             color: var(--primary-pink);
-            font-size: 2rem;
+            font-size: 2.5rem;
+            transition: var(--transition);
+        }
+        
+        .count-number.updated {
+            animation: countChange 0.5s ease-in-out;
+        }
+        
+        .count-loading {
+            font-size: 1.2rem;
+            color: var(--gold);
+        }
+        
+        .count-loading i {
+            animation: spin 1.5s linear infinite;
+            margin-left: 10px;
         }
         
         /* قسم رسائل التهنئة */
@@ -680,324 +722,239 @@
         }
         
         /* قسم العد التنازلي المحسن */
-.countdown-section {
-    background: linear-gradient(135deg, rgba(255, 182, 193, 0.05) 0%, rgba(255, 240, 245, 0.9) 100%);
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-}
+        .countdown-section {
+            background: linear-gradient(135deg, rgba(255, 182, 193, 0.05) 0%, rgba(255, 240, 245, 0.9) 100%);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
 
-.countdown-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cpath d='M50,20 C60,15 75,20 80,30 C85,40 80,50 75,55 C70,60 60,63 50,67 C40,63 30,60 25,55 C20,50 15,40 20,30 C25,20 40,15 50,20 Z' fill='none' stroke='%23FF69B4' stroke-width='0.8' opacity='0.05'/%3E%3C/svg%3E");
-    background-size: 120px;
-    z-index: 0;
-}
+        .countdown-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cpath d='M50,20 C60,15 75,20 80,30 C85,40 80,50 75,55 C70,60 60,63 50,67 C40,63 30,60 25,55 C20,50 15,40 20,30 C25,20 40,15 50,20 Z' fill='none' stroke='%23FF69B4' stroke-width='0.8' opacity='0.05'/%3E%3C/svg%3E");
+            background-size: 120px;
+            z-index: 0;
+        }
 
-.countdown-container {
-    position: relative;
-    z-index: 1;
-    max-width: 900px;
-    margin: 50px auto;
-}
+        .countdown-container {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 50px auto;
+        }
 
-/* تصميم جديد للعداد */
-.countdown-box-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 5px;
-    margin-bottom: 50px;
-}
+        /* تصميم جديد للعداد */
+        .countdown-box-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-bottom: 50px;
+        }
 
-.countdown-box {
-    background: var(--white);
-    border-radius: 20px;
-    padding: 30px 20px;
-    width: 170px;
-    box-shadow: var(--shadow-lg);
-    border: 2px solid transparent;
-    transition: var(--transition);
-    position: relative;
-    overflow: hidden;
-    z-index: 1;
-}
+        .countdown-box {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 30px 20px;
+            width: 170px;
+            box-shadow: var(--shadow-lg);
+            border: 2px solid transparent;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
 
-.countdown-box::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, rgba(255, 107, 139, 0.05) 0%, rgba(212, 175, 55, 0.05) 100%);
-    z-index: -1;
-}
+        .countdown-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 107, 139, 0.05) 0%, rgba(212, 175, 55, 0.05) 100%);
+            z-index: -1;
+        }
 
-.countdown-box::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(to right, var(--primary-pink), var(--gold));
-    border-radius: 2px;
-}
+        .countdown-box::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary-pink), var(--gold));
+            border-radius: 2px;
+        }
 
-.countdown-box:hover {
-    transform: translateY(-10px);
-    border-color: var(--primary-pink);
-    box-shadow: 0 25px 50px rgba(255, 107, 139, 0.15);
-}
+        .countdown-box:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary-pink);
+            box-shadow: 0 25px 50px rgba(255, 107, 139, 0.15);
+        }
 
-.countdown-value {
-    font-size: 4.2rem;
-    font-weight: 900;
-    color: var(--primary-pink);
-    line-height: 1;
-    font-family: 'Cairo', sans-serif;
-    text-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-    margin-bottom: 10px;
-    letter-spacing: 2px;
-    position: relative;
-}
+        .countdown-value {
+            font-size: 4.2rem;
+            font-weight: 900;
+            color: var(--primary-pink);
+            line-height: 1;
+            font-family: 'Cairo', sans-serif;
+            text-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+            position: relative;
+        }
 
-.countdown-value::after {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 25%;
-    width: 50%;
-    height: 3px;
-    background: linear-gradient(to right, transparent, var(--gold), transparent);
-    border-radius: 3px;
-}
+        .countdown-value::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 25%;
+            width: 50%;
+            height: 3px;
+            background: linear-gradient(to right, transparent, var(--gold), transparent);
+            border-radius: 3px;
+        }
 
-.countdown-label {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-}
+        .countdown-label {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
 
-.arabic-label {
-    font-size: 1.5rem;
-    color: var(--primary-pink);
-    font-weight: 700;
-    letter-spacing: 1px;
-}
+        .arabic-label {
+            font-size: 1.5rem;
+            color: var(--primary-pink);
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
 
-.english-label {
-    font-size: 0.9rem;
-    color: #999;
-    font-weight: 600;
-    letter-spacing: 1px;
-}
+        .english-label {
+            font-size: 0.9rem;
+            color: #999;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
 
-/* فاصل القلوب */
-.countdown-separator {
-    color: var(--light-pink);
-    font-size: 2rem;
-    margin: 0 5px;
-    animation: heartbeat 2s infinite;
-}
+        /* فاصل القلوب */
+        .countdown-separator {
+            color: var(--light-pink);
+            font-size: 2rem;
+            margin: 0 5px;
+            animation: heartbeat 2s infinite;
+        }
 
-/* شريط التقدم البصري */
-.progress-timeline {
-    background: var(--white);
-    border-radius: 20px;
-    padding: 25px;
-    margin: 40px auto;
-    max-width: 700px;
-    box-shadow: var(--shadow-lg);
-    border: 2px solid var(--light-pink);
-}
+        /* شريط التقدم البصري */
+        .progress-timeline {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 25px;
+            margin: 40px auto;
+            max-width: 700px;
+            box-shadow: var(--shadow-lg);
+            border: 2px solid var(--light-pink);
+        }
 
-.timeline-label {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 15px;
-    font-weight: 600;
-}
+        .timeline-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
 
-.label-text {
-    color: var(--primary-pink);
-    font-size: 1.2rem;
-}
+        .label-text {
+            color: var(--primary-pink);
+            font-size: 1.2rem;
+        }
 
-.time-left {
-    color: var(--gold);
-    font-size: 1.2rem;
-    font-weight: 800;
-}
+        .time-left {
+            color: var(--gold);
+            font-size: 1.2rem;
+            font-weight: 800;
+        }
 
-.timeline-bar {
-    width: 100%;
-    height: 12px;
-    background: rgba(255, 182, 193, 0.2);
-    border-radius: 10px;
-    overflow: hidden;
-    position: relative;
-}
+        .timeline-bar {
+            width: 100%;
+            height: 12px;
+            background: rgba(255, 182, 193, 0.2);
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
 
-.timeline-progress {
-    height: 100%;
-    width: 85%;
-    background: linear-gradient(to right, var(--primary-pink), var(--gold));
-    border-radius: 10px;
-    position: relative;
-    transition: width 1s ease;
-}
+        .timeline-progress {
+            height: 100%;
+            width: 85%;
+            background: linear-gradient(to right, var(--primary-pink), var(--gold));
+            border-radius: 10px;
+            position: relative;
+            transition: width 1s ease;
+        }
 
-.timeline-progress::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(90deg, 
-        rgba(255, 255, 255, 0) 0%, 
-        rgba(255, 255, 255, 0.4) 50%, 
-        rgba(255, 255, 255, 0) 100%);
-    animation: shimmer 2s infinite;
-}
+        .timeline-progress::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, 
+                rgba(255, 255, 255, 0) 0%, 
+                rgba(255, 255, 255, 0.4) 50%, 
+                rgba(255, 255, 255, 0) 100%);
+            animation: shimmer 2s infinite;
+        }
 
-@keyframes shimmer {
-    0% { transform: translateX(-100%); }
-    100% { transform: translateX(100%); }
-}
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
 
-/* رسالة العد التنازلي */
-.countdown-message {
-    background: var(--white);
-    border-radius: 20px;
-    padding: 30px;
-    margin-top: 50px;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-    box-shadow: var(--shadow-lg);
-    border: 2px solid var(--light-pink);
-    position: relative;
-    overflow: hidden;
-}
+        /* رسالة العد التنازلي */
+        .countdown-message {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 30px;
+            margin-top: 50px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            box-shadow: var(--shadow-lg);
+            border: 2px solid var(--light-pink);
+            position: relative;
+            overflow: hidden;
+        }
 
-.countdown-message::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, rgba(255, 107, 139, 0.03) 0%, rgba(255, 255, 255, 0) 100%);
-}
+        .countdown-message::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 107, 139, 0.03) 0%, rgba(255, 255, 255, 0) 100%);
+        }
 
-.message-icon {
-    font-size: 2.5rem;
-    color: var(--primary-pink);
-    margin-bottom: 20px;
-    animation: float 3s infinite ease-in-out;
-}
+        .message-icon {
+            font-size: 2.5rem;
+            color: var(--primary-pink);
+            margin-bottom: 20px;
+            animation: float 3s infinite ease-in-out;
+        }
 
-.countdown-message p {
-    font-size: 1.4rem;
-    color: #666;
-    line-height: 1.8;
-    font-weight: 500;
-}
+        .countdown-message p {
+            font-size: 1.4rem;
+            color: #666;
+            line-height: 1.8;
+            font-weight: 500;
+        }
 
-/* تصميم متجاوب للعداد المحسن */
-@media (max-width: 1100px) {
-    .countdown-box {
-        width: 150px;
-        padding: 25px 15px;
-    }
-    
-    .countdown-value {
-        font-size: 3.8rem;
-    }
-}
-
-@media (max-width: 850px) {
-    .countdown-box-wrapper {
-        gap: 15px;
-        row-gap: 20px;
-    }
-    
-    .countdown-box {
-        width: 160px;
-    }
-    
-    .countdown-separator {
-        display: none;
-    }
-}
-
-@media (max-width: 768px) {
-    .countdown-box {
-        width: 145px;
-        padding: 20px 15px;
-    }
-    
-    .countdown-value {
-        font-size: 3.2rem;
-    }
-    
-    .arabic-label {
-        font-size: 1.3rem;
-    }
-    
-    .progress-timeline {
-        padding: 20px;
-    }
-    
-    .countdown-message {
-        padding: 25px;
-    }
-    
-    .countdown-message p {
-        font-size: 1.2rem;
-    }
-}
-
-@media (max-width: 650px) {
-    .countdown-box-wrapper {
-        gap: 10px;
-    }
-    
-    .countdown-box {
-        width: calc(50% - 20px);
-        min-width: 140px;
-    }
-}
-
-@media (max-width: 480px) {
-    .countdown-box {
-        width: calc(50% - 15px);
-        min-width: 130px;
-        padding: 20px 10px;
-    }
-    
-    .countdown-value {
-        font-size: 2.8rem;
-    }
-    
-    .arabic-label {
-        font-size: 1.2rem;
-    }
-    
-    .countdown-message p {
-        font-size: 1.1rem;
-    }
-}
-        
         /* الفوتر المعدل */
         .luxury-footer {
             background: linear-gradient(135deg, rgba(255, 182, 193, 0.15) 0%, rgba(255, 255, 255, 1) 100%);
@@ -1245,6 +1202,20 @@
             .gold-flower {
                 font-size: 30px;
             }
+            
+            /* تصميم متجاوب للعداد المحسن */
+            .countdown-box {
+                width: 150px;
+                padding: 25px 15px;
+            }
+            
+            .countdown-value {
+                font-size: 3.8rem;
+            }
+            
+            .count-number {
+                font-size: 2.2rem;
+            }
         }
         
         @media (max-width: 850px) {
@@ -1258,6 +1229,19 @@
             
             .couple-names .and {
                 margin: 0 10px;
+            }
+            
+            .countdown-box-wrapper {
+                gap: 15px;
+                row-gap: 20px;
+            }
+            
+            .countdown-box {
+                width: 160px;
+            }
+            
+            .countdown-separator {
+                display: none;
             }
         }
         
@@ -1360,6 +1344,21 @@
             .gold-flower {
                 font-size: 28px;
             }
+            
+            .count-number {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 650px) {
+            .countdown-box-wrapper {
+                gap: 10px;
+            }
+            
+            .countdown-box {
+                width: calc(50% - 20px);
+                min-width: 140px;
+            }
         }
         
         @media (max-width: 580px) {
@@ -1381,6 +1380,10 @@
             .quran-verse::before, .quran-verse::after {
                 margin: 0 8px;
                 font-size: 1.2rem;
+            }
+            
+            .count-number {
+                font-size: 1.8rem;
             }
         }
         
@@ -1449,6 +1452,10 @@
             
             .gold-flower {
                 font-size: 25px;
+            }
+            
+            .count-number {
+                font-size: 1.6rem;
             }
         }
         
@@ -1537,7 +1544,12 @@
                 </button>
                 
                 <div class="attendance-count">
-                    <span class="count-number" id="attendanceCount">0</span> شخص أكد حضوره حتى الآن
+                    <div class="count-loading" id="countLoading">
+                        <i class="fas fa-spinner"></i> جاري جلب عدد الحضور...
+                    </div>
+                    <div id="countDisplay" style="display: none;">
+                        <span class="count-number" id="attendanceCount">0</span> شخص أكد حضوره حتى الآن
+                    </div>
                 </div>
             </div>
         </div>
@@ -1629,75 +1641,75 @@
     </section>
     
     <!-- قسم العد التنازلي المحسن -->
-<section class="section countdown-section" id="countdown">
-    <div class="container">
-        <h2 class="section-title">العد التنازلي لبداية الفرح</h2>
-        
-        <div class="countdown-container">
-            <!-- تصميم جديد للعداد -->
-            <div class="countdown-box-wrapper">
-                <div class="countdown-box">
-                    <div class="countdown-value" id="days">00</div>
-                    <div class="countdown-label">
-                        <span class="arabic-label">أيام</span>
-                        <span class="english-label">Days</span>
-                    </div>
-                </div>
-                <div class="countdown-separator">
-                    <i class="fas fa-heart"></i>
-                </div>
-                
-                <div class="countdown-box">
-                    <div class="countdown-value" id="hours">00</div>
-                    <div class="countdown-label">
-                        <span class="arabic-label">ساعات</span>
-                        <span class="english-label">Hours</span>
-                    </div>
-                </div>
-                <div class="countdown-separator">
-                    <i class="fas fa-heart"></i>
-                </div>
-                
-                <div class="countdown-box">
-                    <div class="countdown-value" id="minutes">00</div>
-                    <div class="countdown-label">
-                        <span class="arabic-label">دقائق</span>
-                        <span class="english-label">Minutes</span>
-                    </div>
-                </div>
-                <div class="countdown-separator">
-                    <i class="fas fa-heart"></i>
-                </div>
-                
-                <div class="countdown-box">
-                    <div class="countdown-value" id="seconds">00</div>
-                    <div class="countdown-label">
-                        <span class="arabic-label">ثواني</span>
-                        <span class="english-label">Seconds</span>
-                    </div>
-                </div>
-            </div>
+    <section class="section countdown-section" id="countdown">
+        <div class="container">
+            <h2 class="section-title">العد التنازلي لبداية الفرح</h2>
             
-            <!-- شريط التقدم البصري -->
-            <div class="progress-timeline">
-                <div class="timeline-label">
-                    <span class="label-text">انقضاء الوقت</span>
-                    <span class="time-left" id="timeLeftText">100%</span>
+            <div class="countdown-container">
+                <!-- تصميم جديد للعداد -->
+                <div class="countdown-box-wrapper">
+                    <div class="countdown-box">
+                        <div class="countdown-value" id="days">00</div>
+                        <div class="countdown-label">
+                            <span class="arabic-label">أيام</span>
+                            <span class="english-label">Days</span>
+                        </div>
+                    </div>
+                    <div class="countdown-separator">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    
+                    <div class="countdown-box">
+                        <div class="countdown-value" id="hours">00</div>
+                        <div class="countdown-label">
+                            <span class="arabic-label">ساعات</span>
+                            <span class="english-label">Hours</span>
+                        </div>
+                    </div>
+                    <div class="countdown-separator">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    
+                    <div class="countdown-box">
+                        <div class="countdown-value" id="minutes">00</div>
+                        <div class="countdown-label">
+                            <span class="arabic-label">دقائق</span>
+                            <span class="english-label">Minutes</span>
+                        </div>
+                    </div>
+                    <div class="countdown-separator">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    
+                    <div class="countdown-box">
+                        <div class="countdown-value" id="seconds">00</div>
+                        <div class="countdown-label">
+                            <span class="arabic-label">ثواني</span>
+                            <span class="english-label">Seconds</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="timeline-bar">
-                    <div class="timeline-progress" id="timelineProgress"></div>
+                
+                <!-- شريط التقدم البصري -->
+                <div class="progress-timeline">
+                    <div class="timeline-label">
+                        <span class="label-text">انقضاء الوقت</span>
+                        <span class="time-left" id="timeLeftText">100%</span>
+                    </div>
+                    <div class="timeline-bar">
+                        <div class="timeline-progress" id="timelineProgress"></div>
+                    </div>
                 </div>
-            </div>
-            
-            <div class="countdown-message">
-                <div class="message-icon">
-                    <i class="fas fa-heartbeat"></i>
+                
+                <div class="countdown-message">
+                    <div class="message-icon">
+                        <i class="fas fa-heartbeat"></i>
+                    </div>
+                    <p>كل لحظة تقربنا من بداية رحلة عمر جديدة مليئة بالسعادة والمحبة</p>
                 </div>
-                <p>كل لحظة تقربنا من بداية رحلة عمر جديدة مليئة بالسعادة والمحبة</p>
             </div>
         </div>
-    </div>
-</section>
+    </section>
     
     <!-- الفوتر المعدل بالآية القرآنية والنص الأكثر رقيًا -->
     <footer class="luxury-footer">
@@ -1746,6 +1758,256 @@
     </div>
     
     <script>
+        // متغيرات عامة
+        let attendanceConfirmed = false;
+        let attendanceCount = 0; // سيتم تعبئته من الـ API
+        
+        // دالة لجلب عدد الحضور من الـ API
+        async function fetchAttendanceCount() {
+    const apiUrl = 'https://www.taamirnajd.com/api/invite/count';
+    
+    try {
+        console.log('جارٍ جلب عدد الحضور من الـ API...');
+        
+        // إرسال طلب GET إلى الـ API
+        const response = await fetch(apiUrl, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            mode: 'cors'
+        });
+        
+        console.log('استجابة API عدد الحضور:', response.status, response.statusText);
+        
+        if (response.ok) {
+            const data = await response.json();
+            console.log('بيانات API عدد الحضور:', data);
+            
+            // استخراج عدد الحضور من الاستجابة
+            // بناءً على الـ API الحالي الذي يعيد: {"message":"Current invite count retrieved!","total_calls":9}
+            let count = 0;
+            
+            if (typeof data === 'number') {
+                count = data;
+            } else if (data && typeof data === 'object') {
+                // التحقق من الخصائص المختلفة
+                if (data.total_calls !== undefined) {
+                    count = data.total_calls;
+                } else if (data.count !== undefined) {
+                    count = data.count;
+                } else if (data.total !== undefined) {
+                    count = data.total;
+                } else if (data.attendanceCount !== undefined) {
+                    count = data.attendanceCount;
+                } else {
+                    // إذا كان الكائن يحتوي على رقم كخاصية أولى
+                    const firstKey = Object.keys(data)[0];
+                    if (!isNaN(data[firstKey])) {
+                        count = Number(data[firstKey]);
+                    }
+                }
+            }
+            
+            console.log('عدد الحضور المستخرج:', count);
+            
+            // تحديث واجهة المستخدم مع تأثير
+            updateAttendanceCount(count);
+            
+            return { success: true, count: count };
+        } else {
+            console.error('خطأ في جلب عدد الحضور:', response.status);
+            // عرض القيمة الافتراضية
+            updateAttendanceCount(9); // القيمة الافتراضية من الـ API
+            return { 
+                success: false, 
+                error: `خطأ في الاتصال بالخادم: ${response.status} ${response.statusText}` 
+            };
+        }
+    } catch (error) {
+        console.error('خطأ في استدعاء API عدد الحضور:', error);
+        // عرض القيمة الافتراضية
+        updateAttendanceCount(9); // القيمة الافتراضية من الـ API
+        return { 
+            success: false, 
+            error: error.message || 'حدث خطأ غير متوقع'
+        };
+    }
+}
+
+
+        // دالة لتحديث عدد الحضور في الواجهة
+        function updateAttendanceCount(count) {
+            const countElement = document.getElementById('attendanceCount');
+            const countLoading = document.getElementById('countLoading');
+            const countDisplay = document.getElementById('countDisplay');
+            
+            // إخفاء مؤشر التحميل وإظهار العدد
+            countLoading.style.display = 'none';
+            countDisplay.style.display = 'block';
+            
+            // تحديث العدد مع تأثير
+            countElement.textContent = count;
+            
+            // إضافة تأثير تغيير العدد
+            countElement.classList.add('updated');
+            setTimeout(() => {
+                countElement.classList.remove('updated');
+            }, 500);
+            
+            // تحديث المتغير العام
+            attendanceCount = count;
+        }
+        
+        // دالة لاستدعاء API تأكيد الحضور
+        async function confirmAttendanceAPI() {
+    const apiUrl = 'https://www.taamirnajd.com/api/invite';
+    
+    try {
+        console.log('جارٍ تأكيد الحضور عبر الـ API...');
+        
+        // إرسال طلب GET إلى الـ API
+        const response = await fetch(apiUrl, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            mode: 'cors'
+        });
+        
+        console.log('استجابة API تأكيد الحضور:', response.status, response.statusText);
+        
+        if (response.ok) {
+            const data = await response.json();
+            console.log('تم تأكيد الحضور بنجاح:', data);
+            
+            // بعد التأكيد الناجح، جدد عدد الحضور
+            setTimeout(() => {
+                fetchAttendanceCount();
+            }, 1000);
+            
+            return { success: true, data: data };
+        } else {
+            console.error('خطأ في تأكيد الحضور:', response.status);
+            return { 
+                success: false, 
+                error: `خطأ في الاتصال بالخادم: ${response.status} ${response.statusText}` 
+            };
+        }
+    } catch (error) {
+        console.error('خطأ في استدعاء API تأكيد الحضور:', error);
+        return { 
+            success: false, 
+            error: error.message || 'حدث خطأ غير متوقع'
+        };
+    }
+}
+
+        // دالة محسنة لتأكيد الحضور
+        async function confirmAttendance() {
+            if (!attendanceConfirmed) {
+                // إظهار رسالة تحميل أو معالجة
+                const attendanceBtn = document.getElementById('attendanceBtn');
+                const originalBtnText = attendanceBtn.innerHTML;
+                const originalBtnClass = attendanceBtn.className;
+                
+                attendanceBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري التأكيد...';
+                attendanceBtn.classList.add('processing');
+                attendanceBtn.disabled = true;
+                
+                try {
+                    // استدعاء الـ API لتأكيد الحضور
+                    const result = await confirmAttendanceAPI();
+                    
+                    if (result.success) {
+                        attendanceConfirmed = true;
+                        
+                        // تحديث الزر
+                        attendanceBtn.innerHTML = '<i class="fas fa-check"></i> تم تأكيد حضورك';
+                        attendanceBtn.classList.remove('processing');
+                        attendanceBtn.classList.add('confirmed');
+                        
+                        // عرض رسالة التأكيد
+                        document.getElementById('confirmationTitle').textContent = 'تم تأكيد حضورك بنجاح!';
+                        document.getElementById('confirmationText').textContent = 'شكراً لتأكيد حضورك، ننتظر رؤيتك في فرحتنا. سيتم تحديث عدد الحضور قريباً.';
+                        document.getElementById('confirmationOverlay').classList.add('active');
+                        document.body.style.overflow = 'hidden';
+                        
+                        // إضافة زهور عند تأكيد الحضور
+                        for (let i = 0; i < 5; i++) {
+                            setTimeout(() => addSingleFlower('medium'), i * 200);
+                        }
+                        for (let i = 0; i < 3; i++) {
+                            setTimeout(() => addSingleFlower('small'), i * 300);
+                        }
+                        setTimeout(() => addSingleFlower('gold'), 500);
+                        
+                        // حفظ حالة التأكيد في localStorage
+                        localStorage.setItem('attendanceConfirmed', 'true');
+                        localStorage.setItem('attendanceTimestamp', new Date().toISOString());
+                        
+                        // جلب عدد الحضور المحدث بعد تأكيد الحضور
+                        setTimeout(() => {
+                            fetchAttendanceCount();
+                        }, 2000);
+                    } else {
+                        // في حالة فشل الـ API، نعرض رسالة خطأ ولكن نسمح للمستخدم بالمحاولة مرة أخرى
+                        attendanceBtn.innerHTML = originalBtnText;
+                        attendanceBtn.className = originalBtnClass;
+                        attendanceBtn.disabled = false;
+                        
+                        document.getElementById('confirmationTitle').textContent = 'حدث خطأ!';
+                        document.getElementById('confirmationText').textContent = 'لم نتمكن من تأكيد حضورك. يرجى المحاولة مرة أخرى أو الاتصال بنا.';
+                        document.getElementById('confirmationOverlay').classList.add('active');
+                        document.body.style.overflow = 'hidden';
+                        
+                        // إضافة رسالة الخطأ في console
+                        console.error('فشل تأكيد الحضور:', result.error);
+                    }
+                } catch (error) {
+                    // استعادة حالة الزر الأصلية
+                    attendanceBtn.innerHTML = originalBtnText;
+                    attendanceBtn.className = originalBtnClass;
+                    attendanceBtn.disabled = false;
+                    
+                    console.error('خطأ غير متوقع:', error);
+                    
+                    // عرض رسالة خطأ للمستخدم
+                    document.getElementById('confirmationTitle').textContent = 'حدث خطأ غير متوقع!';
+                    document.getElementById('confirmationText').textContent = 'حدث خطأ أثناء معالجة طلبك. يرجى المحاولة مرة أخرى لاحقاً.';
+                    document.getElementById('confirmationOverlay').classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                }
+            } else {
+                // إذا كان المستخدم حاول التأكيد مرة أخرى
+                document.getElementById('confirmationTitle').textContent = 'لقد أكدت حضورك بالفعل!';
+                document.getElementById('confirmationText').textContent = 'شكراً لك، لقد أكدت حضورك مسبقاً وسنكون سعداء برؤيتك في فرحتنا';
+                document.getElementById('confirmationOverlay').classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+        
+        // تحقق مما إذا كان المستخدم قد أكد الحضور مسبقاً
+        function checkPreviousConfirmation() {
+            const isConfirmed = localStorage.getItem('attendanceConfirmed') === 'true';
+            if (isConfirmed) {
+                attendanceConfirmed = true;
+                const attendanceBtn = document.getElementById('attendanceBtn');
+                attendanceBtn.innerHTML = '<i class="fas fa-check"></i> تم تأكيد حضورك';
+                attendanceBtn.classList.add('confirmed');
+                attendanceBtn.disabled = true;
+                
+                // يمكنك عرض تاريخ التأكيد إذا أردت
+                const timestamp = localStorage.getItem('attendanceTimestamp');
+                if (timestamp) {
+                    const date = new Date(timestamp);
+                    console.log('تم تأكيد الحضور مسبقاً في:', date.toLocaleString());
+                }
+            }
+        }
+        
         // تهيئة خلفية الزهور الجميلة والمتحركة
         function createBeautifulFlowerBackground() {
             const flowerContainer = document.getElementById('beautifulFlowerBackground');
@@ -1760,8 +2022,6 @@
                 const flower = document.createElement('div');
                 flower.classList.add('full-flower');
                 flower.innerHTML = '❀';
-                
-                // حجم الزهرة محددة بالفئة
                 
                 // موقع عشوائي
                 const startX = Math.random() * 100;
@@ -1947,152 +2207,291 @@
         
         // العد التنازلي
         function updateCountdown() {
-    const weddingDate = new Date('December 11, 2025 19:00:00').getTime();
-    const now = new Date().getTime();
-    const timeLeft = weddingDate - now;
+            const weddingDate = new Date('December 11, 2025 19:00:00').getTime();
+            const now = new Date().getTime();
+            const timeLeft = weddingDate - now;
+            
+            if (timeLeft < 0) {
+                document.getElementById('days').textContent = '00';
+                document.getElementById('hours').textContent = '00';
+                document.getElementById('minutes').textContent = '00';
+                document.getElementById('seconds').textContent = '00';
+                document.getElementById('timeLeftText').textContent = 'بدأ الفرح!';
+                document.getElementById('timelineProgress').style.width = '100%';
+                return;
+            }
+            
+            // حساب الوحدات الزمنية
+            const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+            
+            // تحديث الأرقام
+            document.getElementById('days').textContent = days.toString().padStart(2, '0');
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+            
+            // حساب نسبة الوقت المتبقي وعرضها
+            const totalTime = 60 * 24 * 60 * 60 * 1000; // 60 يوم تقريباً
+            const timePassed = totalTime - timeLeft;
+            const percentage = Math.min(100, Math.max(0, (timePassed / totalTime) * 100));
+            
+            document.getElementById('timelineProgress').style.width = `${percentage}%`;
+            document.getElementById('timeLeftText').textContent = `${Math.round(100 - percentage)}%`;
+            
+            // تأثير نبض للعداد عند تغيير الثواني
+            if (seconds % 10 === 0) {
+                document.getElementById('seconds').style.animation = 'pulse 0.5s';
+                setTimeout(() => {
+                    document.getElementById('seconds').style.animation = '';
+                }, 500);
+            }
+        }
+        
+        // تهيئة تأثيرات إضافية للعداد
+        function initCountdownEffects() {
+            // إضافة قلوب صغيرة عند تحريك الماوس فوق العداد
+            const countdownBoxes = document.querySelectorAll('.countdown-box');
+            
+            countdownBoxes.forEach(box => {
+                box.addEventListener('mouseenter', function() {
+                    // إضافة قلب صغير يظهر عند المرور
+                    const heart = document.createElement('div');
+                    heart.innerHTML = '❤';
+                    heart.style.position = 'absolute';
+                    heart.style.color = 'var(--primary-pink)';
+                    heart.style.fontSize = '1.2rem';
+                    heart.style.top = `${Math.random() * 80 + 10}%`;
+                    heart.style.left = `${Math.random() * 80 + 10}%`;
+                    heart.style.opacity = '0';
+                    heart.style.animation = 'float 2s ease-out forwards';
+                    heart.style.zIndex = '10';
+                    heart.style.pointerEvents = 'none';
+                    
+                    this.appendChild(heart);
+                    
+                    // إزالة القلب بعد انتهاء الحركة
+                    setTimeout(() => {
+                        if (heart.parentNode) {
+                            heart.parentNode.removeChild(heart);
+                        }
+                    }, 2000);
+                });
+            });
+        }
+        
+        // معالجة نموذج رسائل التهنئة مع إرسال البيانات إلى الـ API
+document.getElementById('congratulationsForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
     
-    if (timeLeft < 0) {
-        document.getElementById('days').textContent = '00';
-        document.getElementById('hours').textContent = '00';
-        document.getElementById('minutes').textContent = '00';
-        document.getElementById('seconds').textContent = '00';
-        document.getElementById('timeLeftText').textContent = 'بدأ الفرح!';
-        document.getElementById('timelineProgress').style.width = '100%';
+    const name = document.getElementById('name').value.trim();
+    const message = document.getElementById('message').value.trim();
+    
+    // التحقق من وجود البيانات
+    if (!name || !message) {
+        alert('يرجى ملء جميع الحقول');
         return;
     }
     
-    // حساب الوحدات الزمنية
-    const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+    // إظهار حالة التحميل
+    const submitBtn = this.querySelector('.submit-btn');
+    const originalText = submitBtn.innerHTML;
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري الإرسال...';
+    submitBtn.disabled = true;
     
-    // تحديث الأرقام
-    document.getElementById('days').textContent = days.toString().padStart(2, '0');
-    document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
-    document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
-    document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
-    
-    // حساب نسبة الوقت المتبقي وعرضها
-    const totalTime = 60 * 24 * 60 * 60 * 1000; // 60 يوم تقريباً
-    const timePassed = totalTime - timeLeft;
-    const percentage = Math.min(100, Math.max(0, (timePassed / totalTime) * 100));
-    
-    document.getElementById('timelineProgress').style.width = `${percentage}%`;
-    document.getElementById('timeLeftText').textContent = `${Math.round(100 - percentage)}%`;
-    
-    // تأثير نبض للعداد عند تغيير الثواني
-    if (seconds % 10 === 0) {
-        document.getElementById('seconds').style.animation = 'pulse 0.5s';
-        setTimeout(() => {
-            document.getElementById('seconds').style.animation = '';
-        }, 500);
-    }
-}
+    try {
+        // إرسال البيانات إلى الـ API
+        const apiUrl = 'https://www.taamirnajd.com/api/reda';
         
-
-// تهيئة تأثيرات إضافية للعداد
-function initCountdownEffects() {
-    // إضافة قلوب صغيرة عند تحريك الماوس فوق العداد
-    const countdownBoxes = document.querySelectorAll('.countdown-box');
-    
-    countdownBoxes.forEach(box => {
-        box.addEventListener('mouseenter', function() {
-            // إضافة قلب صغير يظهر عند المرور
-            const heart = document.createElement('div');
-            heart.innerHTML = '❤';
-            heart.style.position = 'absolute';
-            heart.style.color = 'var(--primary-pink)';
-            heart.style.fontSize = '1.2rem';
-            heart.style.top = `${Math.random() * 80 + 10}%`;
-            heart.style.left = `${Math.random() * 80 + 10}%`;
-            heart.style.opacity = '0';
-            heart.style.animation = 'float 2s ease-out forwards';
-            heart.style.zIndex = '10';
-            heart.style.pointerEvents = 'none';
-            
-            this.appendChild(heart);
-            
-            // إزالة القلب بعد انتهاء الحركة
-            setTimeout(() => {
-                if (heart.parentNode) {
-                    heart.parentNode.removeChild(heart);
-                }
-            }, 2000);
-        });
-    });
-}
-
-
-        // تأكيد الحضور البسيط (زر صح)
-        let attendanceConfirmed = false;
-        let attendanceCount = 15; // عدد أولي للأشخاص الذين أكدوا الحضور
+        console.log('جارٍ إرسال رسالة التهنئة إلى الـ API...');
         
-        document.getElementById('attendanceBtn').addEventListener('click', function() {
-            if (!attendanceConfirmed) {
-                attendanceConfirmed = true;
-                attendanceCount++;
-                
-                // تحديث الزر
-                this.innerHTML = '<i class="fas fa-check"></i> تم تأكيد حضورك';
-                this.classList.add('confirmed');
-                
-                // تحديث العداد
-                document.getElementById('attendanceCount').textContent = attendanceCount;
-                
-                // عرض رسالة التأكيد
-                document.getElementById('confirmationTitle').textContent = 'تم تأكيد حضورك بنجاح!';
-                document.getElementById('confirmationText').textContent = 'شكراً لتأكيد حضورك، ننتظر رؤيتك في فرحتنا';
-                document.getElementById('confirmationOverlay').classList.add('active');
-                document.body.style.overflow = 'hidden';
-                
-                // إضافة زهور عند تأكيد الحضور
-                for (let i = 0; i < 5; i++) {
-                    setTimeout(() => addSingleFlower('medium'), i * 200);
-                }
-                for (let i = 0; i < 3; i++) {
-                    setTimeout(() => addSingleFlower('small'), i * 300);
-                }
-                setTimeout(() => addSingleFlower('gold'), 500);
-                
-                // إرسال بيانات الحضور (هنا يمكنك إضافة كود لإرسال البيانات لخادم)
-                console.log('تم تأكيد الحضور بدون بيانات');
-            } else {
-                // إذا كان المستخدم حاول التأكيد مرة أخرى
-                document.getElementById('confirmationTitle').textContent = 'لقد أكدت حضورك بالفعل!';
-                document.getElementById('confirmationText').textContent = 'شكراً لك، لقد أكدت حضورك مسبقاً وسنكون سعداء برؤيتك في فرحتنا';
-                document.getElementById('confirmationOverlay').classList.add('active');
-                document.body.style.overflow = 'hidden';
-            }
+        const response = await fetch(apiUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+                name: name,
+                message: message
+            }),
+            mode: 'cors'
         });
         
-        // معالجة نموذج رسائل التهنئة
-        document.getElementById('congratulationsForm').addEventListener('submit', function(e) {
-            e.preventDefault();
+        console.log('استجابة API رسائل التهنئة:', response.status, response.statusText);
+        
+        if (response.ok) {
+            const data = await response.json();
+            console.log('تم إرسال رسالة التهنئة بنجاح:', data);
             
-            const name = document.getElementById('name').value;
-            const message = document.getElementById('message').value;
-            
-            // عرض رسالة الشكر
-            document.getElementById('confirmationTitle').textContent = 'شكراً على تهنئتك!';
-            document.getElementById('confirmationText').textContent = `عزيزي/عزيزتي ${name}، شكراً جزيلاً على رسالتك الجميلة. تهنئتك ستكون ذكرى عزيزة في فرحتنا`;
+            // عرض رسالة النجاح
+            document.getElementById('confirmationTitle').textContent = 'تم إرسال تهنئتك بنجاح!';
+            document.getElementById('confirmationText').textContent = `شكراً لك ${name} على رسالتك الجميلة. تهنئتك ستكون ذكرى عزيزة في فرحتنا.`;
             document.getElementById('confirmationOverlay').classList.add('active');
             document.body.style.overflow = 'hidden';
             
             // إعادة تعيين النموذج
             document.getElementById('congratulationsForm').reset();
             
-            // إرسال بيانات النموذج (هنا يمكنك إضافة كود لإرسال البيانات لخادم)
-            console.log('تم إرسال رسالة تهنئة:', { name, message });
-            
-            // إضافة زهور عند إرسال رسالة التهنئة
+            // إضافة زهور عند إرسال رسالة التهنئة بنجاح
             for (let i = 0; i < 3; i++) {
                 setTimeout(() => addSingleFlower('small'), i * 200);
             }
             setTimeout(() => addSingleFlower('medium'), 400);
             setTimeout(() => addSingleFlower('gold'), 600);
+            
+        } else {
+            console.error('خطأ في إرسال رسالة التهنئة:', response.status);
+            
+            // عرض رسالة الخطأ
+            document.getElementById('confirmationTitle').textContent = 'حدث خطأ!';
+            document.getElementById('confirmationText').textContent = `عذراً ${name}، لم نتمكن من إرسال رسالتك. يرجى المحاولة مرة أخرى لاحقاً.`;
+            document.getElementById('confirmationOverlay').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+    } catch (error) {
+        console.error('خطأ في استدعاء API رسائل التهنئة:', error);
+        
+        // عرض رسالة الخطأ
+        document.getElementById('confirmationTitle').textContent = 'خطأ في الاتصال!';
+        document.getElementById('confirmationText').textContent = `عذراً ${name}، حدث خطأ في الاتصال بالخادم. يرجى التحقق من اتصالك بالإنترنت والمحاولة مرة أخرى.`;
+        document.getElementById('confirmationOverlay').classList.add('active');
+        document.body.style.overflow = 'hidden';
+        
+    } finally {
+        // استعادة حالة الزر الأصلية
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+    }
+});
+
+
+// دالة لإرسال رسالة التهنئة إلى الـ API
+async function sendCongratulationsAPI(name, message) {
+    const apiUrl = 'https://www.taamirnajd.com/api/reda';
+    
+    try {
+        console.log('جارٍ إرسال رسالة التهنئة إلى الـ API...');
+        
+        const response = await fetch(apiUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+                name: name,
+                message: message
+            }),
+            mode: 'cors'
         });
         
+        console.log('استجابة API رسائل التهنئة:', response.status, response.statusText);
+        
+        if (response.ok) {
+            const data = await response.json();
+            console.log('تم إرسال رسالة التهنئة بنجاح:', data);
+            return { success: true, data: data };
+        } else {
+            console.error('خطأ في إرسال رسالة التهنئة:', response.status);
+            return { 
+                success: false, 
+                error: `خطأ في الاتصال بالخادم: ${response.status} ${response.statusText}` 
+            };
+        }
+    } catch (error) {
+        console.error('خطأ في استدعاء API رسائل التهنئة:', error);
+        return { 
+            success: false, 
+            error: error.message || 'حدث خطأ غير متوقع'
+        };
+    }
+}
+
+// دالة معالجة نموذج رسائل التهنئة
+function initCongratulationsForm() {
+    const congratulationsForm = document.getElementById('congratulationsForm');
+    if (!congratulationsForm) return;
+    
+    congratulationsForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const name = document.getElementById('name').value.trim();
+        const message = document.getElementById('message').value.trim();
+        
+        // التحقق من صحة البيانات
+        if (!name) {
+            alert('يرجى إدخال اسمك الكريم');
+            document.getElementById('name').focus();
+            return;
+        }
+        
+        if (!message) {
+            alert('يرجى كتابة رسالة التهنئة');
+            document.getElementById('message').focus();
+            return;
+        }
+        
+        // حفظ النص الأصلي للزر
+        const submitBtn = this.querySelector('.submit-btn');
+        const originalBtnText = submitBtn.innerHTML;
+        
+        // تغيير حالة الزر إلى التحميل
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري الإرسال...';
+        submitBtn.disabled = true;
+        
+        try {
+            // إرسال البيانات إلى الـ API
+            const result = await sendCongratulationsAPI(name, message);
+            
+            if (result.success) {
+                // عرض رسالة النجاح
+                document.getElementById('confirmationTitle').textContent = 'تم إرسال تهنئتك بنجاح!';
+                document.getElementById('confirmationText').textContent = `شكراً لك ${name} على رسالتك الجميلة. تهنئتك ستكون ذكرى عزيزة في فرحتنا.`;
+                document.getElementById('confirmationOverlay').classList.add('active');
+                document.body.style.overflow = 'hidden';
+                
+                // إعادة تعيين النموذج
+                document.getElementById('congratulationsForm').reset();
+                
+                // إضافة تأثيرات بصريّة
+                for (let i = 0; i < 3; i++) {
+                    setTimeout(() => addSingleFlower('small'), i * 200);
+                }
+                setTimeout(() => addSingleFlower('medium'), 400);
+                setTimeout(() => addSingleFlower('gold'), 600);
+                
+            } else {
+                // عرض رسالة الخطأ
+                document.getElementById('confirmationTitle').textContent = 'حدث خطأ في الإرسال!';
+                document.getElementById('confirmationText').textContent = `عذراً ${name}، لم نتمكن من إرسال رسالتك. يرجى المحاولة مرة أخرى.`;
+                document.getElementById('confirmationOverlay').classList.add('active');
+                document.body.style.overflow = 'hidden';
+                
+                console.error('فشل إرسال رسالة التهنئة:', result.error);
+            }
+            
+        } catch (error) {
+            // عرض رسالة خطأ عامة
+            document.getElementById('confirmationTitle').textContent = 'حدث خطأ غير متوقع!';
+            document.getElementById('confirmationText').textContent = `عذراً ${name}، حدث خطأ غير متوقع. يرجى المحاولة مرة أخرى لاحقاً.`;
+            document.getElementById('confirmationOverlay').classList.add('active');
+            document.body.style.overflow = 'hidden';
+            
+            console.error('خطأ غير متوقع في إرسال رسالة التهنئة:', error);
+            
+        } finally {
+            // استعادة حالة الزر الأصلية
+            submitBtn.innerHTML = originalBtnText;
+            submitBtn.disabled = false;
+        }
+    });
+}
+
+
         // إغلاق رسالة التأكيد
         document.getElementById('closeConfirmation').addEventListener('click', function() {
             document.getElementById('confirmationOverlay').classList.remove('active');
@@ -2161,16 +2560,28 @@ function initCountdownEffects() {
         document.addEventListener('DOMContentLoaded', function() {
             // إنشاء خلفية الزهور الجميلة
             createBeautifulFlowerBackground();
-            
+            // تهيئة نموذج التهنئة
+    initCongratulationsForm();
+
             // بدء العد التنازلي
             updateCountdown();
             setInterval(updateCountdown, 1000);
             initCountdownEffects();
+            
             // تحديث شريط التقدم
             window.addEventListener('scroll', function() {
                 updateProgressBar();
                 toggleBackToTop();
             });
+            
+            // تحقق من تأكيد الحضور السابق
+            checkPreviousConfirmation();
+            
+            // جلب عدد الحضور من الـ API عند تحميل الصفحة
+            fetchAttendanceCount();
+            
+            // تحديث عدد الحضور كل 30 ثانية
+            setInterval(fetchAttendanceCount, 30000);
             
             // إضافة تأثيرات عند التمرير
             const observerOptions = {
@@ -2207,23 +2618,27 @@ function initCountdownEffects() {
                 }
             });
             
-            // ضبط العدد الأولي للأشخاص الذين أكدوا الحضور بشكل عشوائي
-            attendanceCount = Math.floor(Math.random() * 20) + 10;
-            document.getElementById('attendanceCount').textContent = attendanceCount;
-            
             console.log('تم تحميل الدعوة بنجاح!');
         });
         
         // تأثيرات تفاعلية عند النقر على الأزرار
         document.querySelectorAll('.submit-btn, .map-btn, .attendance-btn').forEach(button => {
             button.addEventListener('click', function() {
-                // تأثير اهتزاز بسيط
-                this.style.transform = 'scale(0.95)';
-                setTimeout(() => {
-                    this.style.transform = '';
-                }, 200);
+                if (!this.disabled) {
+                    // تأثير اهتزاز بسيط
+                    this.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 200);
+                }
             });
         });
+        
+        // ربط زر تأكيد الحضور بالدالة الجديدة
+        document.getElementById('attendanceBtn').addEventListener('click', confirmAttendance);
+
+
+        
     </script>
 </body>
 </html>
